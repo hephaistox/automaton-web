@@ -1,0 +1,5 @@
+{:publication {:as-lib hephaistox/automaton-web
+               :repo-address "git@github.com:hephaistox/automaton-web.git"
+               :branch "main"}
+ :app-name "automaton-web"
+ :monorepo {:app-dir "automaton/automaton-web"}}
