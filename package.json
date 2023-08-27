@@ -1,0 +1,28 @@
+{
+  "name": "automaton",
+  "repository": "https://github.com/hephaistox/automaton",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "description": "automaton",
+  "version": "1.0.0",
+  "author": "Hephaistox <info@hephaistox.com>",
+  "dependencies": {
+    "autoprefixer": "^10.4.1",
+    "create-react-class": "^15.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tw-elements": "^1.0.0-beta2"
+  },
+  "workspaces": [],
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "highlight.js": "^11.8.0",
+    "karma": "^6.4.2",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-cljs-test": "^0.1.0",
+    "marked": "^5.1.0",
+    "shadow-cljs": "^2.24.1",
+    "tailwindcss": "^3.3.2"
+  }
+}

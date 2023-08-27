@@ -1,0 +1,5 @@
+{automaton-web.configuration.outpace/env :dev
+ automaton-web.configuration.outpace/http-server!url #config/env "HTTP-SERVER-URL"
+ automaton-web.configuration.outpace/app-name "automaton-web"
+
+ automaton-web.configuration.outpace/dev!clj-nrepl-port 7888}
