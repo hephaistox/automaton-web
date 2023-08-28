@@ -1,7 +1,8 @@
 {:aliases
  {:build {:deps {io.github.clojure/tools.build #:git{:sha "76b78fe",
                                                      :tag "v0.9.4"}
-                 hephaistox/automaton-core {:local/root "automaton/automaton-core"}},
+                 hephaistox/automaton-core {:sha "f9923f55226b4ba531a1a985490052597885d72d"
+                                            :git/url "https://github.com/hephaistox/automaton-core"}},
           :ns-default build},
   :repl {:extra-paths ["env/dev/src/clj" "env/dev/src/cljc"
                        "env/dev/resources"]},
