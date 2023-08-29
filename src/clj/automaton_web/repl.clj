@@ -4,7 +4,7 @@
    [cider.nrepl :as nrepl-mw]
    [nrepl.server :refer [default-handler start-server stop-server]]
 
-   ;; [automaton-core.adapters.files :as files]
+   [automaton-core.adapters.files :as files]
    [automaton-web.log :as log]
    [automaton-web.configuration.core :as conf]))
 
@@ -39,19 +39,21 @@
   (stop-server (:repl @repl))
   (reset! repl {}))
 
-;; (defn create-nrepl-files [repl-port]
-;;   (when-let [dirs (files/list-subdir ".")]
-;;     (doseq [dir dirs]
-;;       (when-not (files/hidden? dir)
-;;         (files/write-file (str repl-port)
-;;                           (files/create-file-path dir nrepl-port-filename))))))
+(defn create-nrepl-files
+  "Consider all deps.edn files as the root of a clojure project and creates a .nrepl-port file next to it"
+  [repl-port]
+  (let [build-configs (files/search-files "" "**build_config.edn")
+        nrepl-ports (map #(files/file-in-same-dir % nrepl-port-filename)
+                         build-configs)]
+    (doseq [nrepl-port nrepl-ports]
+      (files/write-file (str repl-port)
+                        nrepl-port))))
 
 (defn start-repl*
   "Launch a new repl"
   [{:keys [middleware]}]
-  (let [repl-port (get-nrepl-port-parameter)
-        ;; _ (create-nrepl-files repl-port)
-        ]
+  (let [repl-port (get-nrepl-port-parameter)]
+    (create-nrepl-files repl-port)
 
     (reset! repl {:nrepl-port repl-port
                   :repl (do
@@ -63,6 +65,8 @@
     (.addShutdownHook (Runtime/getRuntime)
                       (Thread. #(do
                                   (log/info "SHUTDOWN in progress" repl-port)
+                                  (-> (files/search-files "" (str "**" nrepl-port-filename))
+                                      (files/delete-files))
                                   (stop-repl repl-port))))))
 
 (defn start-repl
