@@ -1,7 +1,7 @@
 {:aliases
  {:build {:deps {io.github.clojure/tools.build #:git{:sha "76b78fe",
                                                      :tag "v0.9.4"}
-                 hephaistox/automaton-core {:sha "f9923f55226b4ba531a1a985490052597885d72d"
+                 hephaistox/automaton-core {:sha "3bdf7a9bc2df75a9b22ca272f0a8cc7fd4f381ea"
                                             :git/url "https://github.com/hephaistox/automaton-core"}},
           :ns-default build},
   :repl {:extra-paths ["env/dev/src/clj" "env/dev/src/cljc"
@@ -27,7 +27,8 @@
   :main-opts
   ["-m" "nrepl.cmdline" "--middleware"
    "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]},
- :deps {hephaistox/automaton-core {:local/root "automaton/automaton-core"}
+ :deps {hephaistox/automaton-core {:sha "3bdf7a9bc2df75a9b22ca272f0a8cc7fd4f381ea"
+                                            :git/url "https://github.com/hephaistox/automaton-core"}
         amalloy/ring-gzip-middleware #:mvn{:version "0.1.4"},
         babashka/fs #:mvn{:version "0.4.19"},
         babashka/process #:mvn{:version "0.5.21"},
