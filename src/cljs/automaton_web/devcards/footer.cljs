@@ -1,20 +1,22 @@
 (ns automaton-web.devcards.footer
-  (:require
-   [devcards.core :as dc :refer [defcard]]
-
-   [automaton-web.components.icons :as bci]
-   [automaton-web.components.footer :as sut]
-   [automaton-web.devcards.utils :as bdu]))
+  (:require [devcards.core :as dc :refer [defcard]]
+            [automaton-web.components.icons :as web-icons]
+            [automaton-web.components.footer :as sut]
+            [automaton-web.devcards.utils :as bdu]))
 
 (def social-networks
-  {"youtube"  [bci/icon {:path-kw :svg/youtube
-                         :href "https://www.youtube.com/@Hephaistoxsc"}]
-   "linkedin" [bci/icon {:path-kw :svg/linkedin
-                         :href "https://www.linkedin.com/company/hephaistox"}]
-   "github"   [bci/icon {:path-kw :svg/github
-                         :href "https://github.com/hephaistox"}]
-   "twitter"  [bci/icon {:path-kw :svg/twitter
-                         :href ""}]})
+  {"youtube" [web-icons/icon
+              {:path-kw :svg/youtube
+               :href "https://www.youtube.com/@Hephaistoxsc"}]
+   "linkedin" [web-icons/icon
+               {:path-kw :svg/linkedin
+                :href "https://www.linkedin.com/company/hephaistox"}]
+   "github" [web-icons/icon
+             {:path-kw :svg/github
+              :href "https://github.com/hephaistox"}]
+   "twitter" [web-icons/icon
+              {:path-kw :svg/twitter
+               :href ""}]})
 
 (def footer-lists
   [{:title "Solutions"
@@ -70,37 +72,36 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defcard footer
-  (bdu/wrap-component [:div
-                       [:h1 "Footer"]
-                       [sut/footer {:social-networks social-networks
-                                    :footer-lists footer-lists
-                                    :quotation "Making the world a better place through constructing elegant hierarchies."
-                                    :badge "https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300",
-                                    :company-name "Hephaistox"
-                                    :release "2022-1"
-                                    :title "© 2022 Hephaistox, Inc. All rights reserved!"}]
-                       [:h1 "Dark Footer"]
-                       [sut/footer {:dark? true
-                                    :social-networks social-networks
-                                    :footer-lists footer-lists
-                                    :quotation "Making the world a better place through constructing elegant hierarchies."
-                                    :badge "https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300",
-                                    :company-name "Hephaistox"
-                                    :release "2022-1"
-                                    :title "© 2022 Hephaistox, Inc. All rights reserved!"}]]))
+         (bdu/wrap-component
+          [:div [:h1 "Footer"]
+           [sut/footer
+            {:social-networks social-networks
+             :footer-lists footer-lists
+             :quotation "Making the world a better place through constructing elegant hierarchies."
+             :badge "https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300"
+             :company-name "Hephaistox"
+             :release "2022-1"
+             :title "© 2022 Hephaistox, Inc. All rights reserved!"}] [:h1 "Dark Footer"]
+           [sut/footer
+            {:dark? true
+             :social-networks social-networks
+             :footer-lists footer-lists
+             :quotation "Making the world a better place through constructing elegant hierarchies."
+             :badge "https://tailwindui.com/img/logos/mark.svg?color=gray&shade=300"
+             :company-name "Hephaistox"
+             :release "2022-1"
+             :title "© 2022 Hephaistox, Inc. All rights reserved!"}]]))
 
 (defcard simple-footer
-  (bdu/wrap-component [:div
-                       [:h1 "Simple footer"]
-                       [sut/simple-footer
-                        {:title "© 2020 Your Company, Inc. All rights reserved."
-                         :footer-lists simple-footer-list
-                         :release "2022-1"
-                         :social-networks social-networks}]
-                       [:h1 "Simple footer dark"]
-                       [sut/simple-footer
-                        {:title "© 2020 Your Company, Inc. All rights reserved."
-                         :footer-lists simple-footer-list
-                         :release "2022-1"
-                         :social-networks social-networks
-                         :dark? true}]]))
+         (bdu/wrap-component [:div [:h1 "Simple footer"]
+                              [sut/simple-footer
+                               {:title "© 2020 Your Company, Inc. All rights reserved."
+                                :footer-lists simple-footer-list
+                                :release "2022-1"
+                                :social-networks social-networks}] [:h1 "Simple footer dark"]
+                              [sut/simple-footer
+                               {:title "© 2020 Your Company, Inc. All rights reserved."
+                                :footer-lists simple-footer-list
+                                :release "2022-1"
+                                :social-networks social-networks
+                                :dark? true}]]))
