@@ -1,97 +1,78 @@
 (ns automaton-web.i18n.language
-  "Main namespace for everything i18n language related but project unrelated.
-   Contains both usefull functions and values.
-   Holds domain-knowledge and decisions (e.g. french def that holds default value for french language)."
-  (:require
-   [automaton-core.utils.map :as crusher]
-   [automaton-web.i18n.dictionary :as automaton-dict]
-   [automaton-web.i18n.tempura :as bit]
-   [clojure.set :refer [union]]
-   [clojure.string :as cs]))
+  "Defines the possible languages for the apps based on `automaton-web`
+  Is a specialisation of `automaton-core.i18n.language`. All languages set here will be checked by the test suite to be in `automaton-core.i18n.language` also
 
-(def french
-  "fr")
+  Note all of them won't be implementened for all cust-apps
+  See `automaton-web.i18n.language` as all possible values for a web app"
+  (:require [clojure.string :as str]
+            [automaton-core.i18n.language :as core-lang]))
 
-(def english
-  "en")
+(def main-langs
+  "Default language if all language strategy fail to select a language
+  As it is not supposed to happen, this is set to `:en`, as the rest of the default are french"
+  [:en])
 
-(def default-language
-  french)
+(def ^:private web-languages-map
+  "Is a map defining all supported languages in a web app and add specific data
+  First level of keyword is the id of the language, used internally, should be present in `automaton-core.i18n.language`
+  Then, the map has the following data:
+  * `:tld` name of the language in the tld, e.g. hephaistox.com will be directed to `:en`"
+  {:fr {:tld "fr"}
+   :en {:tld "com"}})
 
-(defn language-accepted
-  "Returns language if it's accepted.
-  If not -> returns nil"
-  [lang]
-  (case lang
-    "fr" french
-    ("en" "com") english
-    nil))
+(defprotocol WebLanguages
+  (tlds [this]
+   "List possible tld\n")
+  (cors-domain-routes [this main-domain]
+   "Creates all route filter to route the uri for CORS\n  Params:\n  * `selected-languages` list of languages selected in the cust-app, selected-languages could be smaller for some cust-app\n  * `main-domain` is the domain where the app is deployed")
+  (create-ui-languages [this]
+   "Create data map with all possible languages, especially useful to display them in a combobox")
+  (ui-str-to-id [this lang-ui-text]
+   "Transform a ui string of a language to its id, comparison is based on string is not not case sensitive\n  Params:\n  * `selected-languages` list of languages selected in the cust-app, selected-languages could be smaller for some cust-app\n  * `lang-ui-text` the text to search"))
 
-(defn path-language
-  "Get language from url path. Return nil if it's not there"
-  [pathname]
-  (let [paths (cs/split (str pathname) #"/")
-        lang (first (filter #(>= (count %) 2) paths))]
-    (language-accepted lang)))
+(defrecord AutomatonWebLanguages [core-language]
+  core-lang/Languages
+    (language [_ id] (core-lang/language core-language id))
+    (languages [this] (core-lang/languages this))
+    (languages-ids [_] (core-lang/languages-ids core-language))
+    (dict-languages-ids [_] (core-lang/dict-languages-ids core-language))
+  WebLanguages
+    (tlds [_]
+      (->> core-language
+           core-lang/languages
+           vals
+           (mapv :tld)))
+    (cors-domain-routes [this main-domain]
+      (let [tlds (tlds this)]
+        (->> (for [tld tlds] (str/join "." [main-domain tld]))
+             (mapv (fn [domain] (re-pattern (str ".*" domain "$")))))))
+    (create-ui-languages [_]
+      (->> core-language
+           core-lang/languages
+           (map (fn [[lang-id lang]]
+                  (let [ui-text (:ui-text lang)]
+                    {:name (name lang-id)
+                     :id lang-id
+                     :value ui-text})))))
+    (ui-str-to-id [_ lang-ui-text]
+      (->> core-language
+           core-lang/languages
+           (filter (fn [[_ lang]]
+                     (when (every? string? [lang-ui-text (:ui-text lang)])
+                       (= (str/upper-case lang-ui-text) (str/upper-case (:ui-text lang))))))
+           ffirst)))
 
-(defn choose-language
-  "Chooses language - thins function is here to enclose the logic of choosing a language from different sources."
-  [{:keys [path-lang cookies-lang other-lang]}]
-  (if-let [path-language path-lang]
-    path-language
-    (if-let [cookies-language cookies-lang]
-      cookies-language
-      (if-let [other-language other-lang]
-        other-language
-        default-language))))
+(defn make-automaton-web-languages
+  "Create a `SelectedLanguages` instance
+  Params:
+  * `selected-languages` is a dictionary,
+  The final map consists in the languages defined in both `selected-languages` `core-lang/base-languages`
+  The language data map are merged, see `merge-languages-map` for details"
+  [& selected-languages-seq]
+  (->AutomatonWebLanguages (apply core-lang/make-automaton-core-languages web-languages-map selected-languages-seq)))
 
-(def missing-text
-  bit/tempura-missing-text)
+(def automaton-web-languages "Languages available in `automaton-web`, instance of `Languages`" (make-automaton-web-languages))
 
-(defn translate-fn
-  [& args]
-  (apply bit/tempura-tr args))
+(def get-web-languages-ids "Known language ids in `automaton-web`" (core-lang/languages-ids automaton-web-languages))
 
-(defn translate
-  "Translation function that takes value from dictionary based on language and text arguments specified.
-   Best to be first instantiated with just a dictionary in a def to not create it each time (look at base-transalte)"
-  [dictionary lang & text]
-  (apply translate-fn dictionary lang text))
-
-(defn create-dictionary
-  "Joins base, missing-text option and provided by you dictionary to create one map structure."
-  [dict]
-  (crusher/deep-merge
-   missing-text
-   automaton-dict/automaton-dictionary
-   dict))
-
-(def automaton-translate
-  "Base translation function instantiated, consists only of base dictionary. So it's not creating dictionary each time."
-  (partial translate (create-dictionary {})))
-
-(defn language-report
-  "For all keys of a dictionnary, return the list of languages set
-  `expected-languages` is the languages sequence the report is limited to"
-  [dictionary expected-languages]
-  (let [filtered-dictionary (select-keys dictionary expected-languages)]
-    (apply merge-with union
-           (map (fn [[language dict-map]]
-                  (into {}
-                        (map (fn [v]
-                               [v #{language}])
-                             (keys
-                              (crusher/crush dict-map)))))
-                filtered-dictionary))))
-
-(defn key-with-missing-languages
-  "Return a map with the path to a translation, with the list of existing languages
-  key-exceptions is a sequence or set of all keys that should be excluded from the error list
-  `expected-languages` is the languages the report is limited to"
-  [dictionary expected-languages key-exceptions]
-  (let [key-set-exceptions (into #{} key-exceptions)]
-    (filter (fn [[k v]]
-              (and (not (contains? key-set-exceptions k))
-                   (not= v expected-languages)))
-            (language-report dictionary
-                             expected-languages))))
+(defn get-web-lang "Return the language linked to `lang-id`" [lang-id] (core-lang/language automaton-web-languages lang-id))

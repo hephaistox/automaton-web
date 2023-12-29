@@ -1,57 +1,51 @@
 (ns automaton-web.handlers
-  (:require
-   [ring.util.response :as resp]
-   [ring.util.http-response :as response]
-   [reitit.ring :as rr]
+  "Predefined handlers to manage error pages, and resources (in the sense of classpath in java)"
+  (:require [automaton-web.adapters.be.http-response :as http-response]
+            [automaton-web.pages.errors :as error-pages]
+            [reitit.ring :as reitit-ring]))
 
-   [automaton-web.pages.index :as index]
-   [automaton-web.components.errors :as bce]
-   [automaton-web.i18n.language-backend :as bilb]))
-
-(defn not-found-handler [request]
+(defn not-found-handler
+  [request]
   (-> request
-      (index/build (bce/not-found {:not-found-page-title (bilb/btr request :not-found-page)
-                                   :not-found-page-description (bilb/btr request :not-found-description)
-                                   :back-home-text (bilb/btr request :back-home)}))
-      response/not-found))
+      error-pages/not-found-page
+      http-response/not-found))
 
-(defn not-allowed-handler [request]
+(defn not-allowed-handler
+  [request]
   (-> request
-      (index/build (bce/not-found {:not-found-page-title (bilb/btr request :not-found-page)
-                                   :not-found-page-description (bilb/btr request :not-found-description)
-                                   :back-home-text (bilb/btr request :back-home)}))
-      response/method-not-allowed))
+      error-pages/not-found-page
+      http-response/method-not-allowed))
 
-(defn not-acceptable-handler [request]
+(defn not-acceptable-handler
+  [request]
   (-> request
-      (index/build (bce/not-found {:not-found-page-title (bilb/btr request :not-found-page)
-                                   :not-found-page-description (bilb/btr request :not-found-description)
-                                   :back-home-text (bilb/btr request :back-home)}))
-      response/not-acceptable))
+      error-pages/not-found-page
+      http-response/not-acceptable))
 
-(defn resource-handler [{:keys [path root index-files nfh]
-                         :or {path "/"
-                              root "public"
-                              index-files []
-                              nfh not-found-handler}}]
-  (rr/create-resource-handler {:path path
-                               :root root
-                               :index-files index-files
-                               :not-found-handler nfh}))
+(defn resource-handler
+  [{:keys [path root index-files nfh]
+    :or {path "/"
+         root "public"
+         index-files []
+         nfh not-found-handler}}]
+  (reitit-ring/create-resource-handler {:path path
+                                        :root root
+                                        :index-files index-files
+                                        :not-found-handler nfh}))
 
-(defn default-handlers [{:keys [not-found not-allowed not-acceptable]
-                         :or {not-found not-found-handler
-                              not-allowed not-allowed-handler
-                              not-acceptable not-acceptable-handler}}]
-  (rr/create-default-handler
-   {:not-found not-found
-    :method-not-allowed not-allowed
-    :not-acceptable not-acceptable}))
+(defn apply-middlewares
+  "Apply the collection of middlewares to the handler
+  Params:
+  * `handler` handler to wrap
+  * `middlewares` is a collection of middlewares, could be a function or compile middlewares"
+  [handler middlewares]
+  (reduce (fn [handler middleware] (if (fn? middleware) (middleware handler) ((:wrap middleware) handler))) handler middlewares))
 
-(defn language-handler
-  "Redirects user to appropriate language subfolder."
-  [req]
-  (->> req
-       bilb/select-language
-       (str "/")
-       resp/redirect))
+(defn default-handlers
+  [{:keys [not-found not-allowed not-acceptable]
+    :or {not-found not-found-handler
+         not-allowed not-allowed-handler
+         not-acceptable not-acceptable-handler}} middlewares]
+  (reitit-ring/create-default-handler {:not-found (apply-middlewares not-found middlewares)
+                                       :method-not-allowed (apply-middlewares not-allowed middlewares)
+                                       :not-acceptable (apply-middlewares not-acceptable middlewares)}))

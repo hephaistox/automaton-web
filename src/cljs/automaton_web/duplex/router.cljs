@@ -1,18 +1,16 @@
 (ns automaton-web.duplex.router
-  (:require
-   [taoensso.sente :as sente]
-
-   [automaton-web.log :as log]
-   [automaton-web.duplex.message-handler :as msg-handler]
-   [automaton-web.duplex.core :as realtime]))
+  (:require [taoensso.sente :as sente]
+            [automaton-core.log :as core-log]
+            [automaton-web.duplex.message-handler :as message-handler]
+            [automaton-web.duplex.core :as duplex]))
 
 (defonce router_ (atom nil))
 
-(defn  stop-router! [] (when-let [stop-f @router_] (stop-f)))
+(defn stop-router! "Stop the router component" [] (when-let [stop-f @router_] (stop-f)))
 
-(defn start-router! []
+(defn start-router!
+  "Start the router component"
+  []
   (stop-router!)
-  (log/trace "Starting realtime router")
-  (reset! router_
-          (sente/start-client-chsk-router!
-           realtime/ch-chsk msg-handler/event-msg-handler)))
+  (core-log/trace "Starting realtime router")
+  (reset! router_ (sente/start-client-chsk-router! duplex/ch-chsk message-handler/event-msg-handler)))

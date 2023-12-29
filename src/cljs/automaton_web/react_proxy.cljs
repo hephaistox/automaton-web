@@ -1,11 +1,8 @@
 (ns automaton-web.react-proxy
   "Commonly used symbols for easy access in the ClojureScript REPL during
   development."
-  (:require
-   [clojure.pprint :refer (pprint)]
-   [clojure.string :as str]
-   [reagent.dom.client :as rdc]
-   [reagent.core :as r]))
+  (:require [reagent.dom.client :as rdc]
+            [reagent.core :as r]))
 
 (defn render-id
   [app-id component]
@@ -18,17 +15,10 @@
   [& ids]
   (loop [[app-id component & r] ids]
     (render-id app-id component)
-    (when r
-      (recur r))))
+    (when r (recur r))))
 
-(def ratom
-  r/atom)
+(def ratom r/atom)
 
-(def create-class
-  r/create-class)
+(def create-class r/create-class)
 
-(def as-element
-  r/as-element)
-
-(comment
-  (pprint (str/trim "This line suppresses some clj-kondo warnings.")))
+(def as-element r/as-element)

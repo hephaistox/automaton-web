@@ -1,57 +1,54 @@
 (ns automaton-web.components.init-components
   "Put here all initialisation needed for components classes (not for each component instance, which should be spread in the code). For instance, everything which is supposed to be done once for each component."
-  (:require
-   ["tw-elements" :refer [initTE Modal Ripple Tooltip]]
-   ["react" :as react]
-
-   [automaton-web.log :as log]))
+  (:require ["tw-elements" :refer [initTE Modal Ripple Tooltip]]
+            ["react" :as react]
+            [automaton-core.log :as core-log]))
 
 (defn- for-each-root-rendering
   "Init for each root rendering.
   List here all:
   * tailwind element components."
-  []
-  (log/trace "Starting Tailwind element")
-  (try
-    (initTE #js {:Modal Modal
-                 :Ripple Ripple})
-    ;;https://github.com/mdbootstrap/Tailwind-Elements/issues/1765#issuecomment-1623821125
-    ;;https://tailwind-elements.com/docs/standard/components/tooltip/#docsTabsAPI
-    ;;tooltips are not initalized yet with initTE despite what documentation say, but they plan to add it
-    (let
-     [tooltipTriggerList
-      (.call
-       (.-slice #js [])
-       (.querySelectorAll js/document "[data-te-toggle=\"tooltip\"]"))]
-      (.map
-       tooltipTriggerList
-       (fn [tooltipTriggerEl] (new Tooltip tooltipTriggerEl))))
-
-    (catch js/Error e
-      (log/error "Unexpected tailwind element issue " e)))
-  (log/trace "Ending Tailwind element"))
+  [document]
+  (core-log/trace "Starting Tailwind element")
+  (try (initTE #js {:Modal Modal
+                    :Ripple Ripple})
+       ;;https://github.com/mdbootstrap/Tailwind-Elements/issues/1765#issuecomment-1623821125
+       ;;https://tailwind-elements.com/docs/standard/components/tooltip/#docsTabsAPI
+       ;;tooltips are not initalized yet with initTE despite what
+       ;;documentation say, but they plan to add it
+       (let [tooltipTriggerList (.call (.-slice #js []) (.querySelectorAll document "[data-te-toggle=\"tooltip\"]"))]
+         (.map tooltipTriggerList (fn [tooltipTriggerEl] (new Tooltip tooltipTriggerEl))))
+       (catch js/Error e (core-log/error-exception (ex-info "Unexpected tailwind-element issue " {:error e}))))
+  (core-log/trace "Ending Tailwind-element")
+  js/undefined)
 
 (defn init-rendering
   "To be called at the root of components rendering"
-  []
-  (log/trace "Rendering init for base components")
-  (react/useEffect for-each-root-rendering
-                   #js []))
+  ([] (init-rendering js/document))
+  ([document] (core-log/trace "Rendering init for base components") (react/useEffect #(for-each-root-rendering document))))
 
-(defn init-modal [el]
-  (Modal. el))
+(defn init-elements-js
+  "To be called to initialize tw-elements in js"
+  [document]
+  (let [script (.createElement document "script")
+        _add-script-src (set! (.-src script) "https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js")]
+    (.appendChild (aget (.getElementsByTagName document "head") 0) script)))
 
-(defn get-modal [el]
-  (.getInstance Modal el))
+(defn init-modal [el] (Modal. el))
 
-(defn hide-modal [modal-id]
-  (-> js/document
-      (.getElementById modal-id)
-      (get-modal)
-      (.hide)))
+(defn get-modal [el] (.getInstance Modal el))
 
-(defn on-modal-hide [modal-id on-hide-fn]
-  (-> js/document
-      (.getElementById modal-id)
-      (.addEventListener "hidden.te.modal"
-                         on-hide-fn)))
+(defn hide-modal
+  ([modal-id] (hide-modal js/document modal-id))
+  ([document modal-id]
+   (some-> document
+           (.getElementById modal-id)
+           (get-modal)
+           (.hide))))
+
+(defn on-modal-hide
+  ([modal-id on-hide-fn] (on-modal-hide js/document modal-id on-hide-fn))
+  ([document modal-id on-hide-fn]
+   (some-> document
+           (.getElementById modal-id)
+           (.addEventListener "hidden.te.modal" on-hide-fn))))
