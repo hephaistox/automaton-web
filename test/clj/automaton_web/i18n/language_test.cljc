@@ -1,17 +1,17 @@
 (ns automaton-web.i18n.language-test
-  (:require [automaton-web.i18n.language :as sut]
+  (:require [automaton-core.adapters.regexp :as core-regexp]
+            [automaton-web.i18n.language :as sut]
             [clojure.test :refer [deftest is testing]]))
 
 (def selected-languages "For test, all supported languages are tested" (sut/make-automaton-web-languages))
 
 (deftest cors-domain-routes-test
   (testing "routes are built"
-    (is (= #?(:clj #{".*heph.com$" ".*heph.fr$"}
-              :cljs #{"/.*heph.com$/" "/.*heph.fr$/"})
+    (is (= #{".*heph.com$" ".*heph.fr$"}
            (->> (sut/cors-domain-routes (sut/make-automaton-web-languages {:en {}
                                                                            :fr {}})
                                         "heph")
-                (map str)
+                (map core-regexp/stringify)
                 set)))))
 
 (deftest create-ui-languages-test

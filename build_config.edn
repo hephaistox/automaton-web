@@ -3,10 +3,10 @@
                :mermaid-dir "docs/code/"
                :publication {:as-lib org.clojars.hephaistox/automaton-web
                              :branch "main"
-                             :jar-path "target/prod/automaton-web.jar"
-                             :pom-path "target/prod/class/META-INF/maven/org.clojars.hephaistox/automaton-web/pom.xml"
                              :frontend {:run-aliases [:automaton-web-portfolio]}
+                             :jar-path "target/prod/automaton-web.jar"
                              :major-version "0.0.%d"
+                             :pom-path "target/prod/class/META-INF/maven/org.clojars.hephaistox/automaton-web/pom.xml"
                              :repo "git@github.com:hephaistox/automaton-web.git"}
                :repl-aliases [:common-test :env-development-repl :build]
                :storage-datomic {:datomic-ver "1.0.7021"}}
