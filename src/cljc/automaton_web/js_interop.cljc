@@ -15,5 +15,6 @@
                         (cond (string? v) (str "\"" v "\"")
                               (keyword? v) (kw-to-js v)
                               (map? v) (mapToJSmap v)
+                              (nil? v) 'null
                               :else v))))
        "}"))
