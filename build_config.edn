@@ -3,6 +3,7 @@
                :mermaid-dir "docs/code/"
                :publication {:as-lib org.clojars.hephaistox/automaton-web
                              :branch "main"
+                             :deploy-to :clojars
                              :frontend {:run-aliases [:automaton-web-portfolio]}
                              :jar-path "target/prod/automaton-web.jar"
                              :major-version "0.0.%d"
