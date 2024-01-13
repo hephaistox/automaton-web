@@ -4,7 +4,7 @@
             [automaton-core.adapters.edn-utils :as edn-utils]
             [automaton-core.adapters.env-variables :as env-vars]
             [automaton-core.adapters.version :as version]
-            [automaton-web.configuration.core :as web-conf]
+            [automaton-web.configuration :as web-conf]
             [automaton-core.http.request :as request]
             [automaton-web.components.icons :as web-icons]
             [automaton-web.components.table :as table]

@@ -3,7 +3,7 @@
             [automaton-web.hiccup :as web-hiccup]
             [automaton-web.pages.index :as web-pages-index]
             [automaton-web.pages.admin :as web-admin-index]
-            [automaton-web.configuration.core :as web-conf]))
+            [automaton-web.configuration :as web-conf]))
 
 (defn route
   []

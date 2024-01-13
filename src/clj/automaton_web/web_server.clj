@@ -1,6 +1,6 @@
 (ns automaton-web.web-server
   "Create the webserver, (http kit), set it up, log uncaught exceptions in thread"
-  (:require [automaton-web.configuration.core :as web-conf]
+  (:require [automaton-web.configuration :as web-conf]
             [automaton-core.log :as core-log]
             [org.httpkit.server :as http-kit]))
 

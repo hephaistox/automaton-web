@@ -1,8 +1,8 @@
-(ns automaton-web.configuration.simple-files-web
+(ns automaton-web.configuration.files
   (:require [automaton-core.configuration.protocol :as core-conf-prot]
             [automaton-web.configuration.protocol :as web-prot]
             [automaton-web.js-interop :as ws-util]
-            #?(:clj [automaton-core.configuration.simple-files :as sf]
+            #?(:clj [automaton-core.configuration.files :as core-conf-files]
                :cljs [automaton-core.utils.keyword :as utils-keyword])))
 
 (def js-var
@@ -11,7 +11,7 @@
 
 (defn- read-config
   []
-  #?(:clj (sf/read-config)
+  #?(:clj (core-conf-files/read-config)
      :cljs (utils-keyword/sanitize-map-keys (js->clj js-var :keywordize-keys true))))
 
 (def ^{:doc "A map of configuration variables."} conf (memoize read-config))
