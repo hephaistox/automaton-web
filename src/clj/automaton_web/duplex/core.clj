@@ -1,6 +1,6 @@
 (ns automaton-web.duplex.core
   "Add a real time communication feature with the client"
-  (:require [automaton-web.configuration.core :as web-conf]
+  (:require [automaton-web.configuration :as web-conf]
             [automaton-core.log :as core-log]
             [automaton-web.duplex.message-handler :as message-handler]
             [mount.core :refer [defstate] :as mount]

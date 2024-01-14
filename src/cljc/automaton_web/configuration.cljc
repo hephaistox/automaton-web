@@ -1,4 +1,4 @@
-(ns automaton-web.configuration.core
+(ns automaton-web.configuration
   "Configuration parameters, stored in configuration file.
    This namespace is the entry point to call conf.
 
@@ -9,7 +9,7 @@
   * Read the parameter with  `conf/read-param`"
   (:require [automaton-web.configuration.protocol :as web-prot]
             [automaton-core.configuration.protocol :as core-conf-prot]
-            [automaton-web.configuration.simple-files-web :as simple-web]
+            [automaton-web.configuration.files :as simple-web]
             [mount.core :refer [defstate in-cljc-mode]]))
 
 ;; Force the use of `cljc mode` in mount library, so call to `@` will work

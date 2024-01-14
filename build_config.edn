@@ -1,15 +1,12 @@
 {:app-name "automaton-web"
  :task-shared {:gha {}
-               :mermaid-dir "docs/code/"
                :publication {:as-lib org.clojars.hephaistox/automaton-web
-                             :branch "main"
-                             :frontend {:run-aliases [:automaton-web-portfolio]}
-                             :jar-path "target/prod/automaton-web.jar"
+                             :deploy-to :clojars
+                             :frontend {:css {}
+                                        :run-aliases [:automaton-web-portfolio]}
                              :major-version "0.0.%d"
-                             :pom-path "target/prod/class/META-INF/maven/org.clojars.hephaistox/automaton-web/pom.xml"
                              :repo "git@github.com:hephaistox/automaton-web.git"}
-               :repl-aliases [:common-test :env-development-repl :build]
-               :storage-datomic {:datomic-ver "1.0.7021"}}
+               :repl-aliases [:common-test :env-development-repl :build]}
  :tasks {:clean {:dirs [".cpcache/" ".clj-kondo/.cache/" "tmp/" "target/" "node_modules/" ".shadow-cljs/builds/"]}
          :lfe-test {}
          :lfe-watch {}
