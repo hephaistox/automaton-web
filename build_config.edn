@@ -2,9 +2,9 @@
  :task-shared {:gha {}
                :publication {:as-lib org.clojars.hephaistox/automaton-web
                              :deploy-to :clojars
-                             :license {}
                              :frontend {:css {}
                                         :run-aliases [:automaton-web-portfolio]}
+                             :license {}
                              :major-version "0.0.%d"
                              :repo "git@github.com:hephaistox/automaton-web.git"}
                :repl-aliases [:common-test :env-development-repl :build]}
