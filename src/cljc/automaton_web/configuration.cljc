@@ -9,7 +9,7 @@
   * Read the parameter with  `conf/read-param`"
   (:require [automaton-web.configuration.protocol :as web-prot]
             [automaton-core.configuration.protocol :as core-conf-prot]
-            [automaton-web.configuration.files :as simple-web]
+            [automaton-web.configuration.files :as web-conf-files]
             [mount.core :refer [defstate in-cljc-mode]]))
 
 ;; Force the use of `cljc mode` in mount library, so call to `@` will work
@@ -18,7 +18,7 @@
 (defn start-conf
   []
   (try (prn "Starting web configuration component")
-       (let [conf (simple-web/->SimpleWebConf)]
+       (let [conf (web-conf-files/->SimpleWebConf)]
          (prn "Web configuration component is started")
          conf)
        (catch #?(:clj Throwable
