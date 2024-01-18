@@ -5,8 +5,9 @@
    And component on which the tooltip is shown."
   [{:keys [text direction]
     :or {text "Hoover text"
-         direction "top"}} component]
-  [:span
-   {:data-te-toggle "tooltip"
-    :data-te-placement direction
-    :title text} component])
+         direction "top"}}
+   component]
+  [:span {:data-te-toggle "tooltip"
+          :data-te-placement direction
+          :title text}
+   component])

@@ -1,9 +1,10 @@
 (ns automaton-web.components.fe-language-select
   "A selector component to select the used language
   Is wired with database and will update the app language"
-  (:require [automaton-web.components.simple-select :as web-simple-select]
-            [automaton-web.events.subs :as web-subs]
-            [automaton-web.events-proxy :as web-events-proxy]))
+  (:require
+   [automaton-web.components.simple-select :as web-simple-select]
+   [automaton-web.events.subs :as web-subs]
+   [automaton-web.events-proxy :as web-events-proxy]))
 
 (defn language-select
   "UI component for selecting the language
@@ -19,4 +20,6 @@
       :name "lang"
       :on-change #(web-events-proxy/dispatch [change-lang-kw %])
       :value selected-value
-      :options (map (fn [{:keys [value]}] [:option {:value value} value]) ui-languages)}]))
+      :options (map (fn [{:keys [value]}] [:option {:value value}
+                                           value])
+                    ui-languages)}]))

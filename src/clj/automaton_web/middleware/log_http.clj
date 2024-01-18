@@ -1,7 +1,8 @@
 (ns automaton-web.middleware.log-http
   "For logging the request
   Having that middleware appart allows to manage the log parameters for that query only, as it may be huge on production"
-  (:require [automaton-core.log :as core-log]))
+  (:require
+   [automaton-core.log :as core-log]))
 
 (defn wrap-log
   "Write the response in the log

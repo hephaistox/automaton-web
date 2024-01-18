@@ -1,9 +1,10 @@
 (ns automaton-web.fe.history.reitit
   "Adapter for reitit history
   See [reitit history](https://github.com/metosin/reitit/blob/master/modules/reitit-frontend/src/reitit/frontend/history.cljs) for details"
-  (:require [automaton-web.adapters.fe.url :as fe-url]
-            [automaton-web.fe.history :as web-fe-history]
-            [reitit.frontend.history :as reitit-fe-history]))
+  (:require
+   [automaton-web.adapters.fe.url :as fe-url]
+   [automaton-web.fe.history :as web-fe-history]
+   [reitit.frontend.history :as reitit-fe-history]))
 
 (defrecord History [history]
   web-fe-history/History
@@ -15,7 +16,8 @@
                               (or name (get-in match [:data :name]))
                               (merge (:path-params match) path-params)
                               (merge (:query-params match) query-params)))
-    (href [_ name path-params query-params] (reitit-fe-history/href history name path-params query-params)))
+    (href [_ name path-params query-params]
+      (reitit-fe-history/href history name path-params query-params)))
 
 (defn make-history
   "Make an history (fe-history/History) instance for pushy.
@@ -25,4 +27,5 @@
   * `router` router used by that history
   * `on-navigate` function called when a route changed. Takes two parameters, `match` and `history`"
   [router on-navigate]
-  (->History (reitit-fe-history/start! router on-navigate {:use-fragment false})))
+  (->History
+   (reitit-fe-history/start! router on-navigate {:use-fragment false})))

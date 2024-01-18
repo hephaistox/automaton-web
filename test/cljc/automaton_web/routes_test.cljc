@@ -1,11 +1,13 @@
 (ns automaton-web.routes-test
-  (:require [automaton-web.routes :as sut]
-            #?(:clj [clojure.test :refer [deftest is testing]]
-               :cljs [cljs.test :refer [deftest is testing] :include-macros true])))
+  (:require
+   [automaton-web.routes :as sut]
+   #?(:clj [clojure.test :refer [deftest is testing]]
+      :cljs [cljs.test :refer [deftest is testing] :include-macros true])))
 
 (deftest parse-route-elt-test
   (testing "Strings are preserved" (is (= "foo" (sut/parse-routes :be "foo"))))
-  (testing "If be or fe data isn't a map, so copy it directly (usefull to pass handlers directly)"
+  (testing
+    "If be or fe data isn't a map, so copy it directly (usefull to pass handlers directly)"
     (is (= 'clojure.print
            (sut/parse-routes :be
                              {:name :foo
@@ -24,5 +26,8 @@
                              {:name ::root
                               :be {:page-id :html-page/index}
                               :fe {:panel-id :panels/home}}))))
-  (testing "Vectors values are treated" (is (= ["foo" "bar"] (sut/parse-routes :be ["foo" "bar"]))))
-  (testing "Registry replace keywords" (is (= ["" clojure.core/last] (sut/parse-routes :be ["" {:be :foo}] {:foo clojure.core/last})))))
+  (testing "Vectors values are treated"
+    (is (= ["foo" "bar"] (sut/parse-routes :be ["foo" "bar"]))))
+  (testing "Registry replace keywords"
+    (is (= ["" clojure.core/last]
+           (sut/parse-routes :be ["" {:be :foo}] {:foo clojure.core/last})))))

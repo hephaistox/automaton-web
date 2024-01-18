@@ -1,7 +1,8 @@
 (ns automaton-web.adapters.fe.cookies
   "Adapter to store a cookie on the frontend"
-  (:require [goog.net.Cookies :as gnc]
-            [automaton-web.persistence.cookies :as cookies]))
+  (:require
+   [goog.net.Cookies :as gnc]
+   [automaton-web.persistence.cookies :as cookies]))
 
 (defn ^:export set-cookie
   "Set the salue of the cookie
@@ -14,7 +15,10 @@
   ([k v time] (.set (gnc/getInstance) (str k) v time "/"))
   ([k v] (.set (gnc/getInstance) (str k) v -1)))
 
-(defn get-cookie "Get the the cookie map of data" [] (cookies/parse-cookie (str (.-cookie js/document))))
+(defn get-cookie
+  "Get the the cookie map of data"
+  []
+  (cookies/parse-cookie (str (.-cookie js/document))))
 
 (defn get-cookie-val
   "Get the value of a key

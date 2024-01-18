@@ -1,16 +1,17 @@
 (ns automaton-web.i18n.fe.translator.tempura
   "Tempura implementation for frontend translation
   Implementing `fe-translator/FeTranslator`"
-  (:require [automaton-core.i18n.translator.tempura :as tempura-translator]
-            [automaton-core.log :as core-log]
-            [automaton-web.adapters.fe.cookies :as fe-cookies]
-            [automaton-web.adapters.fe.url :as fe-url]
-            [automaton-web.events-proxy :as web-events-proxy]
-            [automaton-web.events.subs :as web-subs]
-            [automaton-web.i18n.dict.resources]
-            [automaton-web.i18n.dict.text]
-            [automaton-web.i18n.fe.translator :as fe-translator]
-            [taoensso.tempura :as tempura]))
+  (:require
+   [automaton-core.i18n.translator.tempura :as tempura-translator]
+   [automaton-core.log :as core-log]
+   [automaton-web.adapters.fe.cookies :as fe-cookies]
+   [automaton-web.adapters.fe.url :as fe-url]
+   [automaton-web.events-proxy :as web-events-proxy]
+   [automaton-web.events.subs :as web-subs]
+   [automaton-web.i18n.dict.resources]
+   [automaton-web.i18n.dict.text]
+   [automaton-web.i18n.fe.translator :as fe-translator]
+   [taoensso.tempura :as tempura]))
 
 (defrecord FeTempuraTranslator [opts main-langs ui-str-to-id]
   fe-translator/FeTranslator
@@ -18,7 +19,11 @@
     (translate [_ tr-id resources]
       (let [lang (some-> (web-events-proxy/subscribe [::web-subs/lang])
                          deref)
-            translated-text (tempura/tr opts (vec (concat (when (keyword? lang) [lang]) main-langs)) [tr-id] resources)]
+            translated-text
+            (tempura/tr opts
+                        (vec (concat (when (keyword? lang) [lang]) main-langs))
+                        [tr-id]
+                        resources)]
         (core-log/trace "Translate key `"
                         tr-id
                         "`,with locales `"
@@ -49,7 +54,9 @@
   * `main-langs` languages defaulted by tempura if not found "
   [main-langs ui-str-to-id & dicts]
   ;;Adding web-dict here allows to use that keyword in cust apps
-  (->FeTempuraTranslator
-   (apply tempura-translator/create-opts automaton-web.i18n.dict.text/dict automaton-web.i18n.dict.resources/dict dicts)
-   main-langs
-   ui-str-to-id))
+  (->FeTempuraTranslator (apply tempura-translator/create-opts
+                                automaton-web.i18n.dict.text/dict
+                                automaton-web.i18n.dict.resources/dict
+                                dicts)
+                         main-langs
+                         ui-str-to-id))

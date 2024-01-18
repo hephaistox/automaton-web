@@ -1,7 +1,8 @@
 (ns automaton-web.duplex.message-handler
   "Basic message handler, the `apps` deriving from automaton should
 add some other defmethod, for all other messages"
-  (:require [automaton-core.log :as core-log]))
+  (:require
+   [automaton-core.log :as core-log]))
 
 (defmulti -event-msg-handler
   "Multimethod to handle Sente `event-msg`s"
@@ -25,4 +26,6 @@ add some other defmethod, for all other messages"
     (core-log/trace "Default faultback realtime: uid=" uid ", session=" session)
     (when ?reply-fn (?reply-fn {:umatched-event-as-echoed-from-server event}))))
 
-(defmethod -event-msg-handler :yop/test [{:keys []}] (core-log/trace "Test successful"))
+(defmethod -event-msg-handler :yop/test
+  [{:keys []}]
+  (core-log/trace "Test successful"))

@@ -1,4 +1,5 @@
-(ns automaton-web.i18n.dict.resources "Dictionary for resources translation for `automaton-web`'s components ")
+(ns automaton-web.i18n.dict.resources
+  "Dictionary for resources translation for `automaton-web`'s components ")
 
 (def dict
   "Dictionary to translate resources

@@ -88,21 +88,25 @@
   (let [{:keys [original-width original-height fill icon-scale path]
          :as _icons}
         (get icons-path path-kw)
-        fill-color (cond (some? color) color
-                         (some? dark?) (if dark? "white" "black")
-                         (some? fill) fill
-                         :else "black")
-        svg [:svg
-             {:stroke "currentColor"
-              :href href
-              :fill fill-color
-              :class (vec (concat ["relative" (when hover? "svg-hover-orange")] class))
-              :aria-hidden "true"
-              :height (str (* 1 size) "em")
-              :view-box (str "0 0 " original-width " " original-height)
-              :xmlns "http://www.w3.org/2000/svg"} [:g {:transform (str "scale(" (or scale icon-scale 1) ")")} [:path {:d path}]]]]
+        fill-color (cond
+                     (some? color) color
+                     (some? dark?) (if dark? "white" "black")
+                     (some? fill) fill
+                     :else "black")
+        svg [:svg {:stroke "currentColor"
+                   :href href
+                   :fill fill-color
+                   :class (vec (concat ["relative"
+                                        (when hover? "svg-hover-orange")]
+                                       class))
+                   :aria-hidden "true"
+                   :height (str (* 1 size) "em")
+                   :view-box (str "0 0 " original-width " " original-height)
+                   :xmlns "http://www.w3.org/2000/svg"}
+             [:g {:transform (str "scale(" (or scale icon-scale 1) ")")}
+              [:path {:d path}]]]]
     (if href
-      [:a
-       {:href href
-        :target "_blank"} svg]
+      [:a {:href href
+           :target "_blank"}
+       svg]
       svg)))

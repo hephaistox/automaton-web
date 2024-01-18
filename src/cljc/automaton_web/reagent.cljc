@@ -32,5 +32,7 @@
   [options component]
   (let [[comp-key & comp-rest] component
         maybe-opt (first comp-rest)
-        updated-options (if (map? maybe-opt) (apply vector comp-key options (rest comp-rest)) (apply vector comp-key options comp-rest))]
+        updated-options (if (map? maybe-opt)
+                          (apply vector comp-key options (rest comp-rest))
+                          (apply vector comp-key options comp-rest))]
     updated-options))

@@ -1,9 +1,10 @@
 (ns automaton-web.i18n.be.translator
   "Protocol for a backend translator"
-  (:require [automaton-core.i18n.translator :as core-translator]
-            [automaton-core.log :as core-log]
-            [automaton-web.adapters.be.http-request :as http-request]
-            [clojure.string :as str]))
+  (:require
+   [automaton-core.i18n.translator :as core-translator]
+   [automaton-core.log :as core-log]
+   [automaton-web.adapters.be.http-request :as http-request]
+   [clojure.string :as str]))
 
 (defprotocol BeTranslator
   (wrap-translator [this]
@@ -41,13 +42,16 @@
   * `http-request` request to parse"
   [web-translator http-request]
   (let [par-lang (http-request/get-param http-request :lang)
-        lang-str (if (or (not (string? par-lang)) (str/blank? par-lang))
-                   (language-choice-strategy* par-lang
-                                              (delay (http-request/cookies-language http-request))
-                                              (delay (some-> (http-request/accepted-languages http-request)
-                                                             (subs 0 2)))
-                                              (delay (some-> http-request
-                                                             http-request/tld-language))
-                                              (delay (first (core-translator/default-languages web-translator))))
-                   (do (core-log/trace "Language `" par-lang "` imposed by parameter") par-lang))]
+        lang-str
+        (if (or (not (string? par-lang)) (str/blank? par-lang))
+          (language-choice-strategy*
+           par-lang
+           (delay (http-request/cookies-language http-request))
+           (delay (some-> (http-request/accepted-languages http-request)
+                          (subs 0 2)))
+           (delay (some-> http-request
+                          http-request/tld-language))
+           (delay (first (core-translator/default-languages web-translator))))
+          (do (core-log/trace "Language `" par-lang "` imposed by parameter")
+              par-lang))]
     lang-str))

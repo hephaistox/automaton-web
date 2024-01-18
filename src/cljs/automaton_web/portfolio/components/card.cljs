@@ -1,7 +1,12 @@
 (ns automaton-web.portfolio.components.card
-  (:require [automaton-web.components.card :as sut]
-            [automaton-web.portfolio.proxy :as web-proxy]
-            [portfolio.reagent-18 :as portfolio :refer-macros [defscene configure-scenes]]))
+  (:require
+   [automaton-web.components.card :as sut]
+   [automaton-web.portfolio.proxy :as web-proxy]
+   [portfolio.reagent-18
+    :as
+    portfolio
+    :refer-macros
+    [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Cards"})
@@ -15,6 +20,14 @@
    :on-click #(js/alert "Clicked!")})
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defscene card :params card-params [params] (web-proxy/wrap-component [sut/card params]))
+(defscene card
+          :params
+          card-params
+          [params]
+          (web-proxy/wrap-component [sut/card params]))
 
-(defscene dark-card :params (assoc card-params :dark? true) [params] (web-proxy/wrap-component [sut/card params]))
+(defscene dark-card
+          :params
+          (assoc card-params :dark? true)
+          [params]
+          (web-proxy/wrap-component [sut/card params]))

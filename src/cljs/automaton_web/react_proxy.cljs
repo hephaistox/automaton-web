@@ -1,8 +1,9 @@
 (ns automaton-web.react-proxy
   "Commonly used symbols for easy access in the ClojureScript REPL during
   development."
-  (:require [reagent.dom.client :as rdc]
-            [reagent.core :as r]))
+  (:require
+   [reagent.dom.client :as rdc]
+   [reagent.core :as r]))
 
 (defn render-id
   [app-id component]

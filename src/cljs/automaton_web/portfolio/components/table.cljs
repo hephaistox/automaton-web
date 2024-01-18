@@ -1,7 +1,12 @@
 (ns automaton-web.portfolio.components.table
-  (:require [portfolio.reagent-18 :as portfolio :refer-macros [defscene configure-scenes]]
-            [automaton-web.portfolio.proxy :as web-proxy]
-            [automaton-web.components.table :as sut]))
+  (:require
+   [portfolio.reagent-18
+    :as
+    portfolio
+    :refer-macros
+    [defscene configure-scenes]]
+   [automaton-web.portfolio.proxy :as web-proxy]
+   [automaton-web.components.table :as sut]))
 
 (configure-scenes {:collection :components
                    :title "Table"})
@@ -21,6 +26,8 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene table
-          (web-proxy/wrap-component [sut/table
-                                     {:headers ["one" "two" "three"]
-                                      :rows [["1" "2" "3"] ["first" "second" "third"] ["idk" "more" "more"]]}]))
+          (web-proxy/wrap-component [sut/table {:headers ["one" "two" "three"]
+                                                :rows
+                                                [["1" "2" "3"]
+                                                 ["first" "second" "third"]
+                                                 ["idk" "more" "more"]]}]))

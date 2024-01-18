@@ -1,7 +1,8 @@
 (ns automaton-web.duplex.session
   "Manage session, stored in memory for now
   Session information are described there : https://github.com/ring-clojure/ring/wiki/Sessions"
-  (:require [ring.middleware.session.memory :as ring-memory]))
+  (:require
+   [ring.middleware.session.memory :as ring-memory]))
 
 (def session-store "Atom containing all active sequences" (atom {}))
 

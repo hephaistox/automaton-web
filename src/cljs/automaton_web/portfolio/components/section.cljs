@@ -1,8 +1,13 @@
 (ns automaton-web.portfolio.components.section
-  (:require [automaton-web.components.section :as sut]
-            [automaton-web.portfolio.proxy :as web-proxy]
-            [automaton-web.react-proxy :as web-react]
-            [portfolio.reagent-18 :as portfolio :refer-macros [defscene configure-scenes]]))
+  (:require
+   [automaton-web.components.section :as sut]
+   [automaton-web.portfolio.proxy :as web-proxy]
+   [automaton-web.react-proxy :as web-react]
+   [portfolio.reagent-18
+    :as
+    portfolio
+    :refer-macros
+    [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Section"})
@@ -46,12 +51,14 @@
           (web-proxy/wrap-component [sut/section-text-button params]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defscene section-text-button-long-text
-          :params
-          {:text "This is a text of this section and when it's reaaaaaly long the button will be centered to fit this section text nicely."
-           :btn-text "Click me!"}
-          [params]
-          (web-proxy/wrap-component [sut/section-text-button params]))
+(defscene
+ section-text-button-long-text
+ :params
+ {:text
+  "This is a text of this section and when it's reaaaaaly long the button will be centered to fit this section text nicely."
+  :btn-text "Click me!"}
+ [params]
+ (web-proxy/wrap-component [sut/section-text-button params]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene section-text-video
@@ -76,15 +83,17 @@
           (web-proxy/wrap-component [sut/section-text-video params]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defscene section-text-video-long-text
-          :params
-          {:title "And this is quite long for a title"
-           :subtitle "I'm a subtitle"
-           :text "This is a text of this section and when it's reaaaaaly long the button will be centered to fit this section text nicely."
-           :btn-props {:text "Click me!"}
-           :video-src "https://www.youtube.com/embed/9EcjWd-O4jI"}
-          [params]
-          (web-proxy/wrap-component [sut/section-text-video params]))
+(defscene
+ section-text-video-long-text
+ :params
+ {:title "And this is quite long for a title"
+  :subtitle "I'm a subtitle"
+  :text
+  "This is a text of this section and when it's reaaaaaly long the button will be centered to fit this section text nicely."
+  :btn-props {:text "Click me!"}
+  :video-src "https://www.youtube.com/embed/9EcjWd-O4jI"}
+ [params]
+ (web-proxy/wrap-component [sut/section-text-video params]))
 
 (def section-clickable-cards-modal-params
   {:current-card (web-react/ratom {})
@@ -107,25 +116,27 @@
           :params
           section-clickable-cards-modal-params
           [params]
-          (web-proxy/wrap-component [sut/section-clickable-cards-modal
-                                     {:current-card @(:current-card params)
-                                      :change-card-fn (fn [card] (reset! (:current-card params) card))
-                                      :cards (:cards params)
-                                      :section {:title "hello"
-                                                :description "more words"}
-                                      :size :sm
-                                      :modal-id "card-details-modal"}]))
+          (web-proxy/wrap-component
+           [sut/section-clickable-cards-modal
+            {:current-card @(:current-card params)
+             :change-card-fn (fn [card] (reset! (:current-card params) card))
+             :cards (:cards params)
+             :section {:title "hello"
+                       :description "more words"}
+             :size :sm
+             :modal-id "card-details-modal"}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene section-clickable-cards-modal-dark
           :params
           (merge section-clickable-cards-modal-params {:dark? true})
           [params]
-          (web-proxy/wrap-component [sut/section-clickable-cards-modal
-                                     {:current-card @(:current-card params)
-                                      :change-card-fn (fn [card] (reset! (:current-card params) card))
-                                      :cards (:cards params)
-                                      :section {:title "hello"
-                                                :description "more words"}
-                                      :size :sm
-                                      :modal-id "card-details-modal"}]))
+          (web-proxy/wrap-component
+           [sut/section-clickable-cards-modal
+            {:current-card @(:current-card params)
+             :change-card-fn (fn [card] (reset! (:current-card params) card))
+             :cards (:cards params)
+             :section {:title "hello"
+                       :description "more words"}
+             :size :sm
+             :modal-id "card-details-modal"}]))

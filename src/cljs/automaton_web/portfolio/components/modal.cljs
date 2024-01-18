@@ -1,25 +1,32 @@
 (ns automaton-web.portfolio.components.modal
-  (:require [portfolio.reagent-18 :as portfolio :refer-macros [defscene configure-scenes]]
-            [automaton-web.portfolio.proxy :as web-proxy]
-            [automaton-web.components.modal :as sut]
-            [automaton-web.components.button :as web-button]))
+  (:require
+   [portfolio.reagent-18
+    :as
+    portfolio
+    :refer-macros
+    [defscene configure-scenes]]
+   [automaton-web.portfolio.proxy :as web-proxy]
+   [automaton-web.components.modal :as sut]
+   [automaton-web.components.button :as web-button]))
 
 (configure-scenes {:collection :components
                    :title "Modal"})
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene modal-big
-          (web-proxy/wrap-component (sut/wrap-modal-call {:modal-id "bigModal"} [web-button/button {:text "Call modal"}])
-                                    [sut/modal-big
-                                     {:title [:div "hello"]
-                                      :body [:div "Body"]
-                                      :id "bigModal"}]))
+          (web-proxy/wrap-component (sut/wrap-modal-call {:modal-id "bigModal"}
+                                                         [web-button/button
+                                                          {:text "Call modal"}])
+                                    [sut/modal-big {:title [:div "hello"]
+                                                    :body [:div "Body"]
+                                                    :id "bigModal"}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene
  modal-detailed
  (web-proxy/wrap-component
-  (sut/wrap-modal-call {:modal-id "basic-modal"} [web-button/button {:text "Show modal"}])
+  (sut/wrap-modal-call {:modal-id "basic-modal"}
+                       [web-button/button {:text "Show modal"}])
   [sut/details-modal
    {:img
     "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
@@ -33,7 +40,8 @@
 (defscene
  modal-detailed-sections
  (web-proxy/wrap-component
-  (sut/wrap-modal-call {:modal-id "sections-modal"} [web-button/button {:text "Show modal"}])
+  (sut/wrap-modal-call {:modal-id "sections-modal"}
+                       [web-button/button {:text "Show modal"}])
   [sut/details-modal
    {:img
     "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"

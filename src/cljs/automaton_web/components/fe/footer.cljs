@@ -1,6 +1,7 @@
 (ns automaton-web.components.fe.footer
-  (:require [automaton-web.components.footer :as web-footer]
-            [automaton-web.components.link :as web-link]))
+  (:require
+   [automaton-web.components.footer :as web-footer]
+   [automaton-web.components.link :as web-link]))
 
 (defn simple-footer
   "Minimal version of footer component.
@@ -16,6 +17,8 @@
    * `dark?` - color mode"
   [{:keys [footer-data]
     :as props}]
-  (let [footer-lists (mapv #(web-link/conditional-link-opts (dissoc % :footer-data)) footer-data)]
+  (let [footer-lists (mapv #(web-link/conditional-link-opts (dissoc %
+                                                             :footer-data))
+                           footer-data)]
     (web-footer/simple-footer (assoc props :footer-lists footer-lists))))
 

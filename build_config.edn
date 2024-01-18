@@ -6,9 +6,15 @@
                                         :run-aliases [:automaton-web-portfolio]}
                              :license {}
                              :major-version "0.0.%d"
-                             :repo "git@github.com:hephaistox/automaton-web.git"}
+                             :repo
+                             "git@github.com:hephaistox/automaton-web.git"}
                :repl-aliases [:common-test :env-development-repl :build]}
- :tasks {:clean {:dirs [".cpcache/" ".clj-kondo/.cache/" "tmp/" "target/" "node_modules/" ".shadow-cljs/builds/"]}
+ :tasks {:clean {:dirs [".cpcache/"
+                        ".clj-kondo/.cache/"
+                        "tmp/"
+                        "target/"
+                        "node_modules/"
+                        ".shadow-cljs/builds/"]}
          :lfe-test {}
          :lfe-watch {}
          :reports {:forbiddenwords-words #{"landing" "tap>"}}}}

@@ -1,26 +1,29 @@
 (ns automaton-web.portfolio.components.menu-item
-  (:require [portfolio.reagent-18 :as portfolio :refer-macros [defscene configure-scenes]]
-            [automaton-web.portfolio.proxy :as web-proxy]
-            [automaton-web.components.menu-item :as sut]))
+  (:require
+   [portfolio.reagent-18
+    :as
+    portfolio
+    :refer-macros
+    [defscene configure-scenes]]
+   [automaton-web.portfolio.proxy :as web-proxy]
+   [automaton-web.components.menu-item :as sut]))
 
 (configure-scenes {:collection :components
                    :title "Menu Item"})
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu-item
-          (web-proxy/wrap-component [sut/component
-                                     {:title "Normal menu"
-                                      :href "/coucou"}]))
+          (web-proxy/wrap-component [sut/component {:title "Normal menu"
+                                                    :href "/coucou"}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu-item-selected
-          (web-proxy/wrap-component [sut/component
-                                     {:title "Selected menu"
-                                      :selected true
-                                      :href "/coucou"}]))
+          (web-proxy/wrap-component [sut/component {:title "Selected menu"
+                                                    :selected true
+                                                    :href "/coucou"}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu-item-click-action
-          (web-proxy/wrap-component [sut/component
-                                     {:title "Check click action works"
-                                      :on-click #(js/alert "Hey, click action works!")}]))
+          (web-proxy/wrap-component
+           [sut/component {:title "Check click action works"
+                           :on-click #(js/alert "Hey, click action works!")}]))

@@ -4,7 +4,7 @@
   <packaging>jar</packaging>
   <groupId>org.clojars.hephaistox</groupId>
   <artifactId>automaton-web</artifactId>
-  <version>0.0.26</version>
+  <version>0.0.27</version>
   <name>automaton-web</name>
   <dependencies>
     <dependency>
@@ -30,7 +30,7 @@
     <dependency>
       <groupId>org.clojars.hephaistox</groupId>
       <artifactId>automaton-core</artifactId>
-      <version>0.0.67</version>
+      <version>0.0.68</version>
     </dependency>
     <dependency>
       <groupId>ring-cors</groupId>

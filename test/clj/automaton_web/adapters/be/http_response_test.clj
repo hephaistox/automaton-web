@@ -1,6 +1,7 @@
 (ns automaton-web.adapters.be.http-response-test
-  (:require [automaton-web.adapters.be.http-response :as sut]
-            [clojure.test :refer [deftest is testing]]))
+  (:require
+   [automaton-web.adapters.be.http-response :as sut]
+   [clojure.test :refer [deftest is testing]]))
 
 (deftest default-handlers-test
   (testing "with default http responses"
@@ -24,7 +25,8 @@
               :headers {}
               :body "not-found"}
              (sut/not-found "not-found"))))
-    (testing "test method-not-allowed handler is called and returning 405 status"
+    (testing
+      "test method-not-allowed handler is called and returning 405 status"
       (is (= {:status 405
               :headers {}
               :body "method-not-allowed"}

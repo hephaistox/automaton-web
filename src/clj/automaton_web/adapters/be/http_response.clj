@@ -1,8 +1,12 @@
 (ns automaton-web.adapters.be.http-response
   "Http responses return functions and related code"
-  (:require [ring.util.http-response :as ring-http-response]))
+  (:require
+   [ring.util.http-response :as ring-http-response]))
 
-(defn ok "200 OK (Success)" ([headers body] (merge (ok body) {:headers headers})) ([body] (ring-http-response/ok body)))
+(defn ok
+  "200 OK (Success)"
+  ([headers body] (merge (ok body) {:headers headers}))
+  ([body] (ring-http-response/ok body)))
 
 (defn no-content
   "204 No Content (Success)
@@ -15,8 +19,12 @@
 
 (def not-found "404 Not Found (ClientError)" ring-http-response/not-found)
 
-(def method-not-allowed "405 Method Not Allowed (ClientError)" ring-http-response/method-not-allowed)
+(def method-not-allowed
+  "405 Method Not Allowed (ClientError)"
+  ring-http-response/method-not-allowed)
 
-(def not-acceptable "406 Not Acceptable (ClientError)" ring-http-response/not-acceptable)
+(def not-acceptable
+  "406 Not Acceptable (ClientError)"
+  ring-http-response/not-acceptable)
 
 (def internal-server-error ring-http-response/internal-server-error)

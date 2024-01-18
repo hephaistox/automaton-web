@@ -1,7 +1,8 @@
 (ns automaton-web.components.link
-  (:require [automaton-web.adapters.fe.url :as fe-url]
-            [automaton-web.events-proxy :as web-events-proxy]
-            [automaton-web.events.subs :as web-subs]))
+  (:require
+   [automaton-web.adapters.fe.url :as fe-url]
+   [automaton-web.events-proxy :as web-events-proxy]
+   [automaton-web.events.subs :as web-subs]))
 
 (defn conditional-link-opts
   "Update a html component that support link (typically [:a], [:nav], ...) with disabled and href so it is clickable only if it leads to a different page

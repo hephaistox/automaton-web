@@ -4,8 +4,9 @@
 
   Note all of them won't be implementened for all cust-apps
   See `automaton-web.i18n.language` as all possible values for a web app"
-  (:require [clojure.string :as str]
-            [automaton-core.i18n.language :as core-lang]))
+  (:require
+   [clojure.string :as str]
+   [automaton-core.i18n.language :as core-lang]))
 
 (def main-langs
   "Default language if all language strategy fail to select a language
@@ -59,7 +60,8 @@
            core-lang/languages
            (filter (fn [[_ lang]]
                      (when (every? string? [lang-ui-text (:ui-text lang)])
-                       (= (str/upper-case lang-ui-text) (str/upper-case (:ui-text lang))))))
+                       (= (str/upper-case lang-ui-text)
+                          (str/upper-case (:ui-text lang))))))
            ffirst)))
 
 (defn make-automaton-web-languages
@@ -69,10 +71,19 @@
   The final map consists in the languages defined in both `selected-languages` `core-lang/base-languages`
   The language data map are merged, see `merge-languages-map` for details"
   [& selected-languages-seq]
-  (->AutomatonWebLanguages (apply core-lang/make-automaton-core-languages web-languages-map selected-languages-seq)))
+  (->AutomatonWebLanguages (apply core-lang/make-automaton-core-languages
+                                  web-languages-map
+                                  selected-languages-seq)))
 
-(def automaton-web-languages "Languages available in `automaton-web`, instance of `Languages`" (make-automaton-web-languages))
+(def automaton-web-languages
+  "Languages available in `automaton-web`, instance of `Languages`"
+  (make-automaton-web-languages))
 
-(def get-web-languages-ids "Known language ids in `automaton-web`" (core-lang/languages-ids automaton-web-languages))
+(def get-web-languages-ids
+  "Known language ids in `automaton-web`"
+  (core-lang/languages-ids automaton-web-languages))
 
-(defn get-web-lang "Return the language linked to `lang-id`" [lang-id] (core-lang/language automaton-web-languages lang-id))
+(defn get-web-lang
+  "Return the language linked to `lang-id`"
+  [lang-id]
+  (core-lang/language automaton-web-languages lang-id))

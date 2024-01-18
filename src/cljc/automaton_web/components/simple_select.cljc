@@ -1,13 +1,15 @@
 (ns automaton-web.components.simple-select
   "Simple select component"
-  (:require [automaton-web.reagent :as automaton-web-reagent]
-            [automaton-core.utils.string-to-id :refer [string-to-id]]))
+  (:require
+   [automaton-web.reagent :as automaton-web-reagent]
+   [automaton-core.utils.string-to-id :refer [string-to-id]]))
 
 (defn- update-select-options
   "Add options to select options components.
   Generate a key based on `select-id` and `opt-value`"
   [{:keys [opt-value key]
-    :as opt} select-id]
+    :as opt}
+   select-id]
   (assoc opt :key (or key (str select-id "-" (string-to-id opt-value)))))
 
 (defn simple-select
@@ -23,17 +25,35 @@
       * `options` a list of option, as `options-arg`, easier to use if you already handle a collection of options
   * `options-arg` options should be a collection of [:option] html tags. This value is useful to directly pass options as a variadic arguments. It's superseeding `options` keyword."
   [{:keys [id html-name class on-change value options]
-    :as _props} & options-arg]
+    :as _props}
+   &
+   options-arg]
   (let [options (for [select-option (or options-arg options)]
                   (-> select-option
                       automaton-web-reagent/reagent-option
                       (update-select-options id)
-                      (automaton-web-reagent/update-reagent-options select-option)))]
-    (fn [] [:select
-            {:id id
-             :name html-name
-             :default-value value
-             :class (vec (concat ["mt-2" "block" "w-full" "rounded-md" "border-0" "py-1.5" "pl-3" "pr-10" "text-gray-900" "ring-1"
-                                  "ring-inset" "ring-gray-300" "focus:ring-2" "focus:ring-indigo-600" "sm:text-sm" "sm:leading-6"]
-                                 class))
-             :on-change on-change} options])))
+                      (automaton-web-reagent/update-reagent-options
+                       select-option)))]
+    (fn [] [:select {:id id
+                     :name html-name
+                     :default-value value
+                     :class (vec
+                             (concat ["mt-2"
+                                      "block"
+                                      "w-full"
+                                      "rounded-md"
+                                      "border-0"
+                                      "py-1.5"
+                                      "pl-3"
+                                      "pr-10"
+                                      "text-gray-900"
+                                      "ring-1"
+                                      "ring-inset"
+                                      "ring-gray-300"
+                                      "focus:ring-2"
+                                      "focus:ring-indigo-600"
+                                      "sm:text-sm"
+                                      "sm:leading-6"]
+                                     class))
+                     :on-change on-change}
+            options])))

@@ -1,8 +1,9 @@
 (ns automaton-web.components.init-components
   "Put here all initialisation needed for components classes (not for each component instance, which should be spread in the code). For instance, everything which is supposed to be done once for each component."
-  (:require ["tw-elements" :refer [initTE Modal Ripple Tooltip]]
-            ["react" :as react]
-            [automaton-core.log :as core-log]))
+  (:require
+   ["tw-elements" :refer [initTE Modal Ripple Tooltip]]
+   ["react" :as react]
+   [automaton-core.log :as core-log]))
 
 (defn- for-each-root-rendering
   "Init for each root rendering.
@@ -16,22 +17,34 @@
        ;;https://tailwind-elements.com/docs/standard/components/tooltip/#docsTabsAPI
        ;;tooltips are not initalized yet with initTE despite what
        ;;documentation say, but they plan to add it
-       (let [tooltipTriggerList (.call (.-slice #js []) (.querySelectorAll document "[data-te-toggle=\"tooltip\"]"))]
-         (.map tooltipTriggerList (fn [tooltipTriggerEl] (new Tooltip tooltipTriggerEl))))
-       (catch js/Error e (core-log/error-exception (ex-info "Unexpected tailwind-element issue " {:error e}))))
+       (let [tooltipTriggerList (.call (.-slice #js [])
+                                       (.querySelectorAll
+                                        document
+                                        "[data-te-toggle=\"tooltip\"]"))]
+         (.map tooltipTriggerList
+               (fn [tooltipTriggerEl] (new Tooltip tooltipTriggerEl))))
+       (catch js/Error e
+         (core-log/error-exception (ex-info "Unexpected tailwind-element issue "
+                                            {:error e}))))
   (core-log/trace "Ending Tailwind-element")
   js/undefined)
 
 (defn init-rendering
   "To be called at the root of components rendering"
   ([] (init-rendering js/document))
-  ([document] (core-log/trace "Rendering init for base components") (react/useEffect #(for-each-root-rendering document))))
+  ([document]
+   (core-log/trace "Rendering init for base components")
+   (react/useEffect #(for-each-root-rendering document))))
 
 (defn init-elements-js
   "To be called to initialize tw-elements in js"
   [document]
-  (let [script (.createElement document "script")
-        _add-script-src (set! (.-src script) "https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js")]
+  (let
+    [script (.createElement document "script")
+     _add-script-src
+     (set!
+      (.-src script)
+      "https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js")]
     (.appendChild (aget (.getElementsByTagName document "head") 0) script)))
 
 (defn init-modal [el] (Modal. el))

@@ -4,9 +4,10 @@
   These translation functions are used in the `automaton-web` application, so that the automaton-web dictionary, translation, and  testing of it can be done autonomously.
   So for instance, default text in components (like mailchimp) will use those translation functions.
   But cust-apps will have their own implemntations"
-  (:require [automaton-core.log :as core-log]
-            [automaton-web.events-proxy :as web-events-proxy]
-            [automaton-web.events.subs :as web-subs]))
+  (:require
+   [automaton-core.log :as core-log]
+   [automaton-web.events-proxy :as web-events-proxy]
+   [automaton-web.events.subs :as web-subs]))
 
 (defprotocol FeTranslator
   "The frontend translator"
@@ -31,7 +32,8 @@
     (do (core-log/debug "Init language " language) language)
     (let [default-language (-> (default-languages this)
                                first)]
-      (core-log/warn "No language found in the url, default to " default-language)
+      (core-log/warn "No language found in the url, default to "
+                     default-language)
       default-language)))
 
 (defn -lang
@@ -39,4 +41,7 @@
   [this]
   (try (some-> (web-events-proxy/subscribe [::web-subs/lang])
                deref)
-       (catch :default _ (core-log/warn "The language event has not been found, default language is used") (default-languages this))))
+       (catch :default _
+         (core-log/warn
+          "The language event has not been found, default language is used")
+         (default-languages this))))

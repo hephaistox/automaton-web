@@ -1,7 +1,8 @@
 (ns automaton-web.adapters.fe.url
   "Adapter to frontend url
   Utilities function to manipulate that strings"
-  (:require [automaton-core.url :as url]))
+  (:require
+   [automaton-core.url :as url]))
 
 (defn current-url "Current location in the browser" [] (str js/window.location))
 
@@ -26,4 +27,7 @@
   Params:
   * `url`"
   ([url] (navigate! url true))
-  ([url preserve-history?] (if preserve-history? (.pushState js/window.history nil "" url) (.replaceState js/window.history nil "" url))))
+  ([url preserve-history?]
+   (if preserve-history?
+     (.pushState js/window.history nil "" url)
+     (.replaceState js/window.history nil "" url))))

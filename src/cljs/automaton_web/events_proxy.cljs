@@ -1,9 +1,10 @@
 (ns automaton-web.events-proxy
   "Adapter for [re-frame](https://day8.github.io/re-frame/api-intro/)"
-  (:require [re-frame.core :as rfc]
-            [re-frame.db]
-            [day8.re-frame.tracing :as tracing]
-            [automaton-core.log :as core-log]))
+  (:require
+   [re-frame.core :as rfc]
+   [re-frame.db]
+   [day8.re-frame.tracing :as tracing]
+   [automaton-core.log :as core-log]))
 
 (def reg-sub rfc/reg-sub)
 
@@ -24,7 +25,10 @@
 
 (def reg-event-fx rfc/reg-event-fx)
 
-(defn dispatch [event] (core-log/trace "Event `" event "`") (rfc/dispatch event))
+(defn dispatch
+  [event]
+  (core-log/trace "Event `" event "`")
+  (rfc/dispatch event))
 
 (def dispatch-sync rfc/dispatch-sync)
 
@@ -35,7 +39,8 @@
 (defn assert-db-populated
   "Assert if the db has been populated"
   []
-  (when (empty? @re-frame.db/app-db) (core-log/error "Re-frame is not correctly initialized, db is empty")))
+  (when (empty? @re-frame.db/app-db)
+    (core-log/error "Re-frame is not correctly initialized, db is empty")))
 
 (defn client-app-db-init!
   "To be called during cust-app init to init re-frame

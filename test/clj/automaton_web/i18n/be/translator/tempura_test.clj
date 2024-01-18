@@ -1,8 +1,9 @@
 (ns automaton-web.i18n.be.translator.tempura-test
-  (:require [automaton-web.i18n.be.translator :as be-translator]
-            [automaton-web.i18n.be.translator.tempura :as sut]
-            [automaton-web.i18n.dict.text :as web-dict-text]
-            [clojure.test :refer [deftest is testing]]))
+  (:require
+   [automaton-web.i18n.be.translator :as be-translator]
+   [automaton-web.i18n.be.translator.tempura :as sut]
+   [automaton-web.i18n.dict.text :as web-dict-text]
+   [clojure.test :refer [deftest is testing]]))
 
 (defn handler-stub
   [request]
@@ -35,7 +36,9 @@
                  set))))))
 
 (deftest default-languages-test
-  (testing "Default language is found" (is (= default-language (be-translator/default-languages temp-translator)))))
+  (testing "Default language is found"
+    (is (= default-language
+           (be-translator/default-languages temp-translator)))))
 (deftest get-middleware-test
   (testing "Middleware has the expected keys"
     (is (= #{:tr :accept-langs :locales}
@@ -45,10 +48,13 @@
                  keys
                  set)))))
   (testing "Test translation based on request"
-    (is (= "foo-en" (be-translator/translate-based-on-request temp-translator {} :foo [])))
+    (is (=
+         "foo-en"
+         (be-translator/translate-based-on-request temp-translator {} :foo [])))
     (is (= "foo-fr"
-           (be-translator/translate-based-on-request temp-translator
-                                                     {:headers {"host" "http://www.testify.com?lang=en"}
-                                                      :locales [:fr]}
-                                                     :foo
-                                                     [])))))
+           (be-translator/translate-based-on-request
+            temp-translator
+            {:headers {"host" "http://www.testify.com?lang=en"}
+             :locales [:fr]}
+            :foo
+            [])))))
