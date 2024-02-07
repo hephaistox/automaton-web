@@ -1,0 +1,19 @@
+{
+  "name": "@hephaistox/tailwind-config",
+  "version": "1.0.0",
+  "description": "Hephaistox custom tailwind configuration file",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hephaistox/tailwind-config.git"
+  },
+  "author": "Hephaistox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hephaistox/tailwind-config/issues"
+  },
+  "homepage": "https://github.com/hephaistox/tailwind-config#readme"
+}
