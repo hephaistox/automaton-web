@@ -5,7 +5,7 @@
                                                                      "1.0.0"}}
           :ns-default build}
   :cljs-deps {:extra-deps {binaryage/devtools #:mvn{:version "1.0.7"}
-                           cider/cider-nrepl #:mvn{:version "0.30.0"}
+                           cider/cider-nrepl #:mvn{:version "0.44.0"}
                            cider/piggieback #:mvn{:version "0.5.3"}
                            clj-commons/pushy #:mvn{:version "0.3.10"}
                            cljsjs/highlight #:mvn{:version "11.7.0-0"}

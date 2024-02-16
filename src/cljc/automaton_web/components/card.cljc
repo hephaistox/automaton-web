@@ -8,15 +8,16 @@
   "Displaying a clickable card/box with content (image, title, name) and optional linkedin icon"
   [{:keys [img name title linkedin on-click additional-props dark?]}]
   [:div
-   (merge {:class
-           ["rounded-2xl px-8 py-10 cursor-pointer flex flex-col text-center"
-            (if dark?
-              "bg-theme-light hover:bg-orange-100 drop-shadow-md"
-              "bg-theme-dark hover:bg-orange-300 drop-shadow-md")]
-           :data-te-ripple-init true
-           :data-te-ripple-color "light"
-           :on-click on-click}
-          additional-props)
+   (merge
+    {:class
+     ["rounded-2xl px-8 py-10 cursor-pointer flex flex-col text-center h-full"
+      (if dark?
+        "bg-theme-light hover:bg-orange-100 drop-shadow-md"
+        "bg-theme-dark hover:bg-orange-300 drop-shadow-md")]
+     :data-te-ripple-init true
+     :data-te-ripple-color "light"
+     :on-click on-click}
+    additional-props)
    [:img {:class ["mx-auto h-24 w-24 rounded-full"]
           :src img
           :alt ""}]
