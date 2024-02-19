@@ -23,3 +23,5 @@
 (def create-class r/create-class)
 
 (def as-element r/as-element)
+
+(def after-render r/after-render)
