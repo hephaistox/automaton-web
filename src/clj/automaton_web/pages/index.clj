@@ -6,29 +6,54 @@
 (defn build
   "Build a webpage header"
   [{:keys [header-elements meta-tags]} & body]
-  (let [{:keys [image description title type url]} meta-tags
-        meta-type [:meta {:name "og:type"
-                          :content type}]
-        meta-description [:meta {:name "og:description"
-                                 :content description}]
-        meta-image [:meta {:name "og:image"
-                           :content image}]
-        meta-title [:meta {:name "og:title"
+  (let [{:keys
+         [image description title type url twitter-content twitter-site author]}
+        meta-tags
+        meta-title [:meta {:name "title"
+                           :property "og:title"
                            :content title}]
-        meta-url [:meta {:name "og:url"
+        meta-type [:meta {:property "og:type"
+                          :content type}]
+        meta-description [:meta {:name "description"
+                                 :property "og:description"
+                                 :content description}]
+        meta-image [:meta {:name "image"
+                           :property "og:image"
+                           :content image}]
+        meta-url [:meta {:property "og:url"
                          :content url}]
+        meta-author [:meta {:name "author"
+                            :content author}]
+        twitter-meta-card [:meta {:name "twitter:card"
+                                  :content twitter-content}]
+        twitter-meta-description [:meta {:name "twitter:description"
+                                         :content description}]
+        twitter-meta-image [:meta {:name "twitter:image"
+                                   :content image}]
+        twitter-meta-title [:meta {:name "twitter:title"
+                                   :content title}]
+        twitter-meta-site [:meta {:name "twitter:site"
+                                  :content twitter-site}]
         icon [:link {:rel "icon"
                      :href "favicon.ico"}]
         css [:link {:type "text/css"
                     :rel "stylesheet"
                     :href "/css/compiled/styles.css"}]
+        html-title [:title title]
         head-elements [meta-title
                        meta-type
                        meta-url
                        meta-image
+                       meta-author
                        meta-description
+                       twitter-meta-card
+                       twitter-meta-title
+                       twitter-meta-site
+                       twitter-meta-image
+                       twitter-meta-description
                        icon
                        css
-                       (for [el header-elements] el)]
+                       (for [el header-elements] el)
+                       html-title]
         body-elements (merge [(anti-forgery/anti-forgery-html-token)] body)]
     (str (web-hiccup/html-core head-elements body-elements))))
