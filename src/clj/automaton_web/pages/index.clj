@@ -6,22 +6,26 @@
 (defn build
   "Build a webpage header"
   [{:keys [header-elements meta-tags]} & body]
-  (let [{:keys [image description title type url twitter-content twitter-site]}
+  (let [{:keys
+         [image description title type url twitter-content twitter-site author]}
         meta-tags
-        meta-basic-title [:meta {:name "title"
-                                 :content title}]
-        meta-basic-description [:meta {:name "description"
-                                       :content description}]
-        meta-type [:meta {:name "og:type"
-                          :content type}]
-        meta-description [:meta {:name "og:description"
-                                 :content description}]
-        meta-image [:meta {:name "og:image"
-                           :content image}]
-        meta-title [:meta {:name "og:title"
+        meta-title [:meta {:name "title"
+                           :property "og:title"
                            :content title}]
+        meta-type [:meta {:name "og:type"
+                          :property "og:type"
+                          :content type}]
+        meta-description [:meta {:name "description"
+                                 :property "og:description"
+                                 :content description}]
+        meta-image [:meta {:name "image"
+                           :property "og:image"
+                           :content image}]
         meta-url [:meta {:name "og:url"
+                         :property "og:url"
                          :content url}]
+        meta-author [:meta {:name "author"
+                            :content author}]
         twitter-meta-card [:meta {:name "twitter:card"
                                   :content twitter-content}]
         twitter-meta-description [:meta {:name "twitter:description"
@@ -38,12 +42,11 @@
                     :rel "stylesheet"
                     :href "/css/compiled/styles.css"}]
         html-title [:title title]
-        head-elements [meta-basic-title
-                       meta-basic-description
-                       meta-title
+        head-elements [meta-title
                        meta-type
                        meta-url
                        meta-image
+                       meta-author
                        meta-description
                        twitter-meta-card
                        twitter-meta-title
