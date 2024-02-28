@@ -12,8 +12,7 @@
         meta-title [:meta {:name "title"
                            :property "og:title"
                            :content title}]
-        meta-type [:meta {:name "og:type"
-                          :property "og:type"
+        meta-type [:meta {:property "og:type"
                           :content type}]
         meta-description [:meta {:name "description"
                                  :property "og:description"
@@ -21,8 +20,7 @@
         meta-image [:meta {:name "image"
                            :property "og:image"
                            :content image}]
-        meta-url [:meta {:name "og:url"
-                         :property "og:url"
+        meta-url [:meta {:property "og:url"
                          :content url}]
         meta-author [:meta {:name "author"
                             :content author}]
