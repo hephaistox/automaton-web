@@ -29,10 +29,10 @@
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene structure-fancy
           (web-proxy/wrap-component
-           [sut/structure {:header [web-header/simple-header {:logo "Logo"
-                                                              :size :full
-                                                              :right-section
-                                                              [:div "Login"]}]
+           [sut/structure {:header [web-header/transparent-header
+                                    {:logo "Logo"
+                                     :size :full
+                                     :right-section [:div "Login"]}]
                            :footer [web-footer/simple-footer
                                     {:title "Hephaistox footer"}]}
             [:div {:class ["mt-20" "mb-5"]}

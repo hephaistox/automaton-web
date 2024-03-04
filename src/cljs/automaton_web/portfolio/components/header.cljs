@@ -26,13 +26,13 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene simple-header
-          (web-proxy/wrap-component [sut/simple-header {:logo "I'm your logo"
-                                                        :right-section
-                                                        "Right content"}]))
+          (web-proxy/wrap-component [sut/transparent-header
+                                     {:logo "I'm your logo"
+                                      :right-section "Right content"}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene simple-header-full-size
-          (web-proxy/wrap-component [sut/simple-header {:size :full
-                                                        :logo "I'm your logo"
-                                                        :right-section
-                                                        "Right content"}]))
+          (web-proxy/wrap-component [sut/transparent-header
+                                     {:size :full
+                                      :logo "I'm your logo"
+                                      :right-section "Right content"}]))

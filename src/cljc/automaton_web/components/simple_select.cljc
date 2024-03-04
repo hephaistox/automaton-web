@@ -37,23 +37,21 @@
     (fn [] [:select {:id id
                      :name html-name
                      :default-value value
-                     :class (vec
-                             (concat ["mt-2"
-                                      "block"
-                                      "w-full"
-                                      "rounded-md"
-                                      "border-0"
-                                      "py-1.5"
-                                      "pl-3"
-                                      "pr-10"
-                                      "text-gray-900"
-                                      "ring-1"
-                                      "ring-inset"
-                                      "ring-gray-300"
-                                      "focus:ring-2"
-                                      "focus:ring-indigo-600"
-                                      "sm:text-sm"
-                                      "sm:leading-6"]
-                                     class))
+                     :class (vec (concat ["block"
+                                          "w-full"
+                                          "rounded-md"
+                                          "border-0"
+                                          "py-1"
+                                          "pl-3"
+                                          "pr-10"
+                                          "text-gray-900"
+                                          "ring-1"
+                                          "ring-inset"
+                                          "ring-gray-300"
+                                          "focus:ring-2"
+                                          "focus:ring-indigo-600"
+                                          "sm:text-sm"
+                                          "sm:leading-6"]
+                                         class))
                      :on-change on-change}
             options])))
