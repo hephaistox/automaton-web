@@ -34,19 +34,18 @@
 
 (defn- simple-footer-link
   [{:keys [title href dark? disabled? on-click]}]
-  [:div {:class ["pb-6"]}
-   [:a
-    (merge (if on-click {:on-click on-click} {:href href})
-           {:class ["text-sm leading-6"
-                    (if disabled? "pointer-events-none" "cursor-pointer")
-                    (if dark?
-                      (if disabled?
-                        "text-theme-light"
-                        "text-theme-light-secondary hover:text-theme-light")
-                      (if disabled?
-                        "text-theme-dark"
-                        "text-theme-dark-secondary hover:text-theme-dark"))]})
-    title]])
+  [:a
+   (merge (if on-click {:on-click on-click} {:href href})
+          {:class ["text-sm leading-6"
+                   (if disabled? "pointer-events-none" "cursor-pointer")
+                   (if dark?
+                     (if disabled?
+                       "text-theme-light"
+                       "text-theme-light-secondary hover:text-theme-light")
+                     (if disabled?
+                       "text-theme-dark"
+                       "text-theme-dark-secondary hover:text-theme-dark"))]})
+   title])
 
 (defn- social-networks-comp
   [social-networks dark?]
@@ -127,20 +126,20 @@
       * and value is an component that will be displayed as an icon"
   [{:keys [footer-lists release social-networks title dark?]}]
   [:footer {:class [(if dark? "bg-theme-dark" "bg-theme-light")]}
-   [:div {:class
-          ["mx-auto max-w-7xl overflow-hidden px-6 py-10 sm:py-12 lg:px-8"]}
-    [:nav {:class ["-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"]
+   [:div {:class ["mx-auto max-w-7xl overflow-hidden flex flex-col gap-4"]}
+    [:nav {:class ["columns-2 sm:justify-center"
+                   "flex flex-col gap-6 text-center md:flex-row"]
            :aria-label "Footer"}
      (for [footer footer-lists]
        ^{:key (str "simple-footer-link-"
                    (web-elt-id/string-to-id (:title footer)))}
        [simple-footer-link (merge {:dark? dark?} footer)])]
-    (into [:div {:class ["mt-10 flex justify-center space-x-10 relative"]}
+    (into [:div {:class ["flex justify-center space-x-10 relative"]}
            (when release
              [web-version/component {:version release
                                      :dark? dark?}])]
           (social-networks-comp social-networks dark?))
     [:p {:class
-         ["mt-10 text-center text-xs leading-5"
+         ["text-center text-xs leading-5"
           (if dark? "text-theme-light-secondary" "text-theme-dark-secondary")]}
      title]]])

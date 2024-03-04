@@ -2,7 +2,8 @@
 
 (defn structure
   [{:keys [header footer class]} & components]
-  [:div {:class (vec (concat class ["h-full flex flex-col relative"]))}
+  [:div {:class (vec (concat class
+                             ["h-fit min-h-full flex flex-col relative"]))}
    header
    (into [:div {:class ["grow"]}]
          (for [comp components] comp))
