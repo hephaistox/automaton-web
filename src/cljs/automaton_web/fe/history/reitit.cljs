@@ -4,6 +4,7 @@
   (:require
    [automaton-web.adapters.fe.url :as fe-url]
    [automaton-web.fe.history :as web-fe-history]
+   [reitit.frontend.controllers :as reitit-fe-controllers]
    [reitit.frontend.history :as reitit-fe-history]))
 
 (defrecord History [history]
@@ -29,3 +30,20 @@
   [router on-navigate]
   (->History
    (reitit-fe-history/start! router on-navigate {:use-fragment false})))
+
+(defonce controllers-match-storage (atom nil))
+
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn apply-controllers
+  "To use it, this function must be executed in the `on-navigate` make-history function (or somewhere where navigation happens).
+   After that :controllers can be added to routes
+   More here: https://github.com/metosin/reitit/blob/master/doc/frontend/controllers.md"
+  [new-match]
+  (swap! controllers-match-storage (fn [old-match]
+                                     (when new-match
+                                       (assoc
+                                        new-match
+                                        :controllers
+                                        (reitit-fe-controllers/apply-controllers
+                                         (:controllers old-match)
+                                         new-match))))))

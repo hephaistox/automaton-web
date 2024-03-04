@@ -50,24 +50,23 @@
 
 (defn text-section
   [{:keys [title description pre-title dark?]} & subsections]
-  [:div {:class ["py-16" (if dark? "bg-theme-dark" "bg-theme-light")]}
-   [:div {:class
-          ["mx-auto max-w-3xl text-base leading-7"
-           (if dark? "text-theme-light-secondary" "text-theme-dark-secondary")]}
-    (when pre-title pre-title)
-    [:h1 {:class ["mt-2 text-3xl font-bold tracking-tight sm:text-4xl"
-                  (if dark? "text-theme-light" "text-theme-dark")]}
-     title]
-    [:div {:class ["mt-10 max-w-2xl"]}
-     description
-     (for [{:keys [title description]} subsections]
-       ^{:key (str "subsection: " title)}
-       [:div {:class ["mt-16 max-w-2xl"]}
-        [:h2 {:class ["text-2xl font-bold tracking-tight"
-                      (if dark? "text-theme-light" "text-theme-dark")]}
-         title]
-        [:div {:class ["mt-6"]}
-         description]])]]])
+  [:div {:class
+         ["mx-auto max-w-3xl text-base leading-7"
+          (if dark? "text-theme-light-secondary" "text-theme-dark-secondary")]}
+   (when pre-title pre-title)
+   [:h1 {:class ["mt-2 text-3xl font-bold tracking-tight sm:text-4xl"
+                 (if dark? "text-theme-light" "text-theme-dark")]}
+    title]
+   [:div {:class ["mt-10 max-w-2xl"]}
+    description
+    (for [{:keys [title description]} subsections]
+      ^{:key (str "subsection: " title)}
+      [:div {:class ["mt-16 max-w-2xl"]}
+       [:h2 {:class ["text-2xl font-bold tracking-tight"
+                     (if dark? "text-theme-light" "text-theme-dark")]}
+        title]
+       [:div {:class ["mt-6"]}
+        description]])]])
 
 (defn section-text-video
   "Section with text on the left and video on the right."

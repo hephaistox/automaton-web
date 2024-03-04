@@ -1,12 +1,13 @@
 (ns automaton-web.components.errors
   "Contains all the components that are displayed when something unexpected happens and we need to inform a user.
    This namespace will also help us with consistency on error components inside the application.
-   Like a not found page.")
+   Like a not found page."
+  (:require
+   [automaton-web.components.navigation :as web-navigation]))
 
 (defn not-found
-  [{:keys [title description _back-home-text _back-link] ;:or {_back-link
-                                                         ;"/"}
-   }]
+  [{:keys [title description back-home-text back-link]
+    :or {back-link "/"}}]
   [:main {:class ["relative isolate min-h-full h-full"]}
    [:div
     {:class
@@ -28,14 +29,13 @@
     [:p {:class ["mt-4 text-base text-white/70 sm:mt-6 text-border-black"]}
      description]
     [:div {:class ["mt-10 flex justify-center text-border-black"]}
-     #_(foobar-navigation/back-navigation {:href back-link
-                                           :text back-home-text
-                                           :dark? true})]]])
+     (web-navigation/back-navigation {:href back-link
+                                      :text back-home-text
+                                      :dark? true})]]])
 
 (defn internal-error
-  [{:keys [title description _back-home-text _back-link] ;:or {_back-link
-                                                         ;"/"}
-   }]
+  [{:keys [title description back-home-text back-link]
+    :or {back-link "/"}}]
   [:main {:class ["relative isolate min-h-full h-full"]}
    [:div
     {:class
@@ -57,6 +57,6 @@
     [:p {:class ["mt-4 text-base text-white/70 sm:mt-6 text-border-black"]}
      description]
     [:div {:class ["mt-10 flex justify-center text-border-black"]}
-     #_(foobar-navigation/back-navigation {:href back-link
-                                           :text back-home-text
-                                           :dark? true})]]])
+     (web-navigation/back-navigation {:href back-link
+                                      :text back-home-text
+                                      :dark? true})]]])

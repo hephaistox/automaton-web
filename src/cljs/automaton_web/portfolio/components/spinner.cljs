@@ -1,6 +1,6 @@
-(ns automaton-web.portfolio.components.logo
+(ns automaton-web.portfolio.components.spinner
   (:require
-   [automaton-web.components.logo :as sut]
+   [automaton-web.components.spinner :as sut]
    [automaton-web.portfolio.proxy :as web-proxy]
    [portfolio.reagent-18
     :as
@@ -9,7 +9,7 @@
     [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
-                   :title "Logo"})
+                   :title "Spinner"})
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defscene logo (web-proxy/wrap-component [sut/hephaistox]))
+(defscene spinner (web-proxy/wrap-component [sut/spinner]))

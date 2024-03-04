@@ -31,7 +31,7 @@
     :uri (str "http://localhost:8081")}
    {:message "Portfolio"
     :category "Development"
-    :uri "/admin/portfolio"}
+    :uri "http://localhost:8080/"}
    {:message "404 page"
     :category "Development"
     :uri "this-page-doesnt-exists"}
