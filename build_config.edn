@@ -5,7 +5,7 @@
                              :env {:la {}
                                    :production {}}
                              :frontend {:css {}
-                                        :run-aliases [:automaton-web-portfolio :browser-test :ltest]}
+                                        :run-aliases [:automaton-web-portfolio]}
                              :license {}
                              :repo
                              "git@github.com:hephaistox/automaton-web.git"}
