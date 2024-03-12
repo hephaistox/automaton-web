@@ -14,4 +14,6 @@
  :deps {:aliases [:cljs-deps]}
  :dev-http {8080 ["public" "classpath:public"]
             8290 ["target/browser-test"]}
- :nrepl {:port 8776}}
+ :nrepl {:middleware [cider.nrepl/cider-middleware
+                      cider.piggieback/wrap-cljs-repl]
+         :port 8776}}
