@@ -4,7 +4,7 @@
   <packaging>jar</packaging>
   <groupId>org.clojars.hephaistox</groupId>
   <artifactId>automaton-web</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <name>automaton-web</name>
   <dependencies>
     <dependency>
@@ -30,7 +30,7 @@
     <dependency>
       <groupId>org.clojars.hephaistox</groupId>
       <artifactId>automaton-core</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
     </dependency>
     <dependency>
       <groupId>ring-cors</groupId>
@@ -40,7 +40,7 @@
     <dependency>
       <groupId>hiccup</groupId>
       <artifactId>hiccup</artifactId>
-      <version>2.0.0-RC2</version>
+      <version>2.0.0-RC3</version>
     </dependency>
     <dependency>
       <groupId>com.taoensso</groupId>
@@ -55,7 +55,7 @@
     <dependency>
       <groupId>mount</groupId>
       <artifactId>mount</artifactId>
-      <version>0.1.17</version>
+      <version>0.1.18</version>
     </dependency>
     <dependency>
       <groupId>amalloy</groupId>
@@ -70,7 +70,7 @@
     <dependency>
       <groupId>ring</groupId>
       <artifactId>ring</artifactId>
-      <version>1.11.0</version>
+      <version>1.12.0</version>
     </dependency>
     <dependency>
       <groupId>http-kit</groupId>
