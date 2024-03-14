@@ -5,7 +5,7 @@
                              :env {:la {}
                                    :production {}}
                              :frontend {:css {}
-                                        :run-aliases [:automaton-web-portfolio]}
+                                        :run-aliases [:automaton-web-portfolio :browser-test :ltest]}
                              :license {}
                              :repo
                              "git@github.com:hephaistox/automaton-web.git"}
@@ -17,5 +17,6 @@
                         "node_modules/"
                         ".shadow-cljs/builds/"]}
          :lfe-test {}
+         :lfe-css {}
          :lfe-watch {}
-         :reports {:forbiddenwords-words #{"landing" "tap>"}}}}
+         :reports {:forbiddenwords-words #{"automaton-build" "landing" "tap>"}}}}

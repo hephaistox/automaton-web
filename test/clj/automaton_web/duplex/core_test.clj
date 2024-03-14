@@ -6,8 +6,9 @@
 
 (deftest server-test
   (testing "mocking realtime server"
-    (let [_ (mount/start-with-states {#'automaton-web.duplex.core/duplex-server
-                                      {:start (partial sut/start-rt nil)}})]
+    (let [_ (with-out-str (mount/start-with-states
+                           {#'automaton-web.duplex.core/duplex-server
+                            {:start (partial sut/start-rt nil)}}))]
       (testing "Realtime server has an ajax-get-or-ws-handshake-fn"
         (is (fn? (sut/ajax-get-or-ws-handshake))))
       (testing "Realtime server has an ajax-post" (is (fn? (sut/ajax-post))))
@@ -16,4 +17,4 @@
         (is (= clojure.lang.Atom (type (sut/connected-uids)))))
       (testing "Realtime server has a send-fn"
         (is (not (sut/send-fn 666 [:foo/bar]))))
-      (mount/stop))))
+      (with-out-str (mount/stop)))))
