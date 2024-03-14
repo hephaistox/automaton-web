@@ -55,7 +55,8 @@
                "test/clj"
                "-d"
                "test/cljc"]}}
- :deps {amalloy/ring-gzip-middleware #:mvn{:version "0.1.4"}
+ :deps {org.clojars.hephaistox/automaton-core #:mvn{:version "1.0.3"}
+        amalloy/ring-gzip-middleware #:mvn{:version "0.1.4"}
         com.taoensso/sente #:mvn{:version "1.19.2"}
         hiccup/hiccup #:mvn{:version "2.0.0-RC3"}
         http-kit/http-kit #:mvn{:version "2.7.0"}
