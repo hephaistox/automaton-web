@@ -1,8 +1,8 @@
 (ns automaton-web.middleware-test
   (:require
    [automaton-web.middleware :as sut]
-   [clojure.test :refer [deftest is testing]]
-   [reitit.ring :as reitit-ring]))
+   [clojure.test             :refer [deftest is testing]]
+   [reitit.ring              :as reitit-ring]))
 
 (defn handler-test [request] (assoc request :foo :bar))
 

@@ -1,7 +1,7 @@
 (ns automaton-web.adapters.be.http-response-test
   (:require
    [automaton-web.adapters.be.http-response :as sut]
-   [clojure.test :refer [deftest is testing]]))
+   [clojure.test                            :refer [deftest is testing]]))
 
 (deftest default-handlers-test
   (testing "with default http responses"

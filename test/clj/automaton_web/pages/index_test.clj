@@ -1,7 +1,7 @@
 (ns automaton-web.pages.index-test
   (:require
-   [clojure.test :refer [deftest is testing]]
-   [automaton-web.pages.index :as sut]))
+   [automaton-web.pages.index :as sut]
+   [clojure.test              :refer [deftest is testing]]))
 
 ;;The antiforgery is tested in the mocked http server
 (deftest index-html

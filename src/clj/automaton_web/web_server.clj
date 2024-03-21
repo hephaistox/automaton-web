@@ -1,9 +1,9 @@
 (ns automaton-web.web-server
   "Create the webserver, (http kit), set it up, log uncaught exceptions in thread"
   (:require
+   [automaton-core.log          :as core-log]
    [automaton-web.configuration :as web-conf]
-   [automaton-core.log :as core-log]
-   [org.httpkit.server :as http-kit]))
+   [org.httpkit.server          :as http-kit]))
 
 ;; Log uncaught exceptions in threads
 (Thread/setDefaultUncaughtExceptionHandler

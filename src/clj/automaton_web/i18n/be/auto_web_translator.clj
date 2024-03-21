@@ -3,9 +3,9 @@
   The default implementation is a tempura one, with internal dictionaries.
   That implementation could be overriden"
   (:require
-   [automaton-web.i18n.be.translator :as be-translator]
+   [automaton-web.i18n.be.translator         :as be-translator]
    [automaton-web.i18n.be.translator.tempura :as be-tempura-translator]
-   [automaton-web.i18n.language :as web-language]))
+   [automaton-web.i18n.language              :as web-language]))
 
 (def be-components-translator
   (be-tempura-translator/make-tempura-be-translator web-language/main-langs))

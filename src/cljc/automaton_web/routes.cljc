@@ -4,14 +4,18 @@
    [automaton-core.utils.map :as utils-map]))
 
 (defn- kw-to-registry-value
-  [registry val]
-  (if (keyword? val) (get registry val) val))
+  ([registry options val]
+   (if (keyword? val) (partial (get registry val) options) val))
+  ([registry val]
+   (if (keyword? val) (get registry val) val)))
 
 (defn- update-registry
   [handler-registry handler-map]
   (utils-map/update-kw handler-map
                        [:get :head :patch :delete :options :post :put :trace]
-                       (partial kw-to-registry-value handler-registry)))
+                       (if-let [metadata (:index-metadata handler-map)]
+                         (partial kw-to-registry-value handler-registry metadata)
+                         (partial kw-to-registry-value handler-registry))))
 
 (defn parse-routes
   "Parse the routes to return the frontend or backend

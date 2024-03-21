@@ -1,15 +1,15 @@
 (ns automaton-web.pages.admin
   "Admin page"
   (:require
-   [automaton-core.app.build-config :as build-config]
-   [automaton-core.adapters.edn-utils :as edn-utils]
+   [automaton-core.adapters.edn-utils     :as edn-utils]
    [automaton-core.adapters.env-variables :as env-vars]
-   [automaton-core.adapters.version :as version]
-   [automaton-web.configuration :as web-conf]
-   [automaton-core.http.request :as request]
-   [automaton-web.components.icons :as web-icons]
-   [automaton-web.components.table :as table]
-   [mount.tools.graph :as mount-graph]))
+   [automaton-core.adapters.version       :as version]
+   [automaton-core.app.build-config       :as build-config]
+   [automaton-core.http.request           :as request]
+   [automaton-web.components.icons        :as web-icons]
+   [automaton-web.components.table        :as table]
+   [automaton-web.configuration           :as web-conf]
+   [mount.tools.graph                     :as mount-graph]))
 
 (defn menu-items
   "Create menu items"

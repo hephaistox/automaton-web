@@ -1,9 +1,9 @@
 (ns automaton-web.pages.errors
   "Gathering default implementations of error pages."
   (:require
-   [automaton-core.utils.fallback :as fallback]
+   [automaton-core.utils.fallback   :as fallback]
    [automaton-web.components.errors :as web-comp-errors]
-   [automaton-web.pages.index :as web-pages-index]))
+   [automaton-web.pages.index       :as web-pages-index]))
 
 (defn not-found-page
   "Build default not found page"

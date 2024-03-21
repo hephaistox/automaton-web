@@ -1,7 +1,7 @@
 (ns automaton-web.pages.portfolio.route
   (:require
    [automaton-web.adapters.be.http-response :as http-response]
-   [automaton-web.pages.index :as web-pages-index]))
+   [automaton-web.pages.index               :as web-pages-index]))
 
 (defn route
   ([] (route "/js/compiled/share.js"))

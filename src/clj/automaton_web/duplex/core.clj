@@ -1,11 +1,12 @@
 (ns automaton-web.duplex.core
   "Add a real time communication feature with the client"
   (:require
-   [automaton-web.configuration :as web-conf]
-   [automaton-core.log :as core-log]
-   [automaton-web.duplex.message-handler :as message-handler]
-   [mount.core :refer [defstate] :as mount]
-   [taoensso.sente :as sente]
+   [automaton-core.log                      :as core-log]
+   [automaton-web.configuration             :as web-conf]
+   [automaton-web.duplex.message-handler    :as message-handler]
+   [mount.core                              :refer [defstate]
+                                            :as    mount]
+   [taoensso.sente                          :as sente]
    [taoensso.sente.server-adapters.http-kit :refer [get-sch-adapter]]))
 
 (defn start-rt

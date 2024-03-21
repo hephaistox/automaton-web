@@ -1,13 +1,13 @@
 (ns automaton-web.handlers-test
   (:require
-   [automaton-web.handlers :as sut]
-   [automaton-web.middleware :as web-middleware]
-   [automaton-web.adapters.be.http-response :as http-response]
+   [automaton-web.adapters.be.http-response  :as http-response]
+   [automaton-web.handlers                   :as sut]
    [automaton-web.i18n.be.translator.tempura :as be-tempura-translator]
-   [automaton-web.i18n.dict.text :as web-dict-text]
-   [automaton-web.i18n.dict.resources :as web-dict-resources]
-   [clojure.test :refer [deftest is testing]]
-   [reitit.ring :as reitit-ring]))
+   [automaton-web.i18n.dict.resources        :as web-dict-resources]
+   [automaton-web.i18n.dict.text             :as web-dict-text]
+   [automaton-web.middleware                 :as web-middleware]
+   [clojure.test                             :refer [deftest is testing]]
+   [reitit.ring                              :as reitit-ring]))
 
 (def be-translator-stub
   (be-tempura-translator/make-tempura-be-translator [:fr]

@@ -1,10 +1,10 @@
 (ns automaton-web.i18n.be.translator
   "Protocol for a backend translator"
   (:require
-   [automaton-core.i18n.translator :as core-translator]
-   [automaton-core.log :as core-log]
+   [automaton-core.i18n.translator         :as core-translator]
+   [automaton-core.log                     :as core-log]
    [automaton-web.adapters.be.http-request :as http-request]
-   [clojure.string :as str]))
+   [clojure.string                         :as str]))
 
 (defprotocol BeTranslator
   (wrap-translator [this]

@@ -1,9 +1,9 @@
 (ns automaton-web.i18n.be.translator.tempura-test
   (:require
-   [automaton-web.i18n.be.translator :as be-translator]
+   [automaton-web.i18n.be.translator         :as be-translator]
    [automaton-web.i18n.be.translator.tempura :as sut]
-   [automaton-web.i18n.dict.text :as web-dict-text]
-   [clojure.test :refer [deftest is testing]]))
+   [automaton-web.i18n.dict.text             :as web-dict-text]
+   [clojure.test                             :refer [deftest is testing]]))
 
 (defn handler-stub
   [request]

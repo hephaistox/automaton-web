@@ -1,10 +1,10 @@
 (ns automaton-web.pages.admin.route
   (:require
    [automaton-web.adapters.be.http-response :as http-response]
-   [automaton-web.hiccup :as web-hiccup]
-   [automaton-web.pages.index :as web-pages-index]
-   [automaton-web.pages.admin :as web-admin-index]
-   [automaton-web.configuration :as web-conf]))
+   [automaton-web.configuration             :as web-conf]
+   [automaton-web.hiccup                    :as web-hiccup]
+   [automaton-web.pages.admin               :as web-admin-index]
+   [automaton-web.pages.index               :as web-pages-index]))
 
 (defn route
   []

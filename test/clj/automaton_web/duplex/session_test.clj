@@ -1,10 +1,10 @@
 (ns automaton-web.duplex.session-test
   (:require
-   [clojure.test :refer [deftest is testing]]
-   [ring.util.response :as ring-response]
-   [automaton-web.duplex.session :as sut]
-   [automaton-web.middleware :as web-middleware]
-   [ring.middleware.session.memory :as ring-memory]))
+   [automaton-web.duplex.session   :as sut]
+   [automaton-web.middleware       :as web-middleware]
+   [clojure.test                   :refer [deftest is testing]]
+   [ring.middleware.session.memory :as ring-memory]
+   [ring.util.response             :as ring-response]))
 
 (defn handler-count
   "Check information there
