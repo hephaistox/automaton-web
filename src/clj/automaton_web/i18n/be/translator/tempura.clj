@@ -1,12 +1,12 @@
 (ns automaton-web.i18n.be.translator.tempura
   "Implements tempura `WebTranslator` - translation for web backend"
   (:require
-   [automaton-core.i18n.translator :as core-translator]
+   [automaton-core.i18n.translator         :as core-translator]
    [automaton-core.i18n.translator.tempura :as tempura-translator]
-   [automaton-web.i18n.be.translator :as be-translator]
-   [automaton-web.i18n.dict.resources :as web-dict-resources]
-   [automaton-web.i18n.dict.text :as web-dict-text]
-   [taoensso.tempura :as tempura]))
+   [automaton-web.i18n.be.translator       :as be-translator]
+   [automaton-web.i18n.dict.resources      :as web-dict-resources]
+   [automaton-web.i18n.dict.text           :as web-dict-text]
+   [taoensso.tempura                       :as tempura]))
 
 (defrecord TempuraWebTranslator [translator]
   be-translator/BeTranslator

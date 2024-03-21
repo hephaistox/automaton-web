@@ -1,8 +1,8 @@
 (ns automaton-web.i18n.be.translator-test
   (:require
-   [automaton-web.i18n.be.translator :as sut]
+   [automaton-web.i18n.be.translator         :as sut]
    [automaton-web.i18n.be.translator.tempura :as be-tempura-translator]
-   [clojure.test :refer [deftest is testing]]))
+   [clojure.test                             :refer [deftest is testing]]))
 
 (def web-translator (be-tempura-translator/make-tempura-be-translator [:sk]))
 

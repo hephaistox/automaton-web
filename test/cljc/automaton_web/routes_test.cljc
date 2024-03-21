@@ -30,4 +30,14 @@
     (is (= ["foo" "bar"] (sut/parse-routes :be ["foo" "bar"]))))
   (testing "Registry replace keywords"
     (is (= ["" clojure.core/last]
-           (sut/parse-routes :be ["" {:be :foo}] {:foo clojure.core/last})))))
+           (sut/parse-routes :be ["" {:be :foo}] {:foo clojure.core/last}))))
+  (testing "Routes registry index-metadata is included when creating index"
+    (is (= {:some "data"
+            :here "important"}
+           ((:get (sut/parse-routes :be {:name ::root
+                                         :be {:get :html-page/custom-index
+                                              :index-metadata {:some "data"
+                                                               :here "important"}}
+                                         :fe {:panel-id :panels/home}}
+                                    {:html-page/custom-index (fn [x _] x)}))
+            {})))))

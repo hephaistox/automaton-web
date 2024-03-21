@@ -2,8 +2,8 @@
   "Predefined handlers to manage error pages, and resources (in the sense of classpath in java)"
   (:require
    [automaton-web.adapters.be.http-response :as http-response]
-   [automaton-web.pages.errors :as error-pages]
-   [reitit.ring :as reitit-ring]))
+   [automaton-web.pages.errors              :as error-pages]
+   [reitit.ring                             :as reitit-ring]))
 
 (defn not-found-handler
   [request]

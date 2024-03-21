@@ -1,12 +1,12 @@
 (ns automaton-web.duplex.routes
   "Routes for realtime discussion between server and frontend"
   (:require
-   [mount.core :refer [defstate]]
+   [automaton-core.log         :as core-log]
+   [automaton-web.duplex.core  :as duplex]
+   [automaton-web.duplex.route :as duplex-route]
    [automaton-web.duplex.session]
-   [automaton-web.duplex.core :as duplex]
-   [automaton-web.middleware :as web-middleware]
-   [automaton-core.log :as core-log]
-   [automaton-web.duplex.route :as duplex-route]))
+   [automaton-web.middleware   :as web-middleware]
+   [mount.core                 :refer [defstate]]))
 
 (defn routes*
   ([] (routes* (duplex/ajax-get-or-ws-handshake) (duplex/ajax-post)))

@@ -1,8 +1,8 @@
 (ns automaton-web.duplex.core-test
   (:require
-   [clojure.test :refer [deftest is testing]]
-   [mount.core :as mount]
-   [automaton-web.duplex.core :as sut]))
+   [automaton-web.duplex.core :as sut]
+   [clojure.test              :refer [deftest is testing]]
+   [mount.core                :as mount]))
 
 (deftest server-test
   (testing "mocking realtime server"
