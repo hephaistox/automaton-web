@@ -1,6 +1,6 @@
 (ns automaton-web.pages.index
   (:require
-   [automaton-web.hiccup :as web-hiccup]
+   [automaton-web.hiccup                :as web-hiccup]
    [automaton-web.security.csrf-backend :as anti-forgery]))
 
 (defn build

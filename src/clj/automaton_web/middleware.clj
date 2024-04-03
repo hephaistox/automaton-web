@@ -1,23 +1,23 @@
 (ns automaton-web.middleware
   "Middlewares for web server"
   (:require
-   [automaton-core.log :as core-log]
+   [automaton-core.log                      :as core-log]
    [automaton-web.adapters.be.http-response :as http-response]
-   [automaton-web.duplex.session :as web-session]
-   [automaton-web.i18n.be.translator :as be-translator]
-   [automaton-web.middleware.log-http :as log-request]
-   [automaton-web.pages.errors :as error-pages]
-   [reitit.ring.coercion :as rrc]
-   [reitit.ring.middleware.muuntaja :as rrmm]
-   [reitit.ring.middleware.parameters :as rrmp]
-   [ring.middleware.anti-forgery :as ring-anti-forgery]
-   [ring.middleware.content-type :as ring-content-type]
-   [ring.middleware.cookies :as ring-cookies]
-   [ring.middleware.cors :as ring-cors]
-   [ring.middleware.gzip :as ring-gzip]
-   [ring.middleware.keyword-params :as ring-keyword-params]
-   [ring.middleware.session :as ring-session]
-   [ring.util.response :as ring-response]))
+   [automaton-web.duplex.session            :as web-session]
+   [automaton-web.i18n.be.translator        :as be-translator]
+   [automaton-web.middleware.log-http       :as log-request]
+   [automaton-web.pages.errors              :as error-pages]
+   [reitit.ring.coercion                    :as rrc]
+   [reitit.ring.middleware.muuntaja         :as rrmm]
+   [reitit.ring.middleware.parameters       :as rrmp]
+   [ring.middleware.anti-forgery            :as ring-anti-forgery]
+   [ring.middleware.content-type            :as ring-content-type]
+   [ring.middleware.cookies                 :as ring-cookies]
+   [ring.middleware.cors                    :as ring-cors]
+   [ring.middleware.gzip                    :as ring-gzip]
+   [ring.middleware.keyword-params          :as ring-keyword-params]
+   [ring.middleware.session                 :as ring-session]
+   [ring.util.response                      :as ring-response]))
 
 (defn wrap-throw-error
   "Throws an error, usefull for testing error handling."

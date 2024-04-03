@@ -1,7 +1,7 @@
 (ns automaton-web.pages.admin-test
   (:require
-   [clojure.test :refer [deftest is testing]]
-   [automaton-web.pages.admin :as sut]))
+   [automaton-web.pages.admin :as sut]
+   [clojure.test              :refer [deftest is testing]]))
 
 (def graph
   "Graph for test purposes"

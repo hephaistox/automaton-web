@@ -2,10 +2,10 @@
   "Proxy to [reitit](https://cljdoc.org/d/fi.metosin/reitit/0.7.0-alpha6/doc/introduction) for the backend"
   (:require
    [automaton-web.duplex.routes :as duplex-routes]
-   [automaton-web.handlers :as bewh]
-   [muuntaja.core :as m]
-   [reitit.coercion :as coercion]
-   [reitit.ring :as reitit-ring]))
+   [automaton-web.handlers      :as bewh]
+   [muuntaja.core               :as m]
+   [reitit.coercion             :as coercion]
+   [reitit.ring                 :as reitit-ring]))
 
 (defn router
   [web-routes web-middleware]

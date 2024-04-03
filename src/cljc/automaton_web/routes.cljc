@@ -5,7 +5,7 @@
 
 (defn- kw-to-registry-value
   [registry val]
-  (if (keyword? val) (get registry val) val))
+   (if (keyword? val) (get registry val) val))
 
 (defn- update-registry
   [handler-registry handler-map]

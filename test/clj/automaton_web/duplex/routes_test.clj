@@ -1,10 +1,10 @@
 (ns automaton-web.duplex.routes-test
   (:require
    [automaton-web.adapters.be.http-response :as http-response]
-   [automaton-web.duplex.route :as duplex-route]
-   [automaton-web.duplex.routes :as sut]
-   [clojure.test :refer [deftest is testing]]
-   [reitit.ring :as reitit-ring]))
+   [automaton-web.duplex.route              :as duplex-route]
+   [automaton-web.duplex.routes             :as sut]
+   [clojure.test                            :refer [deftest is testing]]
+   [reitit.ring                             :as reitit-ring]))
 
 (deftest route2
   (let [router (reitit-ring/router (sut/routes*

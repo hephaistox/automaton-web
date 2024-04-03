@@ -19,4 +19,7 @@
          :lfe-test {}
          :lfe-css {}
          :lfe-watch {}
+         :update-deps {:exclude-libs #{"com.taoensso/encore"
+                                       "org.clojars.hephaistox/automaton-build@*-*"
+                                       "org.clojars.hephaistox/automaton-core@*-*"}}
          :reports {:forbiddenwords-words #{"automaton-build" "landing" "tap>"}}}}

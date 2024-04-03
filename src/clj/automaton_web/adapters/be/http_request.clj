@@ -2,7 +2,7 @@
   "Adapter for server side http requests"
   (:require
    [automaton-core.url :as url]
-   [clojure.string :as str]))
+   [clojure.string     :as str]))
 
 (defn- get-header
   "Internal api to return a header"
