@@ -1,13 +1,11 @@
 (ns automaton-web.portfolio.components.section
   (:require
    [automaton-web.components.section :as sut]
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [automaton-web.react-proxy :as web-react]
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]))
+   [automaton-web.portfolio.proxy    :as web-proxy]
+   [automaton-web.react-proxy        :as web-react]
+   [portfolio.reagent-18             :as           portfolio
+                                     :refer-macros [defscene
+                                                    configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Section"})

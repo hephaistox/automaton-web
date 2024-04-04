@@ -1,8 +1,7 @@
 (ns automaton-web.portfolio.portfolio
   (:require
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [automaton-web.portfolio.components.button]
    [automaton-web.portfolio.components.alert]
+   [automaton-web.portfolio.components.button]
    [automaton-web.portfolio.components.card]
    [automaton-web.portfolio.components.checkbox]
    [automaton-web.portfolio.components.footer]
@@ -23,7 +22,8 @@
    [automaton-web.portfolio.components.table]
    [automaton-web.portfolio.components.tooltip]
    [automaton-web.portfolio.components.version]
-   [automaton-web.portfolio.pages.error]))
+   [automaton-web.portfolio.pages.error]
+   [automaton-web.portfolio.proxy :as web-proxy]))
 
 (defonce app
   (web-proxy/start!

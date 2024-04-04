@@ -1,10 +1,10 @@
 (ns automaton-web.components.mailchimp
   (:require
-   [automaton-web.components.form :as web-form]
-   [automaton-web.i18n.fe.auto-web-translator :as auto-web-translator]
-   [automaton-web.components.init-components :as web-init-components]
-   [automaton-web.components.input :as web-input]
-   [automaton-web.components.modal :as web-modal]))
+   [automaton-web.components.form             :as web-form]
+   [automaton-web.components.init-components  :as web-init-components]
+   [automaton-web.components.input            :as web-input]
+   [automaton-web.components.modal            :as web-modal]
+   [automaton-web.i18n.fe.auto-web-translator :as auto-web-translator]))
 
 (def mailchimp-newsletter-modal-id "mailchimp-modal")
 

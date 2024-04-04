@@ -1,10 +1,10 @@
 (ns automaton-web.components.section
   "Components to visually display and separate content on the page."
   (:require
-   [automaton-web.components.button :as web-button]
-   [automaton-web.components.card :as web-card]
+   [automaton-web.components.button    :as web-button]
+   [automaton-web.components.card      :as web-card]
    [automaton-web.components.grid-list :as web-grid-list]
-   [automaton-web.components.modal :as web-modal]))
+   [automaton-web.components.modal     :as web-modal]))
 
 (defn section-full-container
   [{:keys [dark? class]} & components]
@@ -14,13 +14,10 @@
    (into [:div {:class ["mx-auto w-full px-6 lg:px-8 self-center"]}]
          (for [component components] component))])
 
-(defn section-text-container [{:keys [class]} & components]
-  [:div {:class
-         (vec (concat ["mx-auto max-w-3xl text-base leading-7"]
-                      class))}
-   (into [:div
-          (for [component components]
-            component)])])
+(defn section-text-container
+  [{:keys [class]} & components]
+  [:div {:class (vec (concat ["mx-auto max-w-3xl text-base leading-7"] class))}
+   (into [:div (for [component components] component)])])
 
 (defn section-description
   [{:keys [title description dark?]}]
@@ -58,7 +55,9 @@
 
 (defn text-section
   [{:keys [title description pre-title dark?]} & subsections]
-  [section-text-container {:class [(if dark? "text-theme-light-secondary" "text-theme-dark-secondary")]}
+  [section-text-container {:class [(if dark?
+                                     "text-theme-light-secondary"
+                                     "text-theme-dark-secondary")]}
    (when pre-title pre-title)
    [:h1 {:class ["mt-2 text-3xl font-bold tracking-tight sm:text-4xl"
                  (if dark? "text-theme-light" "text-theme-dark")]}

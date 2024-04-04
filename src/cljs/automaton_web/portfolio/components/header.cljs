@@ -1,13 +1,10 @@
 (ns automaton-web.portfolio.components.header
   (:require
    [automaton-web.components.header :as sut]
-   [automaton-web.components.menu :as web-menu]
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]))
+   [automaton-web.components.menu   :as web-menu]
+   [automaton-web.portfolio.proxy   :as web-proxy]
+   [portfolio.reagent-18            :as           portfolio
+                                    :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Header"})

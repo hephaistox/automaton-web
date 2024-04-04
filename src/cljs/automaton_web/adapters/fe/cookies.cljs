@@ -1,8 +1,8 @@
 (ns automaton-web.adapters.fe.cookies
   "Adapter to store a cookie on the frontend"
   (:require
-   [goog.net.Cookies :as gnc]
-   [automaton-web.persistence.cookies :as cookies]))
+   [automaton-web.persistence.cookies :as cookies]
+   [goog.net.Cookies                  :as gnc]))
 
 (defn ^:export set-cookie
   "Set the salue of the cookie

@@ -1,10 +1,10 @@
 (ns automaton-web.portfolio.proxy
   (:require
-   [portfolio.ui :as ui]
-   [portfolio.data :as data]
-   [automaton-web.react-proxy :as web-react]
    [automaton-web.components.init-components :as web-init-components]
-   [portfolio.ui.search :as search]))
+   [automaton-web.react-proxy                :as web-react]
+   [portfolio.data                           :as data]
+   [portfolio.ui                             :as ui]
+   [portfolio.ui.search                      :as search]))
 
 
 (defn iframe-document

@@ -1,8 +1,8 @@
 (ns automaton-web.i18n.language-test
   (:require
    [automaton-core.adapters.regexp :as core-regexp]
-   [automaton-web.i18n.language :as sut]
-   [clojure.test :refer [deftest is testing]]))
+   [automaton-web.i18n.language    :as sut]
+   [clojure.test                   :refer [deftest is testing]]))
 
 (def selected-languages
   "For test, all supported languages are tested"

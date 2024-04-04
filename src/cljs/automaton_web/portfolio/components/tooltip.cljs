@@ -1,12 +1,10 @@
 (ns automaton-web.portfolio.components.tooltip
   (:require
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [automaton-web.components.tooltip :as sut]))
+   [automaton-web.components.tooltip :as sut]
+   [automaton-web.portfolio.proxy    :as web-proxy]
+   [portfolio.reagent-18             :as           portfolio
+                                     :refer-macros [defscene
+                                                    configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Tooltip"})

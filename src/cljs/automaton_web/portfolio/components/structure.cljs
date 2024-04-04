@@ -1,16 +1,14 @@
 (ns automaton-web.portfolio.components.structure
   (:require
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]
-   [automaton-web.portfolio.proxy :as web-proxy]
+   [automaton-web.components.footer    :as web-footer]
+   [automaton-web.components.form      :as web-form]
+   [automaton-web.components.header    :as web-header]
+   [automaton-web.components.input     :as web-input]
    [automaton-web.components.structure :as sut]
-   [automaton-web.components.input :as web-input]
-   [automaton-web.components.form :as web-form]
-   [automaton-web.components.footer :as web-footer]
-   [automaton-web.components.header :as web-header]))
+   [automaton-web.portfolio.proxy      :as web-proxy]
+   [portfolio.reagent-18               :as           portfolio
+                                       :refer-macros [defscene
+                                                      configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Structure"})

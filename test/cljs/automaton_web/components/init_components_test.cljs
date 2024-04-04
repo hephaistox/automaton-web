@@ -1,7 +1,10 @@
 (ns automaton-web.components.init-components-test
   (:require
    [automaton-web.components.init-components :as sut]
-   [cljs.test :refer [deftest is testing] :include-macros true]
+   [cljs.test                                :refer          [deftest
+                                                              is
+                                                              testing]
+                                             :include-macros true]
    [goog.object]))
 
 (defn err->edn

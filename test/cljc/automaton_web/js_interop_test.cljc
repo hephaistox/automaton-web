@@ -1,7 +1,7 @@
 (ns automaton-web.js-interop-test
   (:require
-   [clojure.test :refer [deftest is testing]]
-   [automaton-web.js-interop :as sut]))
+   [automaton-web.js-interop :as sut]
+   [clojure.test             :refer [deftest is testing]]))
 
 (deftest mapToJSmap
   (testing "Empty map" (is (= "{}" (sut/mapToJSmap {}))))

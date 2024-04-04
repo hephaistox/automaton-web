@@ -3,15 +3,15 @@
   Implementing `fe-translator/FeTranslator`"
   (:require
    [automaton-core.i18n.translator.tempura :as tempura-translator]
-   [automaton-core.log :as core-log]
-   [automaton-web.adapters.fe.cookies :as fe-cookies]
-   [automaton-web.adapters.fe.url :as fe-url]
-   [automaton-web.events-proxy :as web-events-proxy]
-   [automaton-web.events.subs :as web-subs]
+   [automaton-core.log                     :as core-log]
+   [automaton-web.adapters.fe.cookies      :as fe-cookies]
+   [automaton-web.adapters.fe.url          :as fe-url]
+   [automaton-web.events-proxy             :as web-events-proxy]
+   [automaton-web.events.subs              :as web-subs]
    [automaton-web.i18n.dict.resources]
    [automaton-web.i18n.dict.text]
-   [automaton-web.i18n.fe.translator :as fe-translator]
-   [taoensso.tempura :as tempura]))
+   [automaton-web.i18n.fe.translator       :as fe-translator]
+   [taoensso.tempura                       :as tempura]))
 
 (defrecord FeTempuraTranslator [opts main-langs ui-str-to-id]
   fe-translator/FeTranslator

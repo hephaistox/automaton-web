@@ -1,11 +1,8 @@
 (ns automaton-web.portfolio.pages.error
   (:require
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]
-   [automaton-web.components.errors :as sut]))
+   [automaton-web.components.errors :as sut]
+   [portfolio.reagent-18            :as           portfolio
+                                    :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :pages
                    :title "Error pages"})

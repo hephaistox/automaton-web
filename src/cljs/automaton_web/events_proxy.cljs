@@ -1,10 +1,10 @@
 (ns automaton-web.events-proxy
   "Adapter for [re-frame](https://day8.github.io/re-frame/api-intro/)"
   (:require
-   [re-frame.core :as rfc]
-   [re-frame.db]
+   [automaton-core.log    :as core-log]
    [day8.re-frame.tracing :as tracing]
-   [automaton-core.log :as core-log]))
+   [re-frame.core         :as rfc]
+   [re-frame.db]))
 
 (def reg-sub rfc/reg-sub)
 

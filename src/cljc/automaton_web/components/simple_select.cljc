@@ -1,8 +1,8 @@
 (ns automaton-web.components.simple-select
   "Simple select component"
   (:require
-   [automaton-web.reagent :as automaton-web-reagent]
-   [automaton-core.utils.string-to-id :refer [string-to-id]]))
+   [automaton-core.utils.string-to-id :refer [string-to-id]]
+   [automaton-web.reagent             :as automaton-web-reagent]))
 
 (defn- update-select-options
   "Add options to select options components.

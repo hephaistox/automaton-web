@@ -1,11 +1,11 @@
 (ns automaton-web.components.form
   (:require
-   [automaton-core.utils.uuid-gen :as uuid-gen]
-   [automaton-web.components.button :as web-button]
-   [automaton-web.components.input :as web-input]
+   [automaton-core.utils.uuid-gen             :as uuid-gen]
+   [automaton-web.components.button           :as web-button]
+   [automaton-web.components.input            :as web-input]
    [automaton-web.i18n.fe.auto-web-translator :as auto-web-translator]
-   [automaton-web.react-proxy :as web-react]
-   [clojure.data :as clj-data]))
+   [automaton-web.react-proxy                 :as web-react]
+   [clojure.data                              :as clj-data]))
 
 (defn initialize-state
   [{:keys [state initial-values initial-touched]}]

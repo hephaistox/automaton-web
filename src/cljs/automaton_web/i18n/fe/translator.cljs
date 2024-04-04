@@ -5,9 +5,9 @@
   So for instance, default text in components (like mailchimp) will use those translation functions.
   But cust-apps will have their own implemntations"
   (:require
-   [automaton-core.log :as core-log]
+   [automaton-core.log         :as core-log]
    [automaton-web.events-proxy :as web-events-proxy]
-   [automaton-web.events.subs :as web-subs]))
+   [automaton-web.events.subs  :as web-subs]))
 
 (defprotocol FeTranslator
   "The frontend translator"

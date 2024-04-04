@@ -1,7 +1,7 @@
 (ns automaton-web.components.input
   "Namespace for basic inputs"
   (:require
-   [automaton-web.components.icons :as web-icons]
+   [automaton-web.components.icons            :as web-icons]
    [automaton-web.i18n.fe.auto-web-translator :as auto-web-translator]))
 
 (defn- input
