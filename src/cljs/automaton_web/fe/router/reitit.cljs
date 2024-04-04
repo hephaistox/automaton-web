@@ -5,12 +5,12 @@
 
   Create an instance preferably with `make-reitit-routes` function"
   (:require
-   [automaton-core.log :as core-log]
+   [automaton-core.log      :as core-log]
    [automaton-web.fe.router :as web-fe-router]
-   [reitit.core :as reitit]
-   [reitit.dev.pretty :as pretty]
-   [reitit.frontend :as reitit-frontend]
-   [reitit.spec :as rs]))
+   [reitit.core             :as reitit]
+   [reitit.dev.pretty       :as pretty]
+   [reitit.frontend         :as reitit-frontend]
+   [reitit.spec             :as rs]))
 
 (defrecord ReititRouter [router gather-route-params-fn]
   web-fe-router/Router

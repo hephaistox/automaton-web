@@ -1,9 +1,9 @@
 (ns automaton-web.duplex.core
   (:require
-   [taoensso.sente :as sente]
-   [automaton-core.log :as core-log]
-   [automaton-web.duplex.route :as duplex-route]
-   [automaton-web.security.csrf-frontend :as csrf-frontend]))
+   [automaton-core.log                   :as core-log]
+   [automaton-web.duplex.route           :as duplex-route]
+   [automaton-web.security.csrf-frontend :as csrf-frontend]
+   [taoensso.sente                       :as sente]))
 
 (if csrf-frontend/?csrf-token
   (core-log/info "Init of realtime component, token is:"

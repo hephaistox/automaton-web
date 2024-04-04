@@ -1,8 +1,9 @@
 (ns automaton-web.fe.router.reitit-test
   (:require
-   [automaton-web.fe.router :as web-fe-router]
+   [automaton-web.fe.router        :as web-fe-router]
    [automaton-web.fe.router.reitit :as sut]
-   [cljs.test :refer [deftest is testing] :include-macros true]))
+   [cljs.test                      :refer          [deftest is testing]
+                                   :include-macros true]))
 
 (def reitit-router
   (sut/make-reitit-router ["/foo"

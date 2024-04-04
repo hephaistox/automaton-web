@@ -1,8 +1,8 @@
 (ns automaton-web.components.init-components
   "Put here all initialisation needed for components classes (not for each component instance, which should be spread in the code). For instance, everything which is supposed to be done once for each component."
   (:require
-   ["tw-elements" :refer [initTE Modal Ripple Tooltip]]
-   ["react" :as react]
+   ["react"            :as react]
+   ["tw-elements"      :refer [Modal Ripple Tooltip initTE]]
    [automaton-core.log :as core-log]))
 
 (defn- for-each-root-rendering

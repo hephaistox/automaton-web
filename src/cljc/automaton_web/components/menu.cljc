@@ -1,9 +1,9 @@
 (ns automaton-web.components.menu
   "Display a menu component"
   (:require
-   [clojure.string]
+   [automaton-web.components.icons     :as web-icons]
    [automaton-web.components.menu-item :as menu-item]
-   [automaton-web.components.icons :as web-icons]))
+   [clojure.string]))
 
 (defn- horizontal-version
   "Shown as horizontal following buttons"

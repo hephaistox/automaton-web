@@ -5,8 +5,8 @@
   Note all of them won't be implementened for all cust-apps
   See `automaton-web.i18n.language` as all possible values for a web app"
   (:require
-   [clojure.string :as str]
-   [automaton-core.i18n.language :as core-lang]))
+   [automaton-core.i18n.language :as core-lang]
+   [clojure.string               :as str]))
 
 (def main-langs
   "Default language if all language strategy fail to select a language

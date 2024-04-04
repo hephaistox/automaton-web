@@ -1,14 +1,11 @@
 (ns automaton-web.portfolio.components.form
   (:require
    [automaton-web.components.button :as web-button]
-   [automaton-web.components.form :as sut]
-   [automaton-web.components.input :as web-input]
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]))
+   [automaton-web.components.form   :as sut]
+   [automaton-web.components.input  :as web-input]
+   [automaton-web.portfolio.proxy   :as web-proxy]
+   [portfolio.reagent-18            :as           portfolio
+                                    :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Form"})

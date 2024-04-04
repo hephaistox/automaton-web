@@ -3,9 +3,9 @@
   See [reitit history](https://github.com/metosin/reitit/blob/master/modules/reitit-frontend/src/reitit/frontend/history.cljs) for details"
   (:require
    [automaton-web.adapters.fe.url :as fe-url]
-   [automaton-web.fe.history :as web-fe-history]
-   [reitit.frontend.controllers :as reitit-fe-controllers]
-   [reitit.frontend.history :as reitit-fe-history]))
+   [automaton-web.fe.history      :as web-fe-history]
+   [reitit.frontend.controllers   :as reitit-fe-controllers]
+   [reitit.frontend.history       :as reitit-fe-history]))
 
 (defrecord History [history]
   web-fe-history/History

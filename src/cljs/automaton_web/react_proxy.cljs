@@ -2,8 +2,8 @@
   "Commonly used symbols for easy access in the ClojureScript REPL during
   development."
   (:require
-   [reagent.dom.client :as rdc]
-   [reagent.core :as r]))
+   [reagent.core       :as r]
+   [reagent.dom.client :as rdc]))
 
 (defn render-id
   [app-id component]

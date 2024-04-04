@@ -1,8 +1,8 @@
 (ns automaton-web.configuration.files
   (:require
    [automaton-core.configuration.protocol :as core-conf-prot]
-   [automaton-web.configuration.protocol :as web-prot]
-   [automaton-web.js-interop :as ws-util]
+   [automaton-web.configuration.protocol  :as web-prot]
+   [automaton-web.js-interop              :as ws-util]
    #?(:clj [automaton-core.configuration.files :as core-conf-files]
       :cljs [automaton-core.utils.keyword :as utils-keyword])))
 

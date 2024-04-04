@@ -1,7 +1,7 @@
 (ns automaton-web.components.footer
   (:require
-   [automaton-web.web-elt.id :as web-elt-id]
-   [automaton-web.components.version :as web-version]))
+   [automaton-web.components.version :as web-version]
+   [automaton-web.web-elt.id         :as web-elt-id]))
 
 (defn- footer-link
   [{:keys [title items dark? disabled?]

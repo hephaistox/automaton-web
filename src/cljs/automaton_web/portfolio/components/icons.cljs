@@ -1,12 +1,9 @@
 (ns automaton-web.portfolio.components.icons
   (:require
    [automaton-web.components.icons :as sut]
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]))
+   [automaton-web.portfolio.proxy  :as web-proxy]
+   [portfolio.reagent-18           :as           portfolio
+                                   :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Icons"})

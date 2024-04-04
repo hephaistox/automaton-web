@@ -3,9 +3,9 @@
   The default implementation is a tempura one, with internal dictionaries.
   That implementation could be overriden"
   (:require
-   [automaton-web.i18n.fe.translator :as fe-translator]
+   [automaton-web.i18n.fe.translator         :as fe-translator]
    [automaton-web.i18n.fe.translator.tempura :as fe-tempura-translator]
-   [automaton-web.i18n.language :as web-language]))
+   [automaton-web.i18n.language              :as web-language]))
 
 (def fe-components-translator
   (fe-tempura-translator/make-fe-tempura-translator

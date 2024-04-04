@@ -1,7 +1,7 @@
 (ns automaton-web.duplex.message-handler
   "Message handlers for realtime"
   (:require
-   [automaton-core.log :as core-log]
+   [automaton-core.log        :as core-log]
    [automaton-web.duplex.core :as duplex]))
 
 (defmulti -event-msg-handler

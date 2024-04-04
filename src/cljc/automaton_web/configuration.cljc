@@ -8,10 +8,10 @@
   * Create the parameter, in the current implementation, in the `util/conf.clj`
   * Read the parameter with  `conf/read-param`"
   (:require
-   [automaton-web.configuration.protocol :as web-prot]
    [automaton-core.configuration.protocol :as core-conf-prot]
-   [automaton-web.configuration.files :as web-conf-files]
-   [mount.core :refer [defstate in-cljc-mode]]))
+   [automaton-web.configuration.files     :as web-conf-files]
+   [automaton-web.configuration.protocol  :as web-prot]
+   [mount.core                            :refer [defstate in-cljc-mode]]))
 
 ;; Force the use of `cljc mode` in mount library, so call to `@` will work
 (in-cljc-mode)

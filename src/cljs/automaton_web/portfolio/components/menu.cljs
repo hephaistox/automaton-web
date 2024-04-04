@@ -1,12 +1,9 @@
 (ns automaton-web.portfolio.components.menu
   (:require
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]
+   [automaton-web.components.menu :as sut]
    [automaton-web.portfolio.proxy :as web-proxy]
-   [automaton-web.components.menu :as sut]))
+   [portfolio.reagent-18          :as           portfolio
+                                  :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Menu"})

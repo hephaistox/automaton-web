@@ -3,8 +3,8 @@
   Is wired with database and will update the app language"
   (:require
    [automaton-web.components.simple-select :as web-simple-select]
-   [automaton-web.events.subs :as web-subs]
-   [automaton-web.events-proxy :as web-events-proxy]))
+   [automaton-web.events-proxy             :as web-events-proxy]
+   [automaton-web.events.subs              :as web-subs]))
 
 (defn language-select
   "UI component for selecting the language

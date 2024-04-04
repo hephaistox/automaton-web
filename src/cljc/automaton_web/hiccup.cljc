@@ -1,7 +1,7 @@
 (ns automaton-web.hiccup
   (:require
-   [hiccup2.core :as hiccup2]
-   [hiccup.page :as hiccup-page]))
+   [hiccup.page  :as hiccup-page]
+   [hiccup2.core :as hiccup2]))
 
 (defn html-core
   [head-elements body]

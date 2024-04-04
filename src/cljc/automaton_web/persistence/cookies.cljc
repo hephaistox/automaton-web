@@ -3,7 +3,7 @@
   Could be used on both backend and frontend side to analyze the content of a cookie"
   (:require
    [automaton-core.log :as core-log]
-   [clojure.string :as str]))
+   [clojure.string     :as str]))
 
 (defn parse-cookie
   "Parse the content of the cookie

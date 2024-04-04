@@ -1,13 +1,10 @@
 (ns automaton-web.portfolio.components.footer
   (:require
    [automaton-web.components.footer :as sut]
-   [automaton-web.components.icons :as web-icons]
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]))
+   [automaton-web.components.icons  :as web-icons]
+   [automaton-web.portfolio.proxy   :as web-proxy]
+   [portfolio.reagent-18            :as           portfolio
+                                    :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Footer"})

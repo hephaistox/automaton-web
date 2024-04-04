@@ -1,12 +1,10 @@
 (ns automaton-web.portfolio.components.navigation
   (:require
-   [portfolio.reagent-18
-    :as
-    portfolio
-    :refer-macros
-    [defscene configure-scenes]]
-   [automaton-web.portfolio.proxy :as web-proxy]
-   [automaton-web.components.navigation :as sut]))
+   [automaton-web.components.navigation :as sut]
+   [automaton-web.portfolio.proxy       :as web-proxy]
+   [portfolio.reagent-18                :as           portfolio
+                                        :refer-macros [defscene
+                                                       configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Navigation"})

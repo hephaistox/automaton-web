@@ -1,11 +1,11 @@
 (ns automaton-web.log.tracking.sentry
   "Sentry for web"
   (:require
-   [react :as react]
-   ["@sentry/react" :as Sentry]
-   ["react-router-dom"
-    :refer
-    (useLocation useNavigationType createRoutesFromChildren matchRoutes)]))
+   ["@sentry/react"    :as Sentry]
+   ["react-router-dom" :refer (useLocation useNavigationType
+                                           createRoutesFromChildren
+                                           matchRoutes)]
+   [react              :as react]))
 
 (defn init-sentry!
   "Initialize sentry for react, which is recording react errors that happens inside the components and enables to send events.

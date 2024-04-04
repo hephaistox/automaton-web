@@ -1,9 +1,9 @@
 (ns automaton-web.duplex.router
   (:require
-   [taoensso.sente :as sente]
-   [automaton-core.log :as core-log]
+   [automaton-core.log                   :as core-log]
+   [automaton-web.duplex.core            :as duplex]
    [automaton-web.duplex.message-handler :as message-handler]
-   [automaton-web.duplex.core :as duplex]))
+   [taoensso.sente                       :as sente]))
 
 (defonce router_ (atom nil))
 

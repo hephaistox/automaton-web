@@ -2,13 +2,13 @@
   "Allow the loading of a local file
    See [mozilla input definition](https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input/file)"
   (:require
-   [ajax.core :as ajax]
-   [automaton-core.log :as core-log]
-   [automaton-web.components.alert :as alert]
-   [automaton-web.events-proxy :as web-events-proxy]
+   [ajax.core                            :as ajax]
+   [automaton-core.log                   :as core-log]
+   [automaton-web.components.alert       :as alert]
+   [automaton-web.events-proxy           :as web-events-proxy]
    [automaton-web.security.csrf-frontend :as csrf-frontend]
-   [clojure.string :as str]
-   [day8.re-frame.tracing :refer-macros [fn-traced]]))
+   [clojure.string                       :as str]
+   [day8.re-frame.tracing                :refer-macros [fn-traced]]))
 
 
 
