@@ -6,8 +6,16 @@
 (defn build
   "Build a webpage header"
   [{:keys [header-elements meta-tags]} & body]
-  (let [{:keys
-         [image description title type url twitter-content twitter-site author]}
+  (let [{:keys [image
+                description
+                title
+                type
+                url
+                twitter-content
+                twitter-site
+                author
+                icon]
+         :or {icon "/favicon.ico"}}
         meta-tags
         meta-title [:meta {:name "title"
                            :property "og:title"
@@ -37,7 +45,7 @@
         twitter-meta-site [:meta {:name "twitter:site"
                                   :content twitter-site}]
         icon [:link {:rel "icon"
-                     :href "favicon.ico"}]
+                     :href icon}]
         css [:link {:type "text/css"
                     :rel "stylesheet"
                     :href "/css/compiled/styles.css"}]

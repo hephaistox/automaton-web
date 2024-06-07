@@ -8,6 +8,8 @@
 
 (def reg-sub rfc/reg-sub)
 
+(def reg-sub-raw rfc/reg-sub-raw)
+
 (def subscribe rfc/subscribe)
 
 (defn subscribe-value
@@ -24,6 +26,8 @@
 (def reg-event-db rfc/reg-event-db)
 
 (def reg-event-fx rfc/reg-event-fx)
+
+(def reg-cofx rfc/reg-cofx)
 
 (defn dispatch
   [event]

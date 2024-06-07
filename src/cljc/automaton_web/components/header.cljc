@@ -38,6 +38,7 @@
     logo
     [:div {:class ["hidden lg:flex lg:gap-x-12"]}
      (for [{:keys [title href]} menu-items]
+       ^{:key (str title href)}
        [:a {:href href
             :class ["text-sm font-semibold leading-6 text-gray-900"]}
         title])]

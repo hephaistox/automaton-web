@@ -1,25 +1,55 @@
-(ns automaton-web.components.table "For table components")
+(ns automaton-web.components.table
+  "For table components"
+  (:require
+   [automaton-core.utils.uuid-gen :as uuid-gen]))
+
+(defn- vector->hiccup
+  [v]
+  [:div {:class ["p-2 flex flex-col"]}
+   "[ "
+   (for [i v] ^{:key (uuid-gen/unguessable)} [:span (str i)])
+   " ]"])
+
+#_{:clj-kondo/ignore [:clojure-lsp/unused-private-var]}
+(defn map->invisible-table
+  "Transform clojure map to hiccup"
+  [m i]
+  [:ul
+   (map (fn [[k v]] [:li {:class [(str "ml-" i)]}
+                     [:span {:class ["font-bold"]}
+                      k
+                      ": "]
+                     [:span
+                      (cond
+                        (map? v) (map->invisible-table v (+ i 1))
+                        (vector? v) (vector->hiccup v)
+                        :else (str v))]])
+        m)])
 
 (defn map->table
   "Turns clojure map into table"
   [map-data]
-  [:table
+  [:div
    {:class
     ["max-w-full w-full bg-transparent border-spacing-0 border-solid border-gray-500 border-2"]}
-   [:tbody
+   [:div
     (for [[k v] map-data]
-      [:tr
-       [:td
-        (merge {:class
-                ["border-spacing-0 border-solid border-gray-500 border-2 p-0"]}
-               (when (map? v) {:colspan "2"}))
+      ^{:key (str "k: " k)}
+      [:div
+       [:div
+        (merge
+         {:class
+          ["border-spacing-0 border-solid border-gray-500 border-2 p-0 flex"]}
+         (when (map? v) {:colSpan "2"}))
         [:div {:class ["p-2 font-bold float-left"]}
          k]
-        (if (map? v)
-          (map->table v)
-          [:td
-           [:div {:class ["p-2 bg-stone-100"]}
-            v]])]])]])
+        (cond
+          (map? v) (map->table v)
+          (vector? v) [:div {:class ["p-2 float-left bg-stone-100"]}
+                       (vector->hiccup v)]
+          :else [:div {:class ["p-2 float-left"]}
+                 [:div {:class ["bg-stone-100"]}
+                  (str v)]])]])]])
 
 (defn table
   "Just plain regular table.
@@ -37,6 +67,7 @@
        [:thead {:class ["bg-gray-50"]}
         [:tr
          (for [header headers]
+           ^{:key (uuid-gen/unguessable)}
            [:th
             {:scope "col"
              :class
@@ -46,6 +77,7 @@
         (for [row rows]
           [:tr
            (for [cell row]
+             ^{:key (uuid-gen/unguessable)}
              [:td
               {:class
                ["whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"]}
