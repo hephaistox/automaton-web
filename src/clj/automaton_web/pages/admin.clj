@@ -7,7 +7,7 @@
    [automaton-core.app.build-config       :as build-config]
    [automaton-core.http.request           :as request]
    [automaton-web.components.icons        :as web-icons]
-   [automaton-web.components.table        :as table]
+   [automaton-web.components.table        :as web-table]
    [automaton-web.configuration           :as web-conf]
    [mount.tools.graph                     :as mount-graph]))
 
@@ -113,7 +113,7 @@
   (let [app-name (:app-name build-config-edn)]
     [:div
      [:div (str app-name " full build config:")]
-     (table/map->table build-config-edn)]))
+     (web-table/map->table build-config-edn)]))
 
 (defn display-links
   [items-by-category]
@@ -230,7 +230,7 @@
                 :hover? false}))])))
       []
       cust-apps)]
-    (table/table
+    (web-table/table
      {:headers ["App name" "Local env" "Github" "Prod env" "Test env" "Status"]
       :rows rows})))
 

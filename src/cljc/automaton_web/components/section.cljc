@@ -1,6 +1,7 @@
 (ns automaton-web.components.section
   "Components to visually display and separate content on the page."
   (:require
+   [automaton-core.utils.uuid-gen      :as uuid-gen]
    [automaton-web.components.button    :as web-button]
    [automaton-web.components.card      :as web-card]
    [automaton-web.components.grid-list :as web-grid-list]
@@ -17,7 +18,9 @@
 (defn section-text-container
   [{:keys [class]} & components]
   [:div {:class (vec (concat ["mx-auto max-w-3xl text-base leading-7"] class))}
-   (into [:div (for [component components] component)])])
+   (into [:div]
+         (for [component components]
+           ^{:key (uuid-gen/unguessable)} component))])
 
 (defn section-description
   [{:keys [title description dark?]}]

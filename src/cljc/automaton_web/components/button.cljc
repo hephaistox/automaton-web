@@ -27,6 +27,19 @@
     (when on-click {:on-click (fn [e] (on-click e))}))
    text])
 
+(defn icon-button
+  [{:keys [btn-props on-click icon-path icon-size]}]
+  [:button
+   (merge
+    {:type "button"
+     :class
+     ["box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"]
+     :aria-label "Close"
+     :on-click on-click}
+    btn-props)
+   (web-icons/icon {:path-kw icon-path
+                    :size icon-size})])
+
 (defn link-button
   "Wraps button with a clickable link, giving quick native way to put hrefs."
   [{:keys [link]} btn-props]
@@ -37,13 +50,8 @@
 
 (defn x-button
   "Exit 'X' button."
-  [{:keys [btn-props on-click]}]
-  [:button
-   (merge
-    {:type "button"
-     :class
-     ["box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"]
-     :aria-label "Close"
-     :on-click on-click}
-    btn-props)
-   (web-icons/icon {:path-kw :svg/x-mark})])
+  [{:keys [btn-props on-click icon-size]}]
+  [icon-button {:btn-props btn-props
+                :on-click on-click
+                :icon-size icon-size
+                :icon-path :svg/x-mark}])

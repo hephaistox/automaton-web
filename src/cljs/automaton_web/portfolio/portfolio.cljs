@@ -16,6 +16,7 @@
    [automaton-web.portfolio.components.menu-item]
    [automaton-web.portfolio.components.modal]
    [automaton-web.portfolio.components.navigation]
+   [automaton-web.portfolio.components.player]
    [automaton-web.portfolio.components.section]
    [automaton-web.portfolio.components.select]
    [automaton-web.portfolio.components.structure]
