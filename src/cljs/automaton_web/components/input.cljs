@@ -56,9 +56,18 @@
    invalid? -> boolean: for displaying incorrect data in component
    error-message -> string: for displaying message on invalid component
    size -> :full for displaying input on two grid cols
-   values -> fn returning string: value of input when component is controlled."
-  [{:keys
-    [name text size touched error-message errors type values invalid? required?]
+   values-fn -> fn returning string: value of input when component is controlled."
+  [{:keys [name
+           text
+           size
+           on-change-fn
+           touched
+           error-message
+           errors
+           type
+           value
+           invalid?
+           required?]
     :as params
     :or {type "text"}}]
   (let [invalid? (if (fn? invalid?)
@@ -80,7 +89,70 @@
       [:div
        [input
         (merge params
-               (when values {:value (values name "")})
+               (when value {:value value})
+               (when on-change-fn
+                 {:on-change (fn [e]
+                               (on-change-fn (-> e
+                                                 .-target
+                                                 .-value)))})
+               {:type type
+                :invalid? invalid?})]]
+      (when invalid?
+        [:div
+         {:class
+          ["pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"]}
+         [web-icons/icon {:class ["icon-red"]}]])]
+     (when invalid?
+       [:p {:class ["ml-2 mt-2 text-sm text-red-600"]}
+        e-msg])]))
+
+(defn number-field
+  "Text input with different states covered.
+   Component can be used both with form or standalone.
+   States of the text field:
+   required? -> boolean: for displaying it as non-optional
+   invalid? -> boolean: for displaying incorrect data in component
+   error-message -> string: for displaying message on invalid component
+   size -> :full for displaying input on two grid cols
+   values-fn -> fn returning string: value of input when component is controlled."
+  [{:keys [name
+           text
+           size
+           on-change-fn
+           touched
+           error-message
+           errors
+           type
+           value
+           invalid?
+           required?]
+    :as params
+    :or {type "number"}}]
+  (let [invalid? (if (fn? invalid?)
+                   (invalid? name)
+                   (or invalid?
+                       (when required?
+                         (and touched (touched name) (get errors name)))))
+        e-msg (or error-message (get errors name))]
+    [:div {:class [(when (= size :full) "sm:col-span-2")]}
+     [:div {:class ["relative mt-2.5"]}
+      [:label
+       {:for name
+        :class
+        ["absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"]}
+       text
+       (when required?
+         [:span {:class ["text-red-600"]}
+          " *"])]
+      [:div
+       [input
+        (merge params
+               (when value {:value value})
+               (when on-change-fn
+                 {:on-change (fn [e]
+                               (on-change-fn (-> e
+                                                 .-target
+                                                 .-value)))})
                {:type type
                 :invalid? invalid?})]]
       (when invalid?
