@@ -3,7 +3,8 @@
    [automaton-web.components.input :as sut]
    [automaton-web.portfolio.proxy  :as web-proxy]
    [portfolio.reagent-18           :as           portfolio
-                                   :refer-macros [defscene configure-scenes]]))
+                                   :refer-macros [defscene configure-scenes]]
+   [reagent.core                   :as r]))
 
 (configure-scenes {:collection :components
                    :title "Inputs"})
@@ -20,6 +21,15 @@
           (web-proxy/wrap-component [sut/text-field {:text "Name"
                                                      :placeholder
                                                      "e.g. John"}]))
+
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defscene text-field-value-controlled-outside
+          (let [text-value (r/atom "Initial-text")]
+            (fn []
+              (web-proxy/wrap-component
+               [sut/text-field {:text "Iniated-field"
+                                :on-change-fn (fn [v] (reset! text-value v))
+                                :value @text-value}]))))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene text-field-full
