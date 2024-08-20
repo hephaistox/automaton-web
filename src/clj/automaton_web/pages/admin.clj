@@ -1,3 +1,4 @@
+#_{:heph-ignore {:forbidden-words ["automaton-build"]}}
 (ns automaton-web.pages.admin
   "Admin page"
   (:require
