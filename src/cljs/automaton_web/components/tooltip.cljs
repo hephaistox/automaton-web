@@ -7,7 +7,7 @@
     :or {text "Hoover text"
          direction "top"}}
    component]
-  [:span {:data-te-toggle "tooltip"
-          :data-te-placement direction
+  [:span {:data-twe-toggle "tooltip"
+          :data-twe-placement direction
           :title text}
    component])

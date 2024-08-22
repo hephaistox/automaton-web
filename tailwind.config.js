@@ -6,6 +6,6 @@ module.exports = {
   // look to only left classes in js
                   content:  process.env.NODE_ENV == 'production' ?
                   ['./resources/public/js/compiled/cljs-runtime/**/*.js',
-                   './node_modules/tw-elements/dist/js/**/*.js'] :
+                   './node_modules/tw-elements/js/**/*.js'] :
                   ['./src/**/*.{html,js,clj,cljs,cljc}',
-                   './node_modules/tw-elements/dist/js/**/*.js']}
+                   './node_modules/tw-elements/js/**/*.js']}
