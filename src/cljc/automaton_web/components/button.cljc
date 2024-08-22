@@ -14,8 +14,8 @@
     :or {type "button"}}]
   [:button
    (merge
-    {:data-te-ripple-init true
-     :data-te-ripple-color "light"
+    {:data-twe-ripple-init true
+     :data-twe-ripple-color "light"
      :type type
      :disabled disabled
      :class

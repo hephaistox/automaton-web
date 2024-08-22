@@ -8,16 +8,16 @@
    Requires a modal id of a modal to show."
   [{:keys [modal-id key]} component]
   ^{:key key}
-  [:span {:data-te-toggle "modal"
-          :data-te-target (str "#" modal-id)}
+  [:span {:data-twe-toggle "modal"
+          :data-twe-target (str "#" modal-id)}
    component])
 
-(def close-modal-prop {:data-te-modal-dismiss true})
+(def close-modal-prop {:data-twe-modal-dismiss true})
 
 (defn modal-big
   [{:keys [title body id]}]
   [:div
-   {:data-te-modal-init true
+   {:data-twe-modal-init true
     :class
     ["fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-hidden overflow-x-hidden outline-none"]
     :id id
@@ -25,7 +25,7 @@
     :aria-labelledby id
     :aria-hidden "true"}
    [:div
-    {:data-te-modal-dialog-ref true
+    {:data-twe-modal-dialog-ref true
      :class
      ["overflow-y-auto pointer-events-none relative h-full w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px] min-[992px]:max-w-[800px]"]}
     [:div

@@ -2,7 +2,7 @@
   "Put here all initialisation needed for components classes (not for each component instance, which should be spread in the code). For instance, everything which is supposed to be done once for each component."
   (:require
    ["react"            :as react]
-   ["tw-elements"      :refer [Modal Ripple Tooltip initTE]]
+   ["tw-elements"      :refer [Modal Ripple Tooltip initTWE]]
    [automaton-core.log :as core-log]))
 
 (defn- for-each-root-rendering
@@ -11,8 +11,8 @@
   * tailwind element components."
   [document]
   (core-log/trace "Starting Tailwind element")
-  (try (initTE #js {:Modal Modal
-                    :Ripple Ripple})
+  (try (initTWE #js {:Modal Modal
+                     :Ripple Ripple})
        ;;https://github.com/mdbootstrap/Tailwind-Elements/issues/1765#issuecomment-1623821125
        ;;https://tailwind-elements.com/docs/standard/components/tooltip/#docsTabsAPI
        ;;tooltips are not initalized yet with initTE despite what
@@ -20,7 +20,7 @@
        (let [tooltipTriggerList (.call (.-slice #js [])
                                        (.querySelectorAll
                                         document
-                                        "[data-te-toggle=\"tooltip\"]"))]
+                                        "[data-twe-toggle=\"tooltip\"]"))]
          (.map tooltipTriggerList
                (fn [tooltipTriggerEl] (new Tooltip tooltipTriggerEl))))
        (catch js/Error e
@@ -39,12 +39,11 @@
 (defn init-elements-js
   "To be called to initialize tw-elements in js"
   [document]
-  (let
-    [script (.createElement document "script")
-     _add-script-src
-     (set!
-      (.-src script)
-      "https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js")]
+  (let [script (.createElement document "script")
+        _add-script-src
+        (set!
+         (.-src script)
+         "https://cdn.jsdelivr.net/npm/tw-elements/js/tw-elements.umd.min.js")]
     (.appendChild (aget (.getElementsByTagName document "head") 0) script)))
 
 (defn init-modal [el] (Modal. el))
@@ -64,4 +63,4 @@
   ([document modal-id on-hide-fn]
    (some-> document
            (.getElementById modal-id)
-           (.addEventListener "hidden.te.modal" on-hide-fn))))
+           (.addEventListener "hidden.twe.modal" on-hide-fn))))
