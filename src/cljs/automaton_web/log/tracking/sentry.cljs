@@ -14,16 +14,15 @@
   (.init Sentry
          #js {:dsn dsn
               :environment env
-              :integrations #js [(new (.-BrowserTracing Sentry)
-                                      #js {:routingInstrumentation
-                                           (.reactRouterV6Instrumentation
-                                            Sentry
-                                            react/useEffect
-                                            useLocation
-                                            useNavigationType
-                                            createRoutesFromChildren
-                                            matchRoutes)})
-                                 (new (.-Replay Sentry))]
+              :integrations #js [(.reactRouterV6BrowserTracingIntegration
+                                  Sentry
+                                  #js {:useEffect react/useEffect
+                                       :useLocation useLocation
+                                       :useNavigationType useNavigationType
+                                       :createRoutesFromChildren
+                                       createRoutesFromChildren
+                                       :matchRoutes matchRoutes})
+                                 (.replayIntegration Sentry)]
               :replaysSessionSampleRate 0
               :replaysOnErrorSampleRate 0
               :tracesSampleRate 1.0

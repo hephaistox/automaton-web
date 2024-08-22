@@ -14,8 +14,8 @@
       (if dark?
         "bg-theme-light hover:bg-orange-100 drop-shadow-md"
         "bg-theme-dark hover:bg-orange-300 drop-shadow-md")]
-     :data-te-ripple-init true
-     :data-te-ripple-color "light"
+     :data-twe-ripple-init true
+     :data-twe-ripple-color "light"
      :on-click on-click}
     additional-props)
    [:img {:class ["mx-auto h-24 w-24 rounded-full"]
