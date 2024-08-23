@@ -19,7 +19,7 @@
   },
   "workspaces": [],
   "devDependencies": {
-    "@hephaistox/tailwind-config": "github:hephaistox/tailwind-config#dev",
+    "@hephaistox/tailwind-config": "github:hephaistox/tailwind-config#main",
     "@tailwindcss/forms": "^0.5.7",
     "highlight.js": "^11.10.0",
     "karma": "^6.4.4",
