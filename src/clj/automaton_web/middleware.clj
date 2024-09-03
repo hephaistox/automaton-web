@@ -24,8 +24,7 @@
   [_]
   (fn
     ([_] (throw (AssertionError. "this ERROR is thrown sync on purpose")))
-    ([_ _ _]
-     (throw (AssertionError. "this ERROR is thrown async on purpose")))))
+    ([_ _ _] (throw (AssertionError. "this ERROR is thrown async on purpose")))))
 
 (defn wrap-throw-exception
   "Throws an exception, usefull for testing exception handling."
@@ -58,15 +57,12 @@
   "Disallow iFrame"
   [handler]
   (fn [request]
-    (let [resp (handler request)]
-      (ring-response/header resp "X-Frame-Options" "DENY"))))
+    (let [resp (handler request)] (ring-response/header resp "X-Frame-Options" "DENY"))))
 
 (defn wrap-copy-params
   "Copy in :request-copied key the request
   For dev only"
-  ([handler kw]
-   (fn [request]
-     (let [response (handler request)] (assoc response kw request))))
+  ([handler kw] (fn [request] (let [response (handler request)] (assoc response kw request))))
   ([handler] (wrap-copy-params handler :request-copied)))
 
 (defn wrap-gzip
@@ -79,10 +75,7 @@
   [handler & access-control]
   (apply ring-cors/wrap-cors handler access-control))
 
-(defn wrap-content-type
-  "to accept svg"
-  [handler]
-  (ring-content-type/wrap-content-type handler))
+(defn wrap-content-type "to accept svg" [handler] (ring-content-type/wrap-content-type handler))
 
 (defn wrap-keyword-params
   "Translate string keys in the :params to keywords"
@@ -101,13 +94,9 @@
   "Negotiates a request body based on Content-Type header and response body based on Accept and Accept-Charset headers. Publishes the negotiation results as :muuntaja/request and :muuntaja/response keys into the request."
   rrmm/format-negotiate-middleware)
 
-(def format-request-middleware
-  "Request decoding"
-  rrmm/format-request-middleware)
+(def format-request-middleware "Request decoding" rrmm/format-request-middleware)
 
-(def format-response-middleware
-  "Response encoding"
-  rrmm/format-response-middleware)
+(def format-response-middleware "Response encoding" rrmm/format-response-middleware)
 
 (def coerce-exceptions-middleware rrc/coerce-exceptions-middleware)
 
@@ -139,13 +128,10 @@
 (defn- wrap-exception-handling*
   "Core of wrap-exception-handling fn, moved here for readability. Covers both sync and async version."
   ([handler request body-fn]
-   (try (handler request)
-        (catch Exception e
-          (core-log/error (ex-info "Fail in sync middleware." {:error e}))
-          (body-fn))
-        (catch Error e
-          (core-log/fatal (ex-info "Fail in sync middleware." {:error e}))
-          (body-fn))))
+   (try
+     (handler request)
+     (catch Exception e (core-log/error (ex-info "Fail in sync middleware." {:error e})) (body-fn))
+     (catch Error e (core-log/fatal (ex-info "Fail in sync middleware." {:error e})) (body-fn))))
   ([handler request respond raise body-fn]
    (try (handler request respond raise)
         (catch Exception e
@@ -177,9 +163,7 @@
   ([handler body]
    (fn
      ([request]
-      (wrap-exception-handling* handler
-                                request
-                                #(http-response/internal-server-error body)))
+      (wrap-exception-handling* handler request #(http-response/internal-server-error body)))
      ([request respond raise]
       (wrap-exception-handling* handler
                                 request

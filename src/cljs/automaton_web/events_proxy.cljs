@@ -29,10 +29,7 @@
 
 (def reg-cofx rfc/reg-cofx)
 
-(defn dispatch
-  [event]
-  (core-log/trace "Event `" event "`")
-  (rfc/dispatch event))
+(defn dispatch [event] (core-log/trace "Event `" event "`") (rfc/dispatch event))
 
 (def dispatch-sync rfc/dispatch-sync)
 

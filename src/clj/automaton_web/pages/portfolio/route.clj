@@ -10,11 +10,10 @@
     {:summary "Show portfolio"
      :get (fn [request]
             (http-response/ok {"content-type" "text/html;charset=utf8"}
-                              (web-pages-index/build
-                               request
-                               [:div ""]
-                               [:script {:type "text/javascript"
-                                         :src share-js}]
-                               [:script {:type "text/javascript"
-                                         :src
-                                         "/js/compiled/portfolio.js"}])))}]))
+                              (web-pages-index/build request
+                                                     [:div ""]
+                                                     [:script {:type "text/javascript"
+                                                               :src share-js}]
+                                                     [:script {:type "text/javascript"
+                                                               :src
+                                                               "/js/compiled/portfolio.js"}])))}]))

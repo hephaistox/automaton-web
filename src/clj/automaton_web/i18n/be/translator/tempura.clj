@@ -11,10 +11,7 @@
 (defrecord TempuraWebTranslator [translator]
   be-translator/BeTranslator
     (wrap-translator [this]
-      (fn [handler]
-        (tempura/wrap-ring-request (be-translator/wrap-ring-request this
-                                                                    handler)
-                                   {})))
+      (fn [handler] (tempura/wrap-ring-request (be-translator/wrap-ring-request this handler) {})))
     (translate-based-on-request [_
                                  {:keys [locales]
                                   :as _http-request}
@@ -26,27 +23,23 @@
     (wrap-ring-request [web-translator handler]
       (fn [{:keys [tempura/accept-langs_]
             :as http-request}]
-        (let [locales-str [(be-translator/language-choice-strategy
-                            web-translator
-                            http-request)]
+        (let [locales-str [(be-translator/language-choice-strategy web-translator http-request)]
               updated-request (-> http-request
-                                  (assoc :accept-langs accept-langs_
-                                         :locales locales-str)
+                                  (assoc :accept-langs accept-langs_ :locales locales-str)
                                   (dissoc :tempura/accept-langs_ :tempura/tr))]
           (-> updated-request
-              (assoc
-               :tr
-               (fn
-                 ([tr-id resources]
-                  (be-translator/translate-based-on-request web-translator
-                                                            updated-request
-                                                            tr-id
-                                                            resources))
-                 ([tr-id]
-                  (be-translator/translate-based-on-request web-translator
-                                                            updated-request
-                                                            tr-id
-                                                            nil))))
+              (assoc :tr
+                     (fn
+                       ([tr-id resources]
+                        (be-translator/translate-based-on-request web-translator
+                                                                  updated-request
+                                                                  tr-id
+                                                                  resources))
+                       ([tr-id]
+                        (be-translator/translate-based-on-request web-translator
+                                                                  updated-request
+                                                                  tr-id
+                                                                  nil))))
               handler
               (assoc-in [:headers "locales"] locales-str)))))
   core-translator/Translator

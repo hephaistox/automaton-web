@@ -12,12 +12,11 @@
   ([] (routes* (duplex/ajax-get-or-ws-handshake) (duplex/ajax-post)))
   ([get-handler put-handler]
    (let [route [duplex-route/duplex-uri {:summary "Realtime channel"
-                                         :middleware
-                                         [web-middleware/wrap-session
-                                          web-middleware/wrap-anti-forgery
-                                          web-middleware/parameters-middleware
-                                          web-middleware/wrap-keyword-params
-                                          web-middleware/wrap-copy-params]
+                                         :middleware [web-middleware/wrap-session
+                                                      web-middleware/wrap-anti-forgery
+                                                      web-middleware/parameters-middleware
+                                                      web-middleware/wrap-keyword-params
+                                                      web-middleware/wrap-copy-params]
                                          :get {:handler get-handler}
                                          :put {:handler put-handler}}]]
      route)))

@@ -8,8 +8,7 @@
 
 (web-events-proxy/reg-fx ::set-cookie
                          (fn [[key lang-id]]
-                           (let [saved-value (-> (web-language/get-web-lang
-                                                  lang-id)
+                           (let [saved-value (-> (web-language/get-web-lang lang-id)
                                                  :ui-text)]
                              (core-log/trace "Effect set-cookie" saved-value)
                              (fe-cookies/set-cookie key saved-value))))

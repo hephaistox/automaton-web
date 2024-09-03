@@ -34,10 +34,8 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene all-icons
-          (web-proxy/wrap-component (vec (concat [:div]
-                                                 (for [i sut/icons-path]
-                                                   (let [[name] i]
-                                                     [:div
-                                                      [:h2 (str "Icon " name)]
-                                                      [sut/icon {:path-kw
-                                                                 name}]]))))))
+          (web-proxy/wrap-component
+           (vec (concat [:div]
+                        (for [i sut/icons-path]
+                          (let [[name] i]
+                            [:div [:h2 (str "Icon " name)] [sut/icon {:path-kw name}]]))))))

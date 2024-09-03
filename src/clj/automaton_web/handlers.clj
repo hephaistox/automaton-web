@@ -40,11 +40,10 @@
   * `handler` handler to wrap
   * `middlewares` is a collection of middlewares, could be a function or compile middlewares"
   [handler middlewares]
-  (reduce
-   (fn [handler middleware]
-     (if (fn? middleware) (middleware handler) ((:wrap middleware) handler)))
-   handler
-   middlewares))
+  (reduce (fn [handler middleware]
+            (if (fn? middleware) (middleware handler) ((:wrap middleware) handler)))
+          handler
+          middlewares))
 
 (defn default-handlers
   [{:keys [not-found not-allowed not-acceptable]

@@ -1,15 +1,11 @@
 (ns automaton-web.portfolio.proxy
   (:require
-   [automaton-web.components.init-components :as web-init-components]
-   [automaton-web.react-proxy                :as web-react]
-   [portfolio.data                           :as data]
-   [portfolio.ui                             :as ui]
-   [portfolio.ui.search                      :as search]))
+   [automaton-core.utils.uuid-gen :as uuid-gen]
+   [portfolio.data                :as data]
+   [portfolio.ui                  :as ui]
+   [portfolio.ui.search           :as search]))
 
-
-(defn iframe-document
-  []
-  (.-contentDocument (aget (.getElementsByTagName js/document "iframe") 0)))
+(defn iframe-document [] (.-contentDocument (aget (.getElementsByTagName js/document "iframe") 0)))
 
 (def start! ui/start!)
 
@@ -18,9 +14,7 @@
 (def register-collection! data/register-collection!)
 
 (defn wrap-component
-  "A simple wrapper to prevent to spread that code on all scenes"
+  "A simple wrapper to enable additional code to be added for each scene.
+   Right now it's empty"
   [& cmps]
-  (web-react/as-element [:f>
-                         #(let [_ (web-init-components/init-elements-js
-                                   (iframe-document))]
-                            (into [:<>] (doall (for [cmp cmps] cmp))))]))
+  [:span (doall (for [cmp cmps] ^{:key (str (uuid-gen/unguessable))} cmp))])

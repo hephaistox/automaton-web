@@ -10,8 +10,7 @@
 (defn- base-header
   [{:keys [size sticky? border?]} content]
   [:header {:class [(if sticky? "sticky" "absolute")
-                    (when border?
-                      "border border-solid border-b-theme-dark bg-theme-light")
+                    (when border? "border border-solid border-b-theme-dark bg-theme-light")
                     "inset-x-0 top-0 z-50"
                     "py-2"
                     (if (= :full size) "w-full" "w-full lg:w-1/2")]}
@@ -22,8 +21,7 @@
   [base-header {:size size
                 :sticky? sticky?
                 :border? border?}
-   [:nav {:class
-          ["flex items-center content-between justify-between px-6 lg:px-8"]}
+   [:nav {:class ["flex items-center content-between justify-between px-6 lg:px-8"]}
     logo
     [:div right-section]]])
 
@@ -33,8 +31,7 @@
   [base-header {:size size
                 :sticky? sticky?
                 :border? border?}
-   [:nav {:class
-          ["flex items-center content-between justify-between px-6 lg:px-8"]}
+   [:nav {:class ["flex items-center content-between justify-between px-6 lg:px-8"]}
     logo
     [:div {:class ["hidden lg:flex lg:gap-x-12"]}
      (for [{:keys [title href]} menu-items]

@@ -10,8 +10,7 @@
  (reify
   Thread$UncaughtExceptionHandler
     (uncaughtException [_ thread ex]
-      (core-log/error (ex-info (str "Uncaught exception on" (.getName thread))
-                               {:error ex})))))
+      (core-log/error (ex-info (str "Uncaught exception on" (.getName thread)) {:error ex})))))
 
 (defn start-server
   "Generate the server, based on the given handler.
@@ -30,7 +29,6 @@
                         :join? (:dont-block opts-with-defaults)}]
     (core-log/trace "Params" opts-with-defaults)
     (try (http-kit/run-server handler webserver-opts)
-         (catch Exception e
-           (core-log/error (ex-info "Unable to start server" {:error e}))))))
+         (catch Exception e (core-log/error (ex-info "Unable to start server" {:error e}))))))
 
 (defn stop-server [server] (server) (core-log/info "Server stopped") server)

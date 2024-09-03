@@ -30,8 +30,7 @@
 
 (deftest session-types-test
   (with-redefs [sut/session-store (atom {})]
-    (testing "Session is an atom"
-      (is (= clojure.lang.Atom (type sut/session-store))))
+    (testing "Session is an atom" (is (= clojure.lang.Atom (type sut/session-store))))
     (testing "Sessions are a map"
       (is (map? (sut/sessions)))
       (is (every? string? (keys (sut/sessions)))))))
@@ -45,10 +44,8 @@
                   sut/options {:store mem-store}]
       (let [app-count (-> handler-count
                           web-middleware/wrap-session)]
-        (testing "Before first handler call, session is empty"
-          (is (zero? (count (sut/sessions)))))
-        (testing
-          "First handler count call, no cookie, no session, no session key"
+        (testing "Before first handler call, session is empty" (is (zero? (count (sut/sessions)))))
+        (testing "First handler count call, no cookie, no session, no session key"
           (let [first-attempt (app-count {})]
             (is (= {:status 200
                     :body "You accessed this page 0 times."
@@ -57,9 +54,7 @@
                                      :session/key nil}}
                    (dissoc first-attempt :headers)))
             (is (get-in first-attempt [:headers "Set-Cookie"]))
-            (is (nil? (get-in
-                       first-attempt
-                       [:echoed-request :cookies "ring-session" :value])))))
+            (is (nil? (get-in first-attempt [:echoed-request :cookies "ring-session" :value])))))
         (testing "First handler call has updated sessions"
           (is (= 1 (count (sut/sessions))))
           (is (= 1
@@ -69,29 +64,21 @@
                      :count))))
         (let [key (ffirst (sut/sessions))]
           (testing "Session can be read" (is (.read-session mem-store key)))
-          (let [second-attempt
-                (app-count {:headers {"cookie" (str "ring-session=" key)}})]
+          (let [second-attempt (app-count {:headers {"cookie" (str "ring-session=" key)}})]
             (testing "Cookies found"
-              (is (= key
-                     (get-in
-                      second-attempt
-                      [:echoed-request :cookies "ring-session" :value]))))
+              (is (= key (get-in second-attempt [:echoed-request :cookies "ring-session" :value]))))
             (testing "Key is found"
-              (is (= key
-                     (get-in second-attempt [:echoed-request :session/key]))))
+              (is (= key (get-in second-attempt [:echoed-request :session/key]))))
             (testing "Session found"
-              (is
-               (= 1 (get-in second-attempt [:echoed-request :session :count]))))
+              (is (= 1 (get-in second-attempt [:echoed-request :session :count]))))
             (testing "Second handler count call return the updated content"
               (is (= {:body "You accessed this page 1 times."}
                      (select-keys second-attempt [:body]))))
-            (testing
-              "Second handler call has updated the same session id with an incremented count"
+            (testing "Second handler call has updated the same session id with an incremented count"
               (is (= 1 (count (sut/sessions))))
               (is (= 2
                      (-> (sut/sessions)
                          first
                          second
                          :count))))))))
-    (testing "Testing should not influence dev env"
-      (is (= (sut/sessions) before-session-store)))))
+    (testing "Testing should not influence dev env" (is (= (sut/sessions) before-session-store)))))

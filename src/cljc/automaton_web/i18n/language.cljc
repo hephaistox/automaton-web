@@ -60,8 +60,7 @@
            core-lang/languages
            (filter (fn [[_ lang]]
                      (when (every? string? [lang-ui-text (:ui-text lang)])
-                       (= (str/upper-case lang-ui-text)
-                          (str/upper-case (:ui-text lang))))))
+                       (= (str/upper-case lang-ui-text) (str/upper-case (:ui-text lang))))))
            ffirst)))
 
 (defn make-automaton-web-languages
@@ -71,9 +70,8 @@
   The final map consists in the languages defined in both `selected-languages` `core-lang/base-languages`
   The language data map are merged, see `merge-languages-map` for details"
   [& selected-languages-seq]
-  (->AutomatonWebLanguages (apply core-lang/make-automaton-core-languages
-                                  web-languages-map
-                                  selected-languages-seq)))
+  (->AutomatonWebLanguages
+   (apply core-lang/make-automaton-core-languages web-languages-map selected-languages-seq)))
 
 (def automaton-web-languages
   "Languages available in `automaton-web`, instance of `Languages`"

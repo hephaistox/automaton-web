@@ -15,8 +15,7 @@
                            :values values
                            :touched (into #{} (keys initial-touched))}]
     (if-let [user-provided-state state]
-      (do (swap! user-provided-state (fn [db] (merge initialized-state db)))
-          user-provided-state)
+      (do (swap! user-provided-state (fn [db] (merge initialized-state db))) user-provided-state)
       (web-react/ratom initialized-state))))
 
 (defn element-value
@@ -42,25 +41,15 @@
   [new-values state]
   (swap! state #(-> %
                     (update :values merge new-values)
-                    (update :touched
-                            (fn [x y] (apply conj x y))
-                            (keys new-values)))))
+                    (update :touched (fn [x y] (apply conj x y)) (keys new-values)))))
 
-(defn touched
-  [state k]
-  (or (:attempted-submissions @state) (get (:touched @state) k)))
+(defn touched [state k] (or (:attempted-submissions @state) (get (:touched @state) k)))
 
-(defn set-touched
-  [names state]
-  (swap! state update :touched (fn [x y] (apply conj x y)) names))
+(defn set-touched [names state] (swap! state update :touched (fn [x y] (apply conj x y)) names))
 
-(defn set-untouched
-  [names state]
-  (swap! state update :touched (fn [x y] (apply disj x y)) names))
+(defn set-untouched [names state] (swap! state update :touched (fn [x y] (apply disj x y)) names))
 
-(defn disable
-  [state & [ks]]
-  (swap! state update :disabled? #(apply conj ((fnil into #{}) %) ks)))
+(defn disable [state & [ks]] (swap! state update :disabled? #(apply conj ((fnil into #{}) %) ks)))
 
 (defn enable [state & [ks]] (swap! state update :disabled? #(apply disj % ks)))
 
@@ -68,8 +57,7 @@
 
 (defn handle-validation
   [state validation]
-  (let [resolved (validation state)]
-    (when-not (every? empty? resolved) resolved)))
+  (let [resolved (validation state)] (when-not (every? empty? resolved) resolved)))
 
 (defn on-change
   [evt state]
@@ -79,8 +67,7 @@
 
 (defn on-blur
   [evt state]
-  (let [input-key (element-name evt)]
-    (swap! state update :touched conj input-key)))
+  (let [input-key (element-name evt)] (swap! state update :touched conj input-key)))
 
 (defn set-on-change
   [{:keys [value]} state]
@@ -89,13 +76,9 @@
         val (if (fn? value) (value curr-value) value)]
     (swap! state assoc-in path val)))
 
-(defn set-on-blur
-  [{:keys [value]} state]
-  (swap! state update :touched (if value conj disj)))
+(defn set-on-blur [{:keys [value]} state] (swap! state update :touched (if value conj disj)))
 
-(defn dirty
-  [values initial-values]
-  (first (clj-data/diff values (or initial-values {}))))
+(defn dirty [values initial-values] (first (clj-data/diff values (or initial-values {}))))
 
 (defn on-submit
   [evt {:keys [state on-submit validation reset]}]
@@ -106,8 +89,7 @@
     (on-submit {:state state
                 :values (:values @state)
                 :dirty (dirty (:values @state)
-                              (merge (:initial-values @state)
-                                     (:touched-values @state)))
+                              (merge (:initial-values @state) (:touched-values @state)))
                 :reset reset})))
 
 (defn form
@@ -130,46 +112,41 @@
                                                  :touched #{}}
                                                 m)))}]
     (web-react/create-class
-     {:component-did-mount #(when-let [on-mount (:component-did-mount props)]
-                              (on-mount handlers))
-      :reagent-render
-      (fn [props component]
-        (let [validation (when-let [val-fn (:validation props)]
-                           (handle-validation @state val-fn))]
-          [component
-           {:props (:props props)
-            :state state
-            :form-id form-id
-            :values (:values @state)
-            :dirty (dirty (:values @state)
-                          (merge (:initial-values @state)
-                                 (:touched-values @state)))
-            :errors validation
-            :touched (:touched handlers)
-            :set-touched (:set-touched handlers)
-            :set-untouched (:set-untouched handlers)
-            :attempted-submissions (or (:attempted-submissions @state) 0)
-            :successful-submissions (or (:successful-submissions @state) 0)
-            :set-values (:set-values handlers)
-            :disable (:disable handlers)
-            :enable (:enable handlers)
-            :disabled? (:disabled? handlers)
-            :set-on-change (:set-on-change handlers)
-            :set-on-blur (:set-on-blur handlers)
-            :on-change (:on-change handlers)
-            :on-blur (:on-blur handlers)
-            :reset (:reset handlers)
-            :on-submit (fn [evt]
-                         (on-submit evt
-                                    (merge props
-                                           {:state state
-                                            :form-id form-id
-                                            :validation validation
-                                            :reset (:reset handlers)})))}]))})))
+     {:component-did-mount #(when-let [on-mount (:component-did-mount props)] (on-mount handlers))
+      :reagent-render (fn [props component]
+                        (let [validation (when-let [val-fn (:validation props)]
+                                           (handle-validation @state val-fn))]
+                          [component
+                           {:props (:props props)
+                            :state state
+                            :form-id form-id
+                            :values (:values @state)
+                            :dirty (dirty (:values @state)
+                                          (merge (:initial-values @state) (:touched-values @state)))
+                            :errors validation
+                            :touched (:touched handlers)
+                            :set-touched (:set-touched handlers)
+                            :set-untouched (:set-untouched handlers)
+                            :attempted-submissions (or (:attempted-submissions @state) 0)
+                            :successful-submissions (or (:successful-submissions @state) 0)
+                            :set-values (:set-values handlers)
+                            :disable (:disable handlers)
+                            :enable (:enable handlers)
+                            :disabled? (:disabled? handlers)
+                            :set-on-change (:set-on-change handlers)
+                            :set-on-blur (:set-on-blur handlers)
+                            :on-change (:on-change handlers)
+                            :on-blur (:on-blur handlers)
+                            :reset (:reset handlers)
+                            :on-submit (fn [evt]
+                                         (on-submit evt
+                                                    (merge props
+                                                           {:state state
+                                                            :form-id form-id
+                                                            :validation validation
+                                                            :reset (:reset handlers)})))}]))})))
 
-(defn append-form
-  [form-id el]
-  (.appendChild (.getElementById js/document form-id) el))
+(defn append-form [form-id el] (.appendChild (.getElementById js/document form-id) el))
 
 (defn submit-form
   [form-id]
@@ -204,8 +181,7 @@
                   :target "_blank"}))
         [:div {:class ["grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"]}
          (for [el elements] ^{:key (str el)} [el props])
-         [web-button/button {:disabled (and (seq errors)
-                                            (> attempted-submissions 0))
+         [web-button/button {:disabled (and (seq errors) (> attempted-submissions 0))
                              :class ["sm:col-span-2"]
                              :text text
                              :type "submit"}]]])]))
@@ -218,24 +194,17 @@
       (not (re-matches #".+@.+\..+" email))
       (assoc email-name (auto-web-translator/tr :email-structure-invalid))
       (empty? email) (assoc email-name (auto-web-translator/tr :email-required))
-      (empty? password) (assoc password-name
-                               (auto-web-translator/tr :password-required))
+      (empty? password) (assoc password-name (auto-web-translator/tr :password-required))
       (< (count password) 12) (assoc password-name
-                                     (auto-web-translator/tr
-                                      :password-must-be-more-than-12))
+                                     (auto-web-translator/tr :password-must-be-more-than-12))
       (nil? (re-find #"[A-Z]" password))
-      (assoc password-name
-             (auto-web-translator/tr :password-must-contain-uppercase))
+      (assoc password-name (auto-web-translator/tr :password-must-contain-uppercase))
       (nil? (re-find #"[a-z]" password))
-      (assoc password-name
-             (auto-web-translator/tr :password-must-contain-lowercase))
-      (nil? (re-find #"[0-9]" password)) (assoc password-name
-                                                (auto-web-translator/tr
-                                                 :password-must-contain-number))
+      (assoc password-name (auto-web-translator/tr :password-must-contain-lowercase))
+      (nil? (re-find #"[0-9]" password))
+      (assoc password-name (auto-web-translator/tr :password-must-contain-number))
       (nil? (re-find #"[^\w\*]" password))
-      (assoc password-name
-             (auto-web-translator/tr
-              :password-must-contain-special-character)))))
+      (assoc password-name (auto-web-translator/tr :password-must-contain-special-character)))))
 
 (defn forgot-password
   [{:keys [link]}]

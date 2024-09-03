@@ -7,5 +7,4 @@
 (deftest string-to-id-test
   (testing "testing spaces and accent"
     (is (= "page-d-accueil" (sut/string-to-id "Page d'accueil"))))
-  (testing "Empty string gives a uuid"
-    (is (= 36 (count (sut/string-to-id ""))))))
+  (testing "Empty string gives a uuid" (is (= 36 (count (sut/string-to-id ""))))))

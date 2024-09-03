@@ -3,8 +3,7 @@
    [automaton-web.components.simple-select :as sut]
    [automaton-web.portfolio.proxy          :as web-proxy]
    [portfolio.reagent-18                   :as           portfolio
-                                           :refer-macros [defscene
-                                                          configure-scenes]]))
+                                           :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Select"})
@@ -15,8 +14,7 @@
            [sut/simple-select {:id "lang-id"
                                :html-name "lang-html"
                                :class ["bg-red-500"]
-                               :on-change #(js/console.log
-                                            "On changed happened for lang")}
+                               :on-change #(js/console.log "On changed happened for lang")}
             [:option {:key :en}
              "en"]
             [:option {:key :fr}

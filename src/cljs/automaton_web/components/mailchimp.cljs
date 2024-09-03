@@ -1,7 +1,6 @@
 (ns automaton-web.components.mailchimp
   (:require
    [automaton-web.components.form             :as web-form]
-   [automaton-web.components.init-components  :as web-init-components]
    [automaton-web.components.input            :as web-input]
    [automaton-web.components.modal            :as web-modal]
    [automaton-web.i18n.fe.auto-web-translator :as auto-web-translator]))
@@ -17,8 +16,7 @@
   [web-input/checkbox
    (merge props
           {:title (auto-web-translator/tr :gdpr-required-email)
-           :description (auto-web-translator/tr
-                         :gdpr-mailchimp-email-description)
+           :description (auto-web-translator/tr :gdpr-mailchimp-email-description)
            :size :full
            :id "gdpr_1240"
            :name "gdpr[1240]"
@@ -31,16 +29,13 @@
         lname (get values "LNAME" "")
         gdpr-accepted (get values "gdpr[1240]")]
     (cond-> {}
-      (empty? fname) (assoc "FNAME"
-                            (auto-web-translator/tr :first-name-required))
-      (empty? lname) (assoc "LNAME"
-                            (auto-web-translator/tr :last-name-required))
+      (empty? fname) (assoc "FNAME" (auto-web-translator/tr :first-name-required))
+      (empty? lname) (assoc "LNAME" (auto-web-translator/tr :last-name-required))
       (not (re-matches #".+@.+\..+" email))
       (assoc "EMAIL" (auto-web-translator/tr :email-structure-invalid))
       (empty? email) (assoc "EMAIL" (auto-web-translator/tr :email-required))
       (or (not gdpr-accepted) (false? gdpr-accepted))
-      (assoc "gdpr[1240]"
-             (auto-web-translator/tr :mailchimp-validation/gdpr-unaccepted)))))
+      (assoc "gdpr[1240]" (auto-web-translator/tr :mailchimp-validation/gdpr-unaccepted)))))
 
 (defn mailchimp-language-input
   [document]
@@ -50,22 +45,19 @@
     input))
 
 (defn mailchimp-newsletter-form
-  [{:keys [modal-id mailchimp-post-link form-id document]
+  [{:keys [modal-open? mailchimp-post-link form-id document]
     :or {document js/document}}]
-  [web-form/form-basic
-   {:form-id form-id
-    :action mailchimp-post-link
-    :method "post"
-    :on-submit (fn [_props]
-                 (web-form/append-form form-id
-                                       (mailchimp-language-input document))
-                 (web-form/submit-form form-id)
-                 (web-init-components/hide-modal document modal-id))
-    :component-did-mount
-    (fn [{:keys [reset]}]
-      (web-init-components/on-modal-hide document modal-id #(reset)))
-    :validation mailchimp-newsletter-validation
-    :text (auto-web-translator/tr :submit)}
+  [web-form/form-basic {:form-id form-id
+                        :action mailchimp-post-link
+                        :method "post"
+                        :on-submit (fn [_props]
+                                     (web-form/append-form form-id
+                                                           (mailchimp-language-input document))
+                                     (web-form/submit-form form-id)
+                                     (reset! modal-open? false))
+                        :component-did-mount (fn [_] (reset! modal-open? false))
+                        :validation mailchimp-newsletter-validation
+                        :text (auto-web-translator/tr :submit)}
    #(web-input/email-field (merge %
                                   {:id "mailchimp-email"
                                    :name "EMAIL"
@@ -86,18 +78,16 @@
    #(mailchimp-gdpr-compliance %)])
 
 (defn mailchimp-newsletter-modal
-  [{:keys [modal-id post-link document]
+  [{:keys [modal-id post-link document modal-open?]
     :or {modal-id mailchimp-newsletter-modal-id
          post-link mailchimp-newsletter-post-link
          document js/document}}]
-  [web-modal/modal-big
-   {:title [:h2
-            {:class
-             ["text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"]}
-            (auto-web-translator/tr :newsletter-subscribe-and-materials)]
-    :body [mailchimp-newsletter-form {:modal-id modal-id
-                                      :mailchimp-post-link post-link
-                                      :document document
-                                      :form-id (str modal-id
-                                                    "-mailchimp-form")}]
-    :id modal-id}])
+  [web-modal/modal {:modal-open? modal-open?
+                    :backdrop? true}
+   [web-modal/title {}
+    [:h2 {:class ["text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"]}
+     (auto-web-translator/tr :newsletter-subscribe-and-materials)]]
+   [mailchimp-newsletter-form {:modal-open? modal-open?
+                               :mailchimp-post-link post-link
+                               :document document
+                               :form-id (str modal-id "-mailchimp-form")}]])

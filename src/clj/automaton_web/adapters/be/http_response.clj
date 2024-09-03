@@ -23,8 +23,6 @@
   "405 Method Not Allowed (ClientError)"
   ring-http-response/method-not-allowed)
 
-(def not-acceptable
-  "406 Not Acceptable (ClientError)"
-  ring-http-response/not-acceptable)
+(def not-acceptable "406 Not Acceptable (ClientError)" ring-http-response/not-acceptable)
 
 (def internal-server-error ring-http-response/internal-server-error)

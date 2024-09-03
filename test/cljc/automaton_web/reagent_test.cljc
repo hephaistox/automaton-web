@@ -39,14 +39,12 @@
   (testing "Option map is inserted if it does not exist already"
     (is (= [:div {:bar :foo}]
            (sut/add-opt [:div] :bar :foo))))
-  (testing
-    "Option map is inserted with multiple values even if it does not already exist"
+  (testing "Option map is inserted with multiple values even if it does not already exist"
     (is (= [:div {:bar :foo
                   :bar2 :foo2
                   :bar3 :foo3}]
            (sut/add-opt [:div] :bar :foo :bar2 :foo2 :bar3 :foo3))))
-  (testing
-    "Option map is inserted if it does not exist already even if trailing data exists"
+  (testing "Option map is inserted if it does not exist already even if trailing data exists"
     (is (= [:div {:bar :foo}
             "Am" "I"
             "still" "here?"]
@@ -69,13 +67,11 @@
   (testing "Component with no options now have some"
     (is (= [:div {:foo :bar}]
            (sut/update-reagent-options {:foo :bar} [:div]))))
-  (testing
-    "Component with no options now have some, and preserve one following argument"
+  (testing "Component with no options now have some, and preserve one following argument"
     (is (= [:div {:foo :bar}
             "foo"]
            (sut/update-reagent-options {:foo :bar} [:div "foo"]))))
-  (testing
-    "Component with no component now have some, and preserve two followings arguments"
+  (testing "Component with no component now have some, and preserve two followings arguments"
     (is (= [:div {:foo :bar}
             "foo"
             "bar"]
@@ -84,8 +80,7 @@
     (is (= [:div {:foo :bar}]
            (sut/update-reagent-options {:foo :bar}
                                        [:div {:foo2 :bar2}]))))
-  (testing
-    "Options of a component are replaced, and preserve one following argument"
+  (testing "Options of a component are replaced, and preserve one following argument"
     (is (= [:div {:foo :bar}
             "foo"]
            (sut/update-reagent-options {:foo :bar}

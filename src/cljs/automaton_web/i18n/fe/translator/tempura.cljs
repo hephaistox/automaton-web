@@ -19,11 +19,10 @@
     (translate [_ tr-id resources]
       (let [lang (some-> (web-events-proxy/subscribe [::web-subs/lang])
                          deref)
-            translated-text
-            (tempura/tr opts
-                        (vec (concat (when (keyword? lang) [lang]) main-langs))
-                        [tr-id]
-                        resources)]
+            translated-text (tempura/tr opts
+                                        (vec (concat (when (keyword? lang) [lang]) main-langs))
+                                        [tr-id]
+                                        resources)]
         (core-log/trace "Translate key `"
                         tr-id
                         "`,with locales `"

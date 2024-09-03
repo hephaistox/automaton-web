@@ -13,11 +13,8 @@
   [debug?]
   (let [{:keys [ch-recv]
          :as sente-map}
-        (sente/make-channel-socket! (get-sch-adapter)
-                                    {:user-id-fn (constantly 123456)})
-        server (sente/start-server-chsk-router!
-                ch-recv
-                message-handler/event-msg-handler)]
+        (sente/make-channel-socket! (get-sch-adapter) {:user-id-fn (constantly 123456)})
+        server (sente/start-server-chsk-router! ch-recv message-handler/event-msg-handler)]
     (when (= :development debug?) (sente/set-min-log-level! :warn))
     (assoc sente-map :server server)))
 
@@ -36,10 +33,8 @@ For an example see https://github.com/ptaoussanis/sente/tree/master/example-proj
              (let [res (start-rt (web-conf/read-param [:env]))]
                (core-log/trace "Duplex server component is started")
                res)
-             (catch Exception e
-               (core-log/error "Unexpected error during duplex start" e)))
- :stop (when @duplex-server
-         (when-let [server (:server @duplex-server)] (server))))
+             (catch Exception e (core-log/error "Unexpected error during duplex start" e)))
+ :stop (when @duplex-server (when-let [server (:server @duplex-server)] (server))))
 
 (defn ajax-get-or-ws-handshake
   "Is the handshake handler"

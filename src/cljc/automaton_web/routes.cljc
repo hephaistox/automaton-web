@@ -3,9 +3,7 @@
   (:require
    [automaton-core.utils.map :as utils-map]))
 
-(defn- kw-to-registry-value
-  [registry val]
-  (if (keyword? val) (get registry val) val))
+(defn- kw-to-registry-value [registry val] (if (keyword? val) (get registry val) val))
 
 (defn- update-registry
   [handler-registry handler-map]
@@ -25,8 +23,6 @@
      (cond
        (string? routes) routes
        (and (map? routes) (map? selected-route-data))
-       (merge (select-keys routes [:name])
-              (update-registry handler-registry selected-route-data))
+       (merge (select-keys routes [:name]) (update-registry handler-registry selected-route-data))
        (map? routes) (kw-to-registry-value handler-registry selected-route-data)
-       (vector? routes) (mapv #(parse-routes router-kw % handler-registry)
-                              routes)))))
+       (vector? routes) (mapv #(parse-routes router-kw % handler-registry) routes)))))

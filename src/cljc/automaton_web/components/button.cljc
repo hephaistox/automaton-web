@@ -14,9 +14,7 @@
     :or {type "button"}}]
   [:button
    (merge
-    {:data-twe-ripple-init true
-     :data-twe-ripple-color "light"
-     :type type
+    {:type type
      :disabled disabled
      :class
      (vec
@@ -33,7 +31,7 @@
    (merge
     {:type "button"
      :class
-     ["box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"]
+     ["box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none cursor-pointer"]
      :aria-label "Close"
      :on-click on-click}
     btn-props)

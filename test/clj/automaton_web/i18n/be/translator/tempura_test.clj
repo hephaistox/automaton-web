@@ -37,8 +37,7 @@
 
 (deftest default-languages-test
   (testing "Default language is found"
-    (is (= default-language
-           (be-translator/default-languages temp-translator)))))
+    (is (= default-language (be-translator/default-languages temp-translator)))))
 (deftest get-middleware-test
   (testing "Middleware has the expected keys"
     (is (= #{:tr :accept-langs :locales}
@@ -48,13 +47,11 @@
                  keys
                  set)))))
   (testing "Test translation based on request"
-    (is (=
-         "foo-en"
-         (be-translator/translate-based-on-request temp-translator {} :foo [])))
+    (is (= "foo-en" (be-translator/translate-based-on-request temp-translator {} :foo [])))
     (is (= "foo-fr"
-           (be-translator/translate-based-on-request
-            temp-translator
-            {:headers {"host" "http://www.testify.com?lang=en"}
-             :locales [:fr]}
-            :foo
-            [])))))
+           (be-translator/translate-based-on-request temp-translator
+                                                     {:headers {"host"
+                                                                "http://www.testify.com?lang=en"}
+                                                      :locales [:fr]}
+                                                     :foo
+                                                     [])))))

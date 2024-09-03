@@ -32,8 +32,7 @@
     (do (core-log/debug "Init language " language) language)
     (let [default-language (-> (default-languages this)
                                first)]
-      (core-log/warn "No language found in the url, default to "
-                     default-language)
+      (core-log/warn "No language found in the url, default to " default-language)
       default-language)))
 
 (defn -lang
@@ -42,6 +41,5 @@
   (try (some-> (web-events-proxy/subscribe [::web-subs/lang])
                deref)
        (catch :default _
-         (core-log/warn
-          "The language event has not been found, default language is used")
+         (core-log/warn "The language event has not been found, default language is used")
          (default-languages this))))
