@@ -4,8 +4,7 @@
    [clojure.test                           :refer [deftest is testing]]))
 
 (deftest cookies-language-test
-  (testing "Empty query should pass silently"
-    (is (nil? (sut/cookies-language {}))))
+  (testing "Empty query should pass silently" (is (nil? (sut/cookies-language {}))))
   (testing "Test nil values"
     (is (nil? (sut/cookies-language {:cookies {:value {"lang" nil}}})))
     (is (nil? (sut/cookies-language {:cookies (:value {"lang" "null"})}))))

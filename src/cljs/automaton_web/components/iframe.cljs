@@ -46,40 +46,38 @@
 (defn iframe
   [{:keys [id src]}]
   (let [initialSH (web-react/ratom 0)
-        iframeContentHeightObserver
-        (js/ResizeObserver. (fn [_]
-                              (let [scrollHeight (get-scroll-height id)
-                                    new-height (calculate-new-height
-                                                scrollHeight)]
-                                (when-not (= @initialSH scrollHeight)
-                                  (reset! initialSH new-height)
-                                  (set-scroll-height id new-height)))))]
+        iframeContentHeightObserver (js/ResizeObserver. (fn [_]
+                                                          (let [scrollHeight (get-scroll-height id)
+                                                                new-height (calculate-new-height
+                                                                            scrollHeight)]
+                                                            (when-not (= @initialSH scrollHeight)
+                                                              (reset! initialSH new-height)
+                                                              (set-scroll-height id new-height)))))]
     (web-react/create-class
      {:component-did-update (fn [_]
                               (new js/Promise
                                    (fn [resolve]
-                                     (waitForIframeContentAndObserve
-                                      {:resolve-fn resolve
-                                       :iframe-id id
-                                       :observer iframeContentHeightObserver
-                                       :path src}))))
-      :reagent-render
-      (fn [{:keys [id src sandbox policy]
-            :or {sandbox "allow-same-origin"
-                 policy "no-referrer"}}]
-        [:iframe {:class ["h-full w-full overflow-hidden"]
-                  :sandbox sandbox
-                  :referrerPolicy policy
-                  :ref (fn [_]
-                         (new js/Promise
-                              (fn [resolve]
-                                (waitForIframeContentAndObserve
-                                 {:resolve-fn resolve
-                                  :iframe-id id
-                                  :observer iframeContentHeightObserver}))))
-                  :height "100%"
-                  :width "100%"
-                  :frameBorder "0"
-                  :scrolling "no"
-                  :id id
-                  :src src}])})))
+                                     (waitForIframeContentAndObserve {:resolve-fn resolve
+                                                                      :iframe-id id
+                                                                      :observer
+                                                                      iframeContentHeightObserver
+                                                                      :path src}))))
+      :reagent-render (fn [{:keys [id src sandbox policy]
+                            :or {sandbox "allow-same-origin"
+                                 policy "no-referrer"}}]
+                        [:iframe {:class ["h-full w-full overflow-hidden"]
+                                  :sandbox sandbox
+                                  :referrerPolicy policy
+                                  :ref (fn [_]
+                                         (new js/Promise
+                                              (fn [resolve]
+                                                (waitForIframeContentAndObserve
+                                                 {:resolve-fn resolve
+                                                  :iframe-id id
+                                                  :observer iframeContentHeightObserver}))))
+                                  :height "100%"
+                                  :width "100%"
+                                  :frameBorder "0"
+                                  :scrolling "no"
+                                  :id id
+                                  :src src}])})))

@@ -26,13 +26,11 @@
   * `gather-route-params-fn` function with no argument returning a map with all data used in the routes"
   [routes gather-route-params-fn]
   (let [reitit-router (reitit/router routes
-                                     {:conflicts
-                                      (fn [conflicts]
-                                        (core-log/error
-                                         (ex-info
-                                          "Conflicts in routes have been found"
-                                          {:conflicts conflicts
-                                           :routes routes})))
+                                     {:conflicts (fn [conflicts]
+                                                   (core-log/error
+                                                    (ex-info "Conflicts in routes have been found"
+                                                             {:conflicts conflicts
+                                                              :routes routes})))
                                       :validate rs/validate
                                       :exception pretty/exception})]
     (->ReititRouter reitit-router gather-route-params-fn)))

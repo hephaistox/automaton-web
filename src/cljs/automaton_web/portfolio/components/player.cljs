@@ -17,9 +17,8 @@
           []
           (let [pause? (web-react/ratom false)]
             (fn []
-              (web-proxy/wrap-component
-               [sut/player {:play-fn (fn [] (reset! pause? true))
-                            :pause-fn (fn [] (reset! pause? false))
-                            :pause? @pause?
-                            :next-fn #(js/alert "next!")
-                            :prev-fn #(js/alert "previous!")}]))))
+              (web-proxy/wrap-component [sut/player {:play-fn (fn [] (reset! pause? true))
+                                                     :pause-fn (fn [] (reset! pause? false))
+                                                     :pause? @pause?
+                                                     :next-fn #(js/alert "next!")
+                                                     :prev-fn #(js/alert "previous!")}]))))

@@ -8,18 +8,18 @@
   "version": "1.0.0",
   "author": "Hephaistox <info@hephaistox.com>",
   "dependencies": {
+    "@headlessui/react": "^2.1.3",
     "@sentry/react": "^8.26.0",
     "autoprefixer": "^10.4.20",
     "axe-core": "^4.10.0",
     "create-react-class": "^15.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.1",
-    "tw-elements": "^2.0.0"
+    "react-router-dom": "^6.26.1"
   },
   "workspaces": [],
   "devDependencies": {
-    "@hephaistox/tailwind-config": "github:hephaistox/tailwind-config#main",
+    "@hephaistox/tailwind-config": "github:hephaistox/tailwind-config#f8da71dcc315ac6f3652695a92495ea3f5298d13",
     "@tailwindcss/forms": "^0.5.7",
     "highlight.js": "^11.10.0",
     "karma": "^6.4.4",

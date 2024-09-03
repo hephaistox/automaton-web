@@ -19,17 +19,16 @@
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene text-field-placeholder
           (web-proxy/wrap-component [sut/text-field {:text "Name"
-                                                     :placeholder
-                                                     "e.g. John"}]))
+                                                     :placeholder "e.g. John"}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene text-field-value-controlled-outside
           (let [text-value (r/atom "Initial-text")]
             (fn []
-              (web-proxy/wrap-component
-               [sut/text-field {:text "Iniated-field"
-                                :on-change-fn (fn [v] (reset! text-value v))
-                                :value @text-value}]))))
+              (web-proxy/wrap-component [sut/text-field {:text "Iniated-field"
+                                                         :on-change-fn (fn [v]
+                                                                         (reset! text-value v))
+                                                         :value @text-value}]))))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene text-field-full
@@ -53,11 +52,10 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene text-field-error-message
-          (web-proxy/wrap-component
-           [sut/text-field {:text "Invalid field"
-                            :required? true
-                            :invalid? true
-                            :error-message "This needs to be updated!"}]))
+          (web-proxy/wrap-component [sut/text-field {:text "Invalid field"
+                                                     :required? true
+                                                     :invalid? true
+                                                     :error-message "This needs to be updated!"}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene text-field-disabled

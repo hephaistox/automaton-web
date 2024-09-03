@@ -6,15 +6,7 @@
 (defn build
   "Build a webpage header"
   [{:keys [header-elements meta-tags]} & body]
-  (let [{:keys [image
-                description
-                title
-                type
-                url
-                twitter-content
-                twitter-site
-                author
-                icon]
+  (let [{:keys [image description title type url twitter-content twitter-site author icon]
          :or {icon "/favicon.ico"}}
         meta-tags
         meta-title [:meta {:name "title"

@@ -29,15 +29,13 @@
   (if (vector? ?data)
     (let [[old-state-map new-state-map] ?data]
       (if (:first-open? new-state-map)
-        (core-log/trace "Channel socket successfully established!: "
-                        new-state-map)
+        (core-log/trace "Channel socket successfully established!: " new-state-map)
         (do (core-log/trace "Channel socket state change: " old-state-map)
             (core-log/trace "Channel socket state change: " new-state-map))))
-    (core-log/error
-     (ex-info "Data should be of vector type"
-              {:message
-               "Sente realtime engine failed, returned ?data should be a vector"
-               :data ?data}))))
+    (core-log/error (ex-info "Data should be of vector type"
+                             {:message
+                              "Sente realtime engine failed, returned ?data should be a vector"
+                              :data ?data}))))
 
 (defmethod -event-msg-handler [:chsk/recv :chsk/ws-ping]
   [{:keys [_?data]}]
@@ -46,5 +44,4 @@
 (defmethod -event-msg-handler [:chsk/handshake nil]
   [{:as _ev-msg
     :keys [?data]}]
-  (let [[_?uid _?csrf-token _?handshake-data] ?data]
-    (core-log/trace "Handshake: " ?data)))
+  (let [[_?uid _?csrf-token _?handshake-data] ?data] (core-log/trace "Handshake: " ?data)))

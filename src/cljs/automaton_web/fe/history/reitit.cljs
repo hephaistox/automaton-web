@@ -28,8 +28,7 @@
   * `router` router used by that history
   * `on-navigate` function called when a route changed. Takes two parameters, `match` and `history`"
   [router on-navigate]
-  (->History
-   (reitit-fe-history/start! router on-navigate {:use-fragment false})))
+  (->History (reitit-fe-history/start! router on-navigate {:use-fragment false})))
 
 (defonce controllers-match-storage (atom nil))
 
@@ -41,9 +40,8 @@
   [new-match]
   (swap! controllers-match-storage (fn [old-match]
                                      (when new-match
-                                       (assoc
-                                        new-match
-                                        :controllers
-                                        (reitit-fe-controllers/apply-controllers
-                                         (:controllers old-match)
-                                         new-match))))))
+                                       (assoc new-match
+                                              :controllers
+                                              (reitit-fe-controllers/apply-controllers
+                                               (:controllers old-match)
+                                               new-match))))))

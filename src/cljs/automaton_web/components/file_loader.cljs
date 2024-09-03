@@ -40,13 +40,9 @@
                    (str/join ", " (for [file @files] (.-name file)))
                    ")"))])
          (when @loading?
-           [:div
-            {:class
-             ["flex justify-center items-center inline-block ml-2 float-right"]}
-            [:div
-             {:class
-              ["spinner-border animate-spin inline w-8 h-8 border-4 rounded-full"]
-              :role "status"}]
+           [:div {:class ["flex justify-center items-center inline-block ml-2 float-right"]}
+            [:div {:class ["spinner-border animate-spin inline w-8 h-8 border-4 rounded-full"]
+                   :role "status"}]
             [:span {:class ["visually-hidden"]}
              "Loading ..."]])]
         [:input
@@ -74,19 +70,18 @@ file:py-3 file:px-5 file:mr-5 file:text-body-color file:cursor-pointer file:hove
                             :title "Upload error"}])]])
     [:div "Error in the component parameters"]))
 
-(web-events-proxy/reg-event-fx
- ::files-selected
- (fn-traced [{:keys [db]} [_ tag files uri uri-field]]
-            {:db (assoc-in db
-                  [:file-upload tag]
-                  {:uri uri
-                   :field-name uri-field
-                   :files files})
-             :fx [[:dispatch [::trigger-upload tag files]]]}))
+(web-events-proxy/reg-event-fx ::files-selected
+                               (fn-traced [{:keys [db]} [_ tag files uri uri-field]]
+                                          {:db (assoc-in db
+                                                [:file-upload tag]
+                                                {:uri uri
+                                                 :field-name uri-field
+                                                 :files files})
+                                           :fx [[:dispatch [::trigger-upload tag files]]]}))
 
-(web-events-proxy/reg-event-db
- ::file-upload-success
- (fn-traced [db [_ tag]] (assoc-in db [:file-upload tag :success] true)))
+(web-events-proxy/reg-event-db ::file-upload-success
+                               (fn-traced [db [_ tag]]
+                                          (assoc-in db [:file-upload tag :success] true)))
 
 (web-events-proxy/reg-event-fx
  ::trigger-upload
@@ -103,57 +98,49 @@ file:py-3 file:px-5 file:mr-5 file:text-body-color file:cursor-pointer file:hove
                             :headers {:x-csrf-token csrf-frontend/?csrf-token}
                             :uri uri
                             :timeout 8000
-                            :response-format (ajax/json-response-format
-                                              {:keywords? true})
+                            :response-format (ajax/json-response-format {:keywords? true})
                             :on-success [::loading-success tag]
                             :on-failure [::error-message tag]}})))
 
-(web-events-proxy/reg-event-fx
- ::loading-success
- (fn-traced [{:keys [db]}
-             [_
-              tag
-              {:keys [status _uuid _size _filename]
-               :as upload-response}]]
-            (core-log/trace "upload response  is  " upload-response)
-            {:db (assoc-in db [:file-upload tag :loading?] false)
-             :fx [[:dispatch [::reset-selector tag]]
-                  (if (= "done" status)
-                    [:dispatch [::new-file-uploaded tag upload-response]]
-                    [:dispatch [::file-upload-error tag]])]}))
+(web-events-proxy/reg-event-fx ::loading-success
+                               (fn-traced [{:keys [db]}
+                                           [_
+                                            tag
+                                            {:keys [status _uuid _size _filename]
+                                             :as upload-response}]]
+                                          (core-log/trace "upload response  is  " upload-response)
+                                          {:db (assoc-in db [:file-upload tag :loading?] false)
+                                           :fx [[:dispatch [::reset-selector tag]]
+                                                (if (= "done" status)
+                                                  [:dispatch
+                                                   [::new-file-uploaded tag upload-response]]
+                                                  [:dispatch [::file-upload-error tag]])]}))
 
 (web-events-proxy/reg-event-fx
  ::error-message
- (fn-traced
-  [{:keys [db]} [_ tag result]]
-  {:db (if (= 0 (:status result))
-         (assoc-in db [:file-upload tag :network-error] (:status-text result))
-         (assoc-in db [:file-upload tag :upload-error] (:status-text result)))
-   :fx [[:dispatch [::stop-loading tag]]]}))
+ (fn-traced [{:keys [db]} [_ tag result]]
+            {:db (if (= 0 (:status result))
+                   (assoc-in db [:file-upload tag :network-error] (:status-text result))
+                   (assoc-in db [:file-upload tag :upload-error] (:status-text result)))
+             :fx [[:dispatch [::stop-loading tag]]]}))
 
-(web-events-proxy/reg-event-db
- ::reset-selector
- (fn-traced [db [_ tag]]
-            (let [image-upload (. js/document (getElementById "image-upload"))]
-              (set! (.-value image-upload) "")
-              (assoc-in db [:file-upload tag :files] nil))))
+(web-events-proxy/reg-event-db ::reset-selector
+                               (fn-traced [db [_ tag]]
+                                          (let [image-upload (. js/document
+                                                                (getElementById "image-upload"))]
+                                            (set! (.-value image-upload) "")
+                                            (assoc-in db [:file-upload tag :files] nil))))
 
-(web-events-proxy/reg-event-db
- ::file-upload-error
- (fn-traced [db [_ tag]] (assoc-in db [:file-upload tag :error?] true)))
+(web-events-proxy/reg-event-db ::file-upload-error
+                               (fn-traced [db [_ tag]]
+                                          (assoc-in db [:file-upload tag :error?] true)))
 
-(web-events-proxy/reg-sub ::files
-                          (fn [db [_ tag]]
-                            (get-in db [:file-upload tag :files])))
+(web-events-proxy/reg-sub ::files (fn [db [_ tag]] (get-in db [:file-upload tag :files])))
 
 (web-events-proxy/reg-sub ::upload-message
-                          (fn [db [_ tag]]
-                            (get-in db [:file-upload tag :upload-error])))
+                          (fn [db [_ tag]] (get-in db [:file-upload tag :upload-error])))
 
 (web-events-proxy/reg-sub ::network-error
-                          (fn [db [_ tag]]
-                            (get-in db [:file-upload tag :network-error])))
+                          (fn [db [_ tag]] (get-in db [:file-upload tag :network-error])))
 
-(web-events-proxy/reg-sub ::loading?
-                          (fn [db [_ tag]]
-                            (get-in db [:file-upload tag :loading?])))
+(web-events-proxy/reg-sub ::loading? (fn [db [_ tag]] (get-in db [:file-upload tag :loading?])))

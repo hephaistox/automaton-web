@@ -2,9 +2,7 @@
   "Sentry for web"
   (:require
    ["@sentry/react"    :as Sentry]
-   ["react-router-dom" :refer (useLocation useNavigationType
-                                           createRoutesFromChildren
-                                           matchRoutes)]
+   ["react-router-dom" :refer (useLocation useNavigationType createRoutesFromChildren matchRoutes)]
    [react              :as react]))
 
 (defn init-sentry!
@@ -19,8 +17,7 @@
                                   #js {:useEffect react/useEffect
                                        :useLocation useLocation
                                        :useNavigationType useNavigationType
-                                       :createRoutesFromChildren
-                                       createRoutesFromChildren
+                                       :createRoutesFromChildren createRoutesFromChildren
                                        :matchRoutes matchRoutes})
                                  (.replayIntegration Sentry)]
               :replaysSessionSampleRate 0

@@ -2,10 +2,8 @@
   (:require
    [automaton-web.components.section :as sut]
    [automaton-web.portfolio.proxy    :as web-proxy]
-   [automaton-web.react-proxy        :as web-react]
    [portfolio.reagent-18             :as           portfolio
-                                     :refer-macros [defscene
-                                                    configure-scenes]]))
+                                     :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Section"})
@@ -92,49 +90,3 @@
   :video-src "https://www.youtube.com/embed/9EcjWd-O4jI"}
  [params]
  (web-proxy/wrap-component [sut/section-text-video params]))
-
-(def section-clickable-cards-modal-params
-  {:current-card (web-react/ratom {})
-   :cards
-   [{:img
-     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-     :name "Mateusz Mazurczak"
-     :title "Is a real human person, not an alien"
-     :description "lorem ipsum lorem ipsum"
-     :linkedin "https://www.linkedin.com/in/mateuszmazurczak/"}
-    {:img
-     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-     :name "Bill Gates"
-     :title "Co-chair, Bill & Melinda Gates Foundation"
-     :description "lorem ipsum lorem ipsum ipsum ipsum"
-     :linkedin "https://www.linkedin.com/in/williamhgates/"}]})
-
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defscene section-clickable-cards-modal
-          :params
-          section-clickable-cards-modal-params
-          [params]
-          (web-proxy/wrap-component
-           [sut/section-clickable-cards-modal
-            {:current-card @(:current-card params)
-             :change-card-fn (fn [card] (reset! (:current-card params) card))
-             :cards (:cards params)
-             :section {:title "hello"
-                       :description "more words"}
-             :size :sm
-             :modal-id "card-details-modal"}]))
-
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defscene section-clickable-cards-modal-dark
-          :params
-          (merge section-clickable-cards-modal-params {:dark? true})
-          [params]
-          (web-proxy/wrap-component
-           [sut/section-clickable-cards-modal
-            {:current-card @(:current-card params)
-             :change-card-fn (fn [card] (reset! (:current-card params) card))
-             :cards (:cards params)
-             :section {:title "hello"
-                       :description "more words"}
-             :size :sm
-             :modal-id "card-details-modal"}]))

@@ -6,18 +6,8 @@
 
 (defn- input
   "Input component, passes appropriate values to html input tag and styles it depending on state or props"
-  [{:keys [type
-           placeholder
-           name
-           autocomplete
-           id
-           value
-           checked
-           on-blur
-           on-change
-           class
-           disabled?
-           invalid?]
+  [{:keys
+    [type placeholder name autocomplete id value checked on-blur on-change class disabled? invalid?]
     :or {type "text"}}]
   (let [disabled? (cond
                     (fn? disabled?) (disabled? name)
@@ -43,9 +33,7 @@
           ;;Disabled
           "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200"
           ;;Invalid
-          (if invalid?
-            "text-red-900 ring-red-300 placeholder:text-red-300"
-            "ring-gray-300")]
+          (if invalid? "text-red-900 ring-red-300 placeholder:text-red-300" "ring-gray-300")]
          class))})]))
 
 (defn text-field
@@ -57,24 +45,12 @@
    error-message -> string: for displaying message on invalid component
    size -> :full for displaying input on two grid cols
    values-fn -> fn returning string: value of input when component is controlled."
-  [{:keys [name
-           text
-           size
-           on-change-fn
-           touched
-           error-message
-           errors
-           type
-           value
-           invalid?
-           required?]
+  [{:keys [name text size on-change-fn touched error-message errors type value invalid? required?]
     :as params
     :or {type "text"}}]
   (let [invalid? (if (fn? invalid?)
                    (invalid? name)
-                   (or invalid?
-                       (when required?
-                         (and touched (touched name) (get errors name)))))
+                   (or invalid? (when required? (and touched (touched name) (get errors name)))))
         e-msg (or error-message (get errors name))]
     [:div {:class [(when (= size :full) "sm:col-span-2")]}
      [:div {:class ["relative mt-2.5"]}
@@ -98,9 +74,7 @@
                {:type type
                 :invalid? invalid?})]]
       (when invalid?
-        [:div
-         {:class
-          ["pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"]}
+        [:div {:class ["pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"]}
          [web-icons/icon {:class ["icon-red"]}]])]
      (when invalid?
        [:p {:class ["ml-2 mt-2 text-sm text-red-600"]}
@@ -115,24 +89,12 @@
    error-message -> string: for displaying message on invalid component
    size -> :full for displaying input on two grid cols
    values-fn -> fn returning string: value of input when component is controlled."
-  [{:keys [name
-           text
-           size
-           on-change-fn
-           touched
-           error-message
-           errors
-           type
-           value
-           invalid?
-           required?]
+  [{:keys [name text size on-change-fn touched error-message errors type value invalid? required?]
     :as params
     :or {type "number"}}]
   (let [invalid? (if (fn? invalid?)
                    (invalid? name)
-                   (or invalid?
-                       (when required?
-                         (and touched (touched name) (get errors name)))))
+                   (or invalid? (when required? (and touched (touched name) (get errors name)))))
         e-msg (or error-message (get errors name))]
     [:div {:class [(when (= size :full) "sm:col-span-2")]}
      [:div {:class ["relative mt-2.5"]}
@@ -156,9 +118,7 @@
                {:type type
                 :invalid? invalid?})]]
       (when invalid?
-        [:div
-         {:class
-          ["pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"]}
+        [:div {:class ["pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"]}
          [web-icons/icon {:class ["icon-red"]}]])]
      (when invalid?
        [:p {:class ["ml-2 mt-2 text-sm text-red-600"]}
@@ -173,24 +133,11 @@
    error-message -> string: for displaying message on invalid component
    size -> :full for displaying checkbox on two grid cols
    values -> fn returning boolean: checked of input when component is controlled."
-  [{:keys [id
-           title
-           description
-           name
-           size
-           touched
-           errors
-           values
-           error-message
-           required?
-           invalid?]
+  [{:keys [id title description name size touched errors values error-message required? invalid?]
     :as params}]
-  (let [invalid? (or invalid?
-                     (when required?
-                       (and touched (touched name) (get errors name))))
+  (let [invalid? (or invalid? (when required? (and touched (touched name) (get errors name))))
         error-message (or error-message (get errors name))]
-    [:div {:class ["relative flex items-start"
-                   (when (= size :full) "sm:col-span-2")]}
+    [:div {:class ["relative flex items-start" (when (= size :full) "sm:col-span-2")]}
      [:div {:class ["flex h-6 items-center"]}
       [input
        (merge

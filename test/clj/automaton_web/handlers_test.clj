@@ -20,9 +20,7 @@
                         ["/pong" (constantly nil)]])
    (sut/default-handlers
     {:not-found (fn [request]
-                  (assoc (http-response/not-found "kosh")
-                         :tr-present?
-                         (boolean (:tr request))))
+                  (assoc (http-response/not-found "kosh") :tr-present? (boolean (:tr request))))
      :not-allowed (constantly (http-response/method-not-allowed "kosh"))
      :not-acceptable (constantly (http-response/not-acceptable "kosh"))}
     (web-middleware/translation-middlewares be-translator-stub))))
@@ -72,9 +70,8 @@
             {:foo-r 1}))))
   (testing "Wrapper are compatible with compiled middlewares"
     (is (= {:foo 1}
-           ((sut/apply-middlewares
-             (fn [request] {:foo (:foo-r request)})
-             [automaton-web.middleware/wrap-cookies
-              {:name :reitit.ring.middleware.parameters/parameters
-               :wrap automaton-web.middleware/wrap-cookies}])
+           ((sut/apply-middlewares (fn [request] {:foo (:foo-r request)})
+                                   [automaton-web.middleware/wrap-cookies
+                                    {:name :reitit.ring.middleware.parameters/parameters
+                                     :wrap automaton-web.middleware/wrap-cookies}])
             {:foo-r 1})))))

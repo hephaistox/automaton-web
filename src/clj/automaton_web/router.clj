@@ -10,8 +10,7 @@
 (defn router
   [web-routes web-middleware]
   (reitit-ring/router (vector web-routes
-                              [@duplex-routes/routes
-                               {:compile coercion/compile-request-coercers}])
+                              [@duplex-routes/routes {:compile coercion/compile-request-coercers}])
                       {:data {:muuntaja m/instance
                               :middleware web-middleware}}))
 
@@ -23,16 +22,11 @@
   * `default-handlers` list of default handlers
   * `global-middlewares` middlewares common for all routes, default, resource and web
   * `translator-middlewares` middlewares needed for translator"
-  [{:keys [web-routes
-           web-middleware
-           default-handlers
-           global-middlewares
-           translator-middlewares]}]
+  [{:keys [web-routes web-middleware default-handlers global-middlewares translator-middlewares]}]
   (reitit-ring/ring-handler (router web-routes web-middleware)
                             (reitit-ring/routes (bewh/resource-handler {})
-                                                (bewh/default-handlers
-                                                 default-handlers
-                                                 translator-middlewares))
+                                                (bewh/default-handlers default-handlers
+                                                                       translator-middlewares))
                             {:middleware global-middlewares
                              :inject-match? true ;; So the `:match` keyword
                                                  ;; is in the request and

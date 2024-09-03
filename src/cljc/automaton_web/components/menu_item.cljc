@@ -15,8 +15,7 @@
   [{:keys [title href selected on-click]}]
   [:a
    (merge {:key (str "menu-" title)
-           :class ["select-none"
-                   (if selected "cursor-default" "cursor-pointer")]}
+           :class ["select-none" (if selected "cursor-default" "cursor-pointer")]}
           (when-not selected (if on-click {:on-click on-click} {:href href})))
    [:div
     {:class

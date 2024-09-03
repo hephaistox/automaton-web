@@ -22,9 +22,7 @@
 
 (defn initial-value-form
   [props]
-  [:div
-   (view-state props)
-   [web-input/text-field (merge props {:name "init-text"})]])
+  [:div (view-state props) [web-input/text-field (merge props {:name "init-text"})]])
 
 (defn submit-form
   [{:keys [on-submit]
@@ -70,8 +68,7 @@
   [{:keys [values]}]
   (cond-> {}
     (empty? (get values "name" "")) (assoc "name" "Name required!")
-    (empty? (get values "last-name" "")) (assoc "last-name"
-                                                "Surname required!")))
+    (empty? (get values "last-name" "")) (assoc "last-name" "Surname required!")))
 
 (defn validation-form
   [{:keys [on-submit reset]
@@ -114,35 +111,33 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-initial-value
-          (web-proxy/wrap-component [sut/form {:initial-values {"init-text"
-                                                                "initated"}}
+          (web-proxy/wrap-component [sut/form {:initial-values {"init-text" "initated"}}
                                      initial-value-form]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-submittable
-          (web-proxy/wrap-component
-           [sut/form {:on-submit (fn [props] (js/alert (str "props:" props)))}
-            submit-form]))
+          (web-proxy/wrap-component [sut/form {:on-submit (fn [props]
+                                                            (js/alert (str "props:" props)))}
+                                     submit-form]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-more-components
-          (web-proxy/wrap-component
-           [sut/form {:on-submit (fn [props] (js/alert (str "props:" props)))}
-            bigger-form]))
+          (web-proxy/wrap-component [sut/form {:on-submit (fn [props]
+                                                            (js/alert (str "props:" props)))}
+                                     bigger-form]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-with-validation
-          (web-proxy/wrap-component
-           [sut/form {:on-submit (fn [props] (js/alert (str "props:" props)))
-                      :validation validation-fn}
-            validation-form]))
+          (web-proxy/wrap-component [sut/form {:on-submit (fn [props]
+                                                            (js/alert (str "props:" props)))
+                                               :validation validation-fn}
+                                     validation-form]))
 
 (defn validation
   [{:keys [values]}]
   (let [email (get values "email" "")]
     (cond-> {}
-      (not (re-matches #".+@.+\..+" email)) (assoc "email"
-                                                   "This is not correct email!")
+      (not (re-matches #".+@.+\..+" email)) (assoc "email" "This is not correct email!")
       (empty? email) (assoc "email" "Email needs to be filled")
       (or (not (get values "checkbox1")) (false? (get values "checkbox1")))
       (assoc "checkbox1" "You need to agree"))))
@@ -157,9 +152,7 @@
           (web-proxy/wrap-component
            [sut/form-basic {:form-id "full-form basic"
                             :on-submit (fn [props]
-                                         (js/alert (str
-                                                    "I'm your full form basic!"
-                                                    props)))
+                                         (js/alert (str "I'm your full form basic!" props)))
                             :validation validation
                             :text "Show props"}
             #(web-input/email-field (merge %
@@ -184,11 +177,9 @@
 
 (defscene form-login
           (web-proxy/wrap-component [sut/form-login {:form-id "login-form"
-                                                     :on-submit-fn
-                                                     (fn [e] (prn "e: " e))}]))
+                                                     :on-submit-fn (fn [e] (prn "e: " e))}]))
 
 (defscene form-login-forgot-link
           (web-proxy/wrap-component [sut/form-login {:form-id "login-form"
-                                                     :on-submit-fn
-                                                     (fn [e] (prn "e: " e))
+                                                     :on-submit-fn (fn [e] (prn "e: " e))
                                                      :forgot-link "#"}]))

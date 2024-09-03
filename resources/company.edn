@@ -1,9 +1,8 @@
-{:activities [{:descriptions
-               ["Programmation"
-                "conseil et   autres   activités   informatiques"
-                "Conseil   enarchitecture  logicielles"
-                "Conseil  en  supply  chain,  logistique  et  industrie"
-                "Formation"]
+{:activities [{:descriptions ["Programmation"
+                              "conseil et   autres   activités   informatiques"
+                              "Conseil   enarchitecture  logicielles"
+                              "Conseil  en  supply  chain,  logistique  et  industrie"
+                              "Formation"]
                :language "fr"}]
  :creation-date #inst "2021-11-15T00:00:00.000"
  :establishments [{:adress "5 RUE SAINT DOMINIQUE 63350 JOZE"

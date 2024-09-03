@@ -6,8 +6,9 @@
   [{:keys [text direction]
     :or {text "Hoover text"
          direction "top"}}
-   component]
-  [:span {:data-twe-toggle "tooltip"
-          :data-twe-placement direction
-          :title text}
-   component])
+   &
+   rest]
+  [:span {:class ["tooltip"]}
+   (for [el rest] ^{:key (str (random-uuid))} el)
+   [:span {:class ["tooltiptext" (str "tooltiptext-" direction)]}
+    text]])

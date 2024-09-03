@@ -26,6 +26,4 @@ add some other defmethod, for all other messages"
     (core-log/trace "Default faultback realtime: uid=" uid ", session=" session)
     (when ?reply-fn (?reply-fn {:umatched-event-as-echoed-from-server event}))))
 
-(defmethod -event-msg-handler :yop/test
-  [{:keys []}]
-  (core-log/trace "Test successful"))
+(defmethod -event-msg-handler :yop/test [{:keys []}] (core-log/trace "Test successful"))

@@ -37,10 +37,8 @@
       ^{:key (str "k: " k)}
       [:div
        [:div
-        (merge
-         {:class
-          ["border-spacing-0 border-solid border-gray-500 border-2 p-0 flex"]}
-         (when (map? v) {:colSpan "2"}))
+        (merge {:class ["border-spacing-0 border-solid border-gray-500 border-2 p-0 flex"]}
+               (when (map? v) {:colSpan "2"}))
         [:div {:class ["p-2 font-bold float-left"]}
          k]
         (cond
@@ -60,25 +58,20 @@
   [:div {:class ["mt-8 flow-root"]}
    [:div {:class ["-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"]}
     [:div {:class ["inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"]}
-     [:div
-      {:class
-       ["overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg"]}
+     [:div {:class ["overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg"]}
       [:table {:class ["min-w-full divide-y divide-gray-300"]}
        [:thead {:class ["bg-gray-50"]}
         [:tr
          (for [header headers]
            ^{:key (uuid-gen/unguessable)}
-           [:th
-            {:scope "col"
-             :class
-             ["py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"]}
+           [:th {:scope "col"
+                 :class ["py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"]}
             header])]]
        [:tbody {:class ["divide-y divide-gray-200 bg-white"]}
         (for [row rows]
           [:tr
            (for [cell row]
              ^{:key (uuid-gen/unguessable)}
-             [:td
-              {:class
-               ["whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"]}
+             [:td {:class
+                   ["whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"]}
               cell])])]]]]]])

@@ -11,9 +11,8 @@
 (deftest cors-domain-routes-test
   (testing "routes are built"
     (is (= #{".*heph.com$" ".*heph.fr$"}
-           (->> (sut/cors-domain-routes (sut/make-automaton-web-languages
-                                         {:en {}
-                                          :fr {}})
+           (->> (sut/cors-domain-routes (sut/make-automaton-web-languages {:en {}
+                                                                           :fr {}})
                                         "heph")
                 (map core-regexp/stringify)
                 set)))))

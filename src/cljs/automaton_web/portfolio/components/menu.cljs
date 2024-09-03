@@ -22,31 +22,29 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu-auto-select
-          (web-proxy/wrap-component [sut/component
-                                     {:items [{:title "Menu1"
-                                               :href "/"}
-                                              {:title "Menu2"
-                                               :href "/"
-                                               :selected true}
-                                              {:title "Menu3"
-                                               :href "/"}
-                                              {:title "Menu4"
-                                               :href "/"}]
-                                      :path (.. js/window -location -href)
-                                      :burger-position :left}]))
+          (web-proxy/wrap-component [sut/component {:items [{:title "Menu1"
+                                                             :href "/"}
+                                                            {:title "Menu2"
+                                                             :href "/"
+                                                             :selected true}
+                                                            {:title "Menu3"
+                                                             :href "/"}
+                                                            {:title "Menu4"
+                                                             :href "/"}]
+                                                    :path (.. js/window -location -href)
+                                                    :burger-position :left}]))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu-burger
-          (web-proxy/wrap-component [sut/component
-                                     {:items [{:title "Menu1"
-                                               :href "/"}
-                                              {:title "Menu2"
-                                               :href "/"
-                                               :selected true}
-                                              {:title "Menu3"
-                                               :href "/"}
-                                              {:title "Menu4"
-                                               :href "/"}]
-                                      :path (.. js/window -location -href)
-                                      :force-burger? true
-                                      :burger-position :left}]))
+          (web-proxy/wrap-component [sut/component {:items [{:title "Menu1"
+                                                             :href "/"}
+                                                            {:title "Menu2"
+                                                             :href "/"
+                                                             :selected true}
+                                                            {:title "Menu3"
+                                                             :href "/"}
+                                                            {:title "Menu4"
+                                                             :href "/"}]
+                                                    :path (.. js/window -location -href)
+                                                    :force-burger? true
+                                                    :burger-position :left}]))

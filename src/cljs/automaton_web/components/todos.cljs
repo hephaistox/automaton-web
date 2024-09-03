@@ -9,8 +9,7 @@
     (fn [] [:form {:on-submit (fn [e]
                                 (.preventDefault e)
                                 (on-submit-todo {:desc @new-item
-                                                 :completed
-                                                 @new-item-completed})
+                                                 :completed @new-item-completed})
                                 (reset! new-item "")
                                 (reset! new-item-completed false))}
             [:input {:type "checkbox"
@@ -21,8 +20,7 @@
             [:input {:type "text"
                      :value @new-item
                      :placeholder "Add a new item"
-                     :on-change
-                     (fn [e] (reset! new-item (.-value (.-target e))))}]])))
+                     :on-change (fn [e] (reset! new-item (.-value (.-target e))))}]])))
 
 (defn todo-item
   [todo]
