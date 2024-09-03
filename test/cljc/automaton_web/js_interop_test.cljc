@@ -5,10 +5,8 @@
 
 (deftest mapToJSmap
   (testing "Empty map" (is (= "{}" (sut/mapToJSmap {}))))
-  (testing "String map"
-    (is (= "{\"foo\": \"bar\"}" (sut/mapToJSmap {:foo "bar"}))))
-  (testing "keyword with minus"
-    (is (= "{\"is_foo\": \"bar\"}" (sut/mapToJSmap {:is-foo "bar"}))))
+  (testing "String map" (is (= "{\"foo\": \"bar\"}" (sut/mapToJSmap {:foo "bar"}))))
+  (testing "keyword with minus" (is (= "{\"is_foo\": \"bar\"}" (sut/mapToJSmap {:is-foo "bar"}))))
   (testing "Integer value" (is (= "{\"foo\": 1}" (sut/mapToJSmap {:foo 1}))))
   (testing "keyword value"
     (is (= "{\"foo_from\": \"bar_to\"}" (sut/mapToJSmap {:foo-from :bar-to}))))

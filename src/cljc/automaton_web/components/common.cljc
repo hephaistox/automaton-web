@@ -3,10 +3,7 @@
   (:require
    [clojure.string :as str]))
 
-(defn combine-classes
-  "Combine css classes together"
-  [& args]
-  (str/join " " args))
+(defn combine-classes "Combine css classes together" [& args] (str/join " " args))
 
 (defn combine-classes-with-custom
   "Add the default css values

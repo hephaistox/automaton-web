@@ -15,11 +15,10 @@
   [change-lang-kw ui-languages lang-id-to-str-fn]
   (let [selected-value (-> (web-events-proxy/subscribe-value [::web-subs/lang])
                            lang-id-to-str-fn)]
-    [web-simple-select/simple-select
-     {:id "lang"
-      :name "lang"
-      :on-change #(web-events-proxy/dispatch [change-lang-kw %])
-      :value selected-value
-      :options (map (fn [{:keys [value]}] [:option {:value value}
-                                           value])
-                    ui-languages)}]))
+    [web-simple-select/simple-select {:id "lang"
+                                      :name "lang"
+                                      :on-change #(web-events-proxy/dispatch [change-lang-kw %])
+                                      :value selected-value
+                                      :options (map (fn [{:keys [value]}] [:option {:value value}
+                                                                           value])
+                                                    ui-languages)}]))

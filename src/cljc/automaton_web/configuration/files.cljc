@@ -13,8 +13,7 @@
 (defn- read-config
   []
   #?(:clj (core-conf-files/read-config)
-     :cljs (core-keyword/sanitize-map-keys
-            (js->clj js-var :keywordize-keys true))))
+     :cljs (core-keyword/sanitize-map-keys (js->clj js-var :keywordize-keys true))))
 
 (def ^{:doc "A map of configuration variables."} conf (memoize read-config))
 
@@ -24,5 +23,4 @@
     (config [_this] (conf))
   web-prot/ConfWeb
     (config-web-reference [this]
-      (str "var " js-var
-           " = " (ws-util/mapToJSmap (core-conf-prot/config this)))))
+      (str "var " js-var " = " (ws-util/mapToJSmap (core-conf-prot/config this)))))

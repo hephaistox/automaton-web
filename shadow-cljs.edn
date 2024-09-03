@@ -1,9 +1,8 @@
-{:builds {:automaton-web-portfolio
-          {:asset-path "js/compiled"
-           :modules {:automaton-web-main
-                     {:init-fn automaton-web.portfolio.portfolio/init}}
-           :output-dir "resources/public/js/compiled"
-           :target :browser}
+{:builds {:automaton-web-portfolio {:asset-path "js/compiled"
+                                    :modules {:automaton-web-main
+                                              {:init-fn automaton-web.portfolio.portfolio/init}}
+                                    :output-dir "resources/public/js/compiled"
+                                    :target :browser}
           :browser-test {:ns-regexp "-test$"
                          :runner-ns shadow.test.browser
                          :target :browser-test

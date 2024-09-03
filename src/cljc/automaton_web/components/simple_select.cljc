@@ -32,8 +32,7 @@
                   (-> select-option
                       automaton-web-reagent/reagent-option
                       (update-select-options id)
-                      (automaton-web-reagent/update-reagent-options
-                       select-option)))]
+                      (automaton-web-reagent/update-reagent-options select-option)))]
     (fn [] [:select {:id id
                      :name html-name
                      :default-value value

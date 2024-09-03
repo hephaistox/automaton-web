@@ -8,9 +8,9 @@
    [automaton-web.i18n.language              :as web-language]))
 
 (def fe-components-translator
-  (fe-tempura-translator/make-fe-tempura-translator
-   web-language/main-langs
-   (partial web-language/ui-str-to-id web-language/automaton-web-languages)))
+  (fe-tempura-translator/make-fe-tempura-translator web-language/main-langs
+                                                    (partial web-language/ui-str-to-id
+                                                             web-language/automaton-web-languages)))
 
 (defn tr
   "Translate the `tr-id` with `resources`

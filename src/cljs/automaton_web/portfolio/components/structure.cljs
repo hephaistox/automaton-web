@@ -7,8 +7,7 @@
    [automaton-web.components.structure :as sut]
    [automaton-web.portfolio.proxy      :as web-proxy]
    [portfolio.reagent-18               :as           portfolio
-                                       :refer-macros [defscene
-                                                      configure-scenes]]))
+                                       :refer-macros [defscene configure-scenes]]))
 
 (configure-scenes {:collection :components
                    :title "Structure"})
@@ -27,12 +26,10 @@
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene structure-fancy
           (web-proxy/wrap-component
-           [sut/structure {:header [web-header/transparent-header
-                                    {:logo "Logo"
-                                     :size :full
-                                     :right-section [:div "Login"]}]
-                           :footer [web-footer/simple-footer
-                                    {:title "Hephaistox footer"}]}
+           [sut/structure {:header [web-header/transparent-header {:logo "Logo"
+                                                                   :size :full
+                                                                   :right-section [:div "Login"]}]
+                           :footer [web-footer/simple-footer {:title "Hephaistox footer"}]}
             [:div {:class ["mt-20" "mb-5"]}
              "Body!"]
             [web-form/form-basic {}

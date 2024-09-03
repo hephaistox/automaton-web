@@ -36,9 +36,7 @@
   ([key-path default-value]
    (let [value (core-conf-prot/read-conf-param @conf-state key-path)]
      (if (nil? value)
-       (do (prn "Value for " key-path
-                " is not set, use default value" default-value)
-           default-value)
+       (do (prn "Value for " key-path " is not set, use default value" default-value) default-value)
        (do (prn "Read key-path " key-path " = " value) value))))
   ([key-path] (read-param key-path nil)))
 

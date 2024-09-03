@@ -13,7 +13,6 @@
            (let [admin-content (web-admin-index/admin-page)]
              (http-response/ok {"content-type" "text/html;charset=utf8"}
                                (-> request
-                                   (merge {:header-elements
-                                           [(web-hiccup/js-script-raw
-                                             (web-conf/config-web-reference))]})
+                                   (merge {:header-elements [(web-hiccup/js-script-raw
+                                                              (web-conf/config-web-reference))]})
                                    (web-pages-index/build admin-content)))))}])

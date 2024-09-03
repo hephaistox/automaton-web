@@ -5,11 +5,9 @@
    [automaton-web.components.button :as web-button]))
 
 (defn player
-  [{:keys
-    [play-fn pause-fn pause? next-fn prev-fn fast-forward-fn fast-backward-fn]}]
-  [:div
-   {:class
-    ["flex flex-col rounded-lg bg-white shadow-xl shadow-black/5 ring-1 ring-slate-700/10"]}
+  [{:keys [play-fn pause-fn pause? next-fn prev-fn fast-forward-fn fast-backward-fn]}]
+  [:div {:class
+         ["flex flex-col rounded-lg bg-white shadow-xl shadow-black/5 ring-1 ring-slate-700/10"]}
    [:div {:class ["flex items-center justify-center space-x-4 px-6 py-4"]}
     (when fast-backward-fn
       [web-button/icon-button {:icon-path :svg/fast-backward

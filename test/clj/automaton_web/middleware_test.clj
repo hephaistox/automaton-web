@@ -8,9 +8,9 @@
 
 (defn middleware-env-mock
   [middleware]
-  (reitit-ring/ring-handler
-   (reitit-ring/router ["/ping" {:get #(select-keys % [:params :query-params])}]
-                       {:data {:middleware middleware}})))
+  (reitit-ring/ring-handler (reitit-ring/router ["/ping"
+                                                 {:get #(select-keys % [:params :query-params])}]
+                                                {:data {:middleware middleware}})))
 
 (deftest wrap-deny-frame-test
   (let [app (sut/wrap-deny-frame handler-test)]
@@ -39,20 +39,17 @@
               :foo :bar}
              (app {:bar2 :foo2}))))))
 
-(deftest wrap-session-test
-  (testing "wrap-session is a function" (is (fn? sut/wrap-session))))
+(deftest wrap-session-test (testing "wrap-session is a function" (is (fn? sut/wrap-session))))
 
 (deftest kw-and-params-test
   (let [h (middleware-env-mock [sut/parameters-middleware])]
-    (testing
-      "(Query) Params handler is working - parameters-middleware contract"
+    (testing "(Query) Params handler is working - parameters-middleware contract"
       (is (= {:params {"a" "b"}
               :query-params {"a" "b"}}
              (h {:request-method :get
                  :uri "/ping"
                  :query-string "a=b"})))))
-  (let [h (middleware-env-mock [sut/wrap-keyword-params
-                                sut/parameters-middleware])]
+  (let [h (middleware-env-mock [sut/wrap-keyword-params sut/parameters-middleware])]
     (testing "Params and keyword params are working"
       (is (= {:params {:a "b"}
               :query-params {}}
@@ -66,8 +63,7 @@
     (testing "cookies middleware contract" (is (= {"a" {:value "b"}} resp)))))
 
 (deftest wrap-throw-error-test
-  (testing "wrap-throw-error throws an error"
-    (is (thrown? Error ((sut/wrap-throw-error {}) {})))))
+  (testing "wrap-throw-error throws an error" (is (thrown? Error ((sut/wrap-throw-error {}) {})))))
 
 (deftest wrap-throw-exception-test
   (testing "wrap-throw-error throws an error"

@@ -16,19 +16,15 @@
   "Show the minified - burger version"
   [{:keys [items burger-position force-burger?]}]
   [:div {:class ["block h-20 p-4" (when-not force-burger? "xl:hidden")]}
-   [:div {:class ["absolute"
-                  (if (= :left burger-position) "left-10" "right-10")]}
+   [:div {:class ["absolute" (if (= :left burger-position) "left-10" "right-10")]}
     [:div {:class ["overflow-hidden hover:h-fit hover:w-fit w-5 relative h-8"]}
-     [:div {:class ["flex flex-col absolute"
-                    (if (= :left burger-position) "left-0" "right-0")]}
+     [:div {:class ["flex flex-col absolute" (if (= :left burger-position) "left-0" "right-0")]}
       [:div {:class ["cursor-pointer"]}
        [web-icons/icon {:path-kw :svg/burger}]]]
-     (vec
-      (concat
-       [:div
-        {:class
-         ["h-fit flex flex-col mt-10 max-w-[250] border shadow shadow-xl bg-white"]}]
-       items))]]])
+     (vec (concat [:div
+                   {:class
+                    ["h-fit flex flex-col mt-10 max-w-[250] border shadow shadow-xl bg-white"]}]
+                  items))]]])
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn component
@@ -48,9 +44,8 @@
                      (let [menu-match? (when (and (string? path) (string? href))
                                          (let [uri path] (= uri href)))]
                        [menu-item/component
-                        (merge
-                         (assoc item :path path :auto-select? auto-select?)
-                         (when auto-select? {:selected menu-match?}))])))
+                        (merge (assoc item :path path :auto-select? auto-select?)
+                               (when auto-select? {:selected menu-match?}))])))
         params (assoc params :items items)]
     [:div {:class ["w-full z-10"]}
      [horizontal-version params]

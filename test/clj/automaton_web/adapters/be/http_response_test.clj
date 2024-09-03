@@ -25,8 +25,7 @@
               :headers {}
               :body "not-found"}
              (sut/not-found "not-found"))))
-    (testing
-      "test method-not-allowed handler is called and returning 405 status"
+    (testing "test method-not-allowed handler is called and returning 405 status"
       (is (= {:status 405
               :headers {}
               :body "method-not-allowed"}
