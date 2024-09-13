@@ -5,4 +5,7 @@
          {:doc "Updating any of taoensso libs results in cljs warnings comming from taoensso/timbre"
           :name "com.taoensso/tempura"
           :version "1.5.3"}
-         {:name "marked"}]}}
+         {:name "marked"}]}
+ :frontend {:css "resources/css/custom.css"
+            :run-aliases [:automaton-web-portfolio :browser-test :ltest]}
+ :publication {:as-lib org.clojars.hephaistox/automaton-web}}
