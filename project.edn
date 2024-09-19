@@ -1,10 +1,20 @@
-{:app-name "automaton-optimization"
+{:app-name "automaton-web"
  :code {:forbidden-words #{"DONE" "FIXME" "NOTE" "TODO" "automaton-build" "landing" "tap>"}}
- :frontend {:run-aliases [:ltest :browser-test]}
- :publication {:as-lib org.clojars.hephaistox/automaton-optimization
-               :base-branch "main"
-               :excluded-aliases
-               [:antq :codox :env-development-repl :env-development-test :common-test]
-               :pom-xml-license {:name "CC BY-NC 4.0"
-                                 :url "https://creativecommons.org/licenses/by-nc/4.0/deed.en"}
-               :repo-url "git@github.com:hephaistox/automaton-web.git"}}
+ :deps {:excluded-libs
+        [{:name "com.taoensso/encore"}
+         {:doc "Updating any of taoensso libs results in cljs warnings comming from taoensso/timbre"
+          :name "com.taoensso/tempura"
+          :version "1.5.3"}
+         {:name "marked"}]}
+ :frontend {:css "resources/css/custom.css"
+            :run-aliases [:automaton-web-portfolio :browser-test :ltest]}
+ :publication
+ {:as-lib org.clojars.hephaistox/automaton-web
+  :base-branch "main"
+  :compiled-css-path "resources/public/css/compiled/styles.css"
+  :css-files ["resources/css/custom.css" "resources/css/main.css"]
+  :excluded-aliases
+  [:antq :codox :env-development-repl :env-development-test :common-test :cljs-dev-deps]
+  :pom-xml-license {:name "CC BY-NC 4.0"
+                    :url "https://creativecommons.org/licenses/by-nc/4.0/deed.en"}
+  :repo-url "git@github.com:hephaistox/automaton-web.git"}}
