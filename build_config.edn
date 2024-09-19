@@ -1,18 +1,21 @@
-{:app-name "automaton-optimization"
+{:app-name "automaton-web"
  :task-shared {:gha {}
-               :publication {:as-lib org.clojars.hephaistox/automaton-optimization
+               :publication {:as-lib org.clojars.hephaistox/automaton-web
                              :deploy-to :clojars
                              :env {:la {}
                                    :production {}}
-                             :frontend {:run-aliases [:ltest :browser-test]}
+                             :frontend {:css {}
+                                        :run-aliases
+                                        [:automaton-web-portfolio :browser-test :ltest]}
                              :license {}
-                             :repo "git@github.com:hephaistox/automaton-optimization.git"}
+                             :repo "git@github.com:hephaistox/automaton-web.git"}
                :repl-aliases [:common-test :env-development-repl :build]}
  :tasks
  {:clean
   {:dirs [".cpcache/" ".clj-kondo/.cache/" "tmp/" "target/" "node_modules/" ".shadow-cljs/builds/"]}
+  :lfe-css {}
   :lfe-test {}
   :lfe-watch {}
-  :reports {:forbiddenwords-words #{"automaton-build" "automaton-web" "landing" "tap>"}}
-  :update-deps {:exclude-libs #{"org.clojars.hephaistox/automaton-build@*-*"
+  :reports {:forbiddenwords-words #{"automaton-build" "landing" "tap>"}}
+  :update-deps {:exclude-libs #{"com.taoensso/encore" "org.clojars.hephaistox/automaton-build@*-*"
                                 "org.clojars.hephaistox/automaton-core@*-*"}}}}
