@@ -10,7 +10,7 @@
           :ltest {:ns-regexp "-test$"
                   :output-to "target/ltest.js"
                   :target :karma}}
- :deps {:aliases [:cljs-deps]}
+ :deps {:aliases [:cljs-deps :cljs-dev-deps]}
  :dev-http {8080 ["public" "classpath:public"]
             8290 ["target/browser-test"]}
  :nrepl {:port 8776}}

@@ -4,30 +4,26 @@
   :bb-deps {:extra-deps {org.clojars.hephaistox/automaton-build #:mvn{:version "3.1.0"}}}
   :build {:extra-deps {org.clojars.hephaistox/automaton-build #:mvn{:version "3.1.0"}}
           :ns-default build}
-  :cljs-deps {:extra-deps {binaryage/devtools #:mvn{:version "1.0.7"}
-                           clj-commons/pushy #:mvn{:version "0.3.10"}
+  :cljs-deps {:extra-deps {clj-commons/pushy #:mvn{:version "0.3.10"}
                            cljsjs/highlight #:mvn{:version "11.7.0-0"}
                            com.andrewmcveigh/cljs-time #:mvn{:version "0.5.2"}
                            com.taoensso/encore #:mvn{:version "3.62.1"}
                            com.taoensso/sente #:mvn{:version "1.19.2"}
                            com.taoensso/tempura #:mvn{:version "1.5.3"}
-                           day8.re-frame/http-fx #:mvn{:version "0.2.4"}
-                           day8.re-frame/re-frame-10x #:mvn{:version "1.9.9"}
-                           day8.re-frame/tracing #:mvn{:version "0.6.2"}
                            lambdaisland/uri #:mvn{:version "1.19.155"}
                            metosin/reitit #:mvn{:version "0.7.1"}
                            metosin/reitit-frontend #:mvn{:version "0.7.1"}
-                           no.cjohansen/portfolio #:mvn{:version "2024.06.30"}
                            re-frame/re-frame #:mvn{:version "1.4.3"}
                            reagent/reagent #:mvn{:version "1.2.0"}
                            thheller/shadow-cljs #:mvn{:version "2.28.12"}}
-              :extra-paths ["src/cljs/"
-                            "src/cljc/"
-                            "resources/"
-                            "test/cljs/"
-                            "test/cljc/"
-                            "env/development/src/cljc/"
-                            "env/development/src/cljs/"]}
+              :extra-paths ["src/cljs/" "src/cljc/" "resources/"]}
+  :cljs-dev-deps
+  {:extra-deps {binaryage/devtools #:mvn{:version "1.0.7"}
+                day8.re-frame/http-fx #:mvn{:version "0.2.4"}
+                day8.re-frame/re-frame-10x #:mvn{:version "1.9.9"}
+                day8.re-frame/tracing #:mvn{:version "0.6.2"}
+                no.cjohansen/portfolio #:mvn{:version "2024.06.30"}}
+   :extra-paths ["test/cljs/" "test/cljc/" "env/development/src/cljc/" "env/development/src/cljs/"]}
   :common-test
   {:exec-fn cognitect.test-runner.api/test
    :extra-deps {com.cognitect/test-runner {:git/url "https://github.com/cognitect-labs/test-runner"
