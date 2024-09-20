@@ -5,7 +5,7 @@
 
 (comment
   (client-connect)
-  (tap> :bar)
+  (tap> :barbarbar)
   (tst)
   ;
 )
