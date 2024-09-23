@@ -12,7 +12,6 @@
  {:as-lib org.clojars.hephaistox/automaton-web
   :base-branch "main"
   :clojars true
-  :compile-jar true
   :compiled-css-path "resources/public/css/compiled/styles.css"
   :css-files ["resources/css/custom.css" "resources/css/main.css"]
   :excluded-aliases
