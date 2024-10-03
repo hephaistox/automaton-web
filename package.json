@@ -9,7 +9,7 @@
   "author": "Hephaistox <info@hephaistox.com>",
   "dependencies": {
     "@headlessui/react": "^2.1.8",
-    "@sentry/react": "^8.32.0",
+    "@sentry/react": "^8.33.1",
     "autoprefixer": "^10.4.20",
     "axe-core": "^4.10.0",
     "create-react-class": "^15.7.0",
