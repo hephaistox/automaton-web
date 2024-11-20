@@ -8,5 +8,4 @@
 (configure-scenes {:collection :components
                    :title "Logo"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene logo (web-proxy/wrap-component [sut/hephaistox]))

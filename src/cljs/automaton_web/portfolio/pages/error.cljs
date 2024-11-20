@@ -7,7 +7,6 @@
 (configure-scenes {:collection :pages
                    :title "Error pages"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene not-found
           [:div {:class ["h-full w-full"]}
            [sut/not-found {:back-link "https://www.wikipedia.com"
@@ -15,7 +14,6 @@
                            :description "Sorry we couldn't find the page you were looking for."
                            :back-home-text "Back home"}]])
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene
  internal-error
  [sut/internal-error

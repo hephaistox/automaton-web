@@ -71,7 +71,6 @@
     :title "Legal"
     :href "#"}])
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene footer
           (web-proxy/wrap-component
            [sut/footer {:social-networks social-networks
@@ -83,7 +82,6 @@
                         :release "2022-1"
                         :title "© 2022 Hephaistox, Inc. All rights reserved!"}]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene footer-dark
           (web-proxy/wrap-component
            [sut/footer {:dark? true
@@ -96,7 +94,6 @@
                         :release "2022-1"
                         :title "© 2022 Hephaistox, Inc. All rights reserved!"}]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene simple-footer
           (web-proxy/wrap-component [sut/simple-footer
                                      {:title "© 2020 Your Company, Inc. All rights reserved."
@@ -104,7 +101,6 @@
                                       :release "2022-1"
                                       :social-networks social-networks}]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene simple-footer-dark
           (web-proxy/wrap-component [sut/simple-footer
                                      {:title "© 2020 Your Company, Inc. All rights reserved."

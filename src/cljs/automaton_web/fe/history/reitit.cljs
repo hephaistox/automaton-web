@@ -32,7 +32,6 @@
 
 (defonce controllers-match-storage (atom nil))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn apply-controllers
   "To use it, this function must be executed in the `on-navigate` make-history function (or somewhere where navigation happens).
    After that :controllers can be added to routes

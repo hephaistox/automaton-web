@@ -8,7 +8,6 @@
 
 (defn current-path [] (str (.. js/window -location -pathname)))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn current-location?
   "Is the `url` parameter matching the current location?
   Params:
@@ -16,7 +15,6 @@
   [& urls]
   (apply url/compare-locations (current-url) urls))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn current-path?
   "Is the `path` parameter matching the current location?
   Params:

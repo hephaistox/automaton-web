@@ -8,7 +8,6 @@
 (configure-scenes {:collection :components
                    :title "Menu"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu
           (web-proxy/wrap-component [sut/component {:items [{:title "Menu1"
                                                              :href "/"}
@@ -20,7 +19,6 @@
                                                             {:title "Menu4"
                                                              :href "/"}]}]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu-auto-select
           (web-proxy/wrap-component [sut/component {:items [{:title "Menu1"
                                                              :href "/"}
@@ -34,7 +32,6 @@
                                                     :path (.. js/window -location -href)
                                                     :burger-position :left}]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene menu-burger
           (web-proxy/wrap-component [sut/component {:items [{:title "Menu1"
                                                              :href "/"}
