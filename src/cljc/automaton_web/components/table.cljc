@@ -10,7 +10,6 @@
    (for [i v] ^{:key (uuid-gen/unguessable)} [:span (str i)])
    " ]"])
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-private-var]}
 (defn map->invisible-table
   "Transform clojure map to hiccup"
   [m i]

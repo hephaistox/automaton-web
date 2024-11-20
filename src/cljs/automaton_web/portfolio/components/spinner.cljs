@@ -8,5 +8,4 @@
 (configure-scenes {:collection :components
                    :title "Spinner"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene spinner (web-proxy/wrap-component [sut/spinner]))

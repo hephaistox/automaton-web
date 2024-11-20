@@ -8,7 +8,6 @@
 (configure-scenes {:collection :components
                    :title "Select"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene simple-select-reagent
           (web-proxy/wrap-component
            [sut/simple-select {:id "lang-id"
@@ -22,7 +21,6 @@
             [:option {:key :pl}
              "pl"]]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene simple-select-html
           (web-proxy/wrap-component [sut/simple-select {:id "dinner"}
                                      [:option {:key :en

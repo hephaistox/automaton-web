@@ -8,12 +8,10 @@
 (configure-scenes {:collection :components
                    :title "Navigation"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene back-navigation
           (web-proxy/wrap-component [sut/back-navigation {:text "Back!"
                                                           :href ""}]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene back-navigation-dark
           (web-proxy/wrap-component [sut/back-navigation {:text "Back!"
                                                           :href ""

@@ -22,7 +22,6 @@
                      [:div "hello"]
                      [:div "Body"]]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene
  modal-big
  (web-proxy/wrap-component

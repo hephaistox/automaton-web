@@ -8,7 +8,6 @@
 (configure-scenes {:collection :components
                    :title "Table"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene map-table
           (web-proxy/wrap-component [sut/map->table {:single-kv 1
                                                      :double-kv {:one-el 2}
@@ -20,7 +19,6 @@
                                                                    :second-2 10
                                                                    :second-3 20}}]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene table
           (web-proxy/wrap-component
            [sut/table {:headers ["one" "two" "three"]

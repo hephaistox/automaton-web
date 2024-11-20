@@ -18,7 +18,6 @@
    :linkedin "#"
    :on-click #(js/alert "Clicked!")})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene card :params card-params [params] (web-proxy/wrap-component [sut/card params]))
 
 (defscene dark-card
