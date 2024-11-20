@@ -8,7 +8,6 @@
 (configure-scenes {:collection :components
                    :title "Section"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene
  section-description
  :params
@@ -18,7 +17,6 @@
  [params]
  (web-proxy/wrap-component [sut/section-description params]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene
  section-description-dark
  :params
@@ -29,7 +27,6 @@
  [params]
  (web-proxy/wrap-component [sut/section-description params]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene section-text-button
           :params
           {:text "This is a text of this section"
@@ -37,7 +34,6 @@
           [params]
           (web-proxy/wrap-component [sut/section-text-button params]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene section-text-button-dark
           :params
           {:text "This is a text of this section"
@@ -46,7 +42,6 @@
           [params]
           (web-proxy/wrap-component [sut/section-text-button params]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene
  section-text-button-long-text
  :params
@@ -56,7 +51,6 @@
  [params]
  (web-proxy/wrap-component [sut/section-text-button params]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene section-text-video
           :params
           {:text "This is a text of this section"
@@ -66,7 +60,6 @@
           [params]
           (web-proxy/wrap-component [sut/section-text-video params]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene section-text-video-dark
           :params
           {:text "This is a text of this section"
@@ -78,7 +71,6 @@
           [params]
           (web-proxy/wrap-component [sut/section-text-video params]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene
  section-text-video-long-text
  :params

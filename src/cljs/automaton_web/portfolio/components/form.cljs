@@ -104,29 +104,24 @@
            :on-click #(reset)}
      "Clear!"]]])
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form
           (web-proxy/wrap-component [sut/form {}
                                      minimal-form]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-initial-value
           (web-proxy/wrap-component [sut/form {:initial-values {"init-text" "initated"}}
                                      initial-value-form]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-submittable
           (web-proxy/wrap-component [sut/form {:on-submit (fn [props]
                                                             (js/alert (str "props:" props)))}
                                      submit-form]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-more-components
           (web-proxy/wrap-component [sut/form {:on-submit (fn [props]
                                                             (js/alert (str "props:" props)))}
                                      bigger-form]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-with-validation
           (web-proxy/wrap-component [sut/form {:on-submit (fn [props]
                                                             (js/alert (str "props:" props)))
@@ -142,12 +137,10 @@
       (or (not (get values "checkbox1")) (false? (get values "checkbox1")))
       (assoc "checkbox1" "You need to agree"))))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-basic
           (web-proxy/wrap-component [sut/form-basic {}
                                      web-input/email-field]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene form-basic-full
           (web-proxy/wrap-component
            [sut/form-basic {:form-id "full-form basic"

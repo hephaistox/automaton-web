@@ -9,7 +9,6 @@
   * selected: display differently if true
   ")
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn component
   "Build a menu entry"
   [{:keys [title href selected on-click]}]

@@ -9,10 +9,8 @@
 (configure-scenes {:collection :components
                    :title "Player"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene player [] (web-proxy/wrap-component [sut/player]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene player-controls
           []
           (let [pause? (web-react/ratom false)]

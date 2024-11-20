@@ -12,18 +12,15 @@
 (configure-scenes {:collection :components
                    :title "Structure"})
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene structure
           (web-proxy/wrap-component [sut/structure {}
                                      [:div "Hello"]]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene structure-header-footer
           (web-proxy/wrap-component [sut/structure {:header [:div "Header"]
                                                     :footer [:div "Footer"]}
                                      [:div "Hello"]]))
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene structure-fancy
           (web-proxy/wrap-component
            [sut/structure {:header [web-header/transparent-header {:logo "Logo"

@@ -6,7 +6,6 @@
 
 (def alert-types [:warning :assert :error])
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn component
   "Component to show an alert
   * title: what to display as a first highlighted line

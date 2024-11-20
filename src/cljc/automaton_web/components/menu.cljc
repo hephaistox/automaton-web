@@ -26,7 +26,6 @@
                     ["h-fit flex flex-col mt-10 max-w-[250] border shadow shadow-xl bg-white"]}]
                   items))]]])
 
-#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn component
   "An horizontal menu adapting to small screen to become vertical
   The parameter is a map with the following keys:
